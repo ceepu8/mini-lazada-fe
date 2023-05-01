@@ -1,0 +1,25 @@
+:root {
+  --primary: #0046be;
+  --secondary: #ffdf00;
+
+  --avocado: #4b8105;
+  --red: #fe0000;
+
+  --bright-gray: #eeeeee;
+  --cultured: #f5f5f5;
+  --granite-gray: #666666;
+  --dark-charcoal: #333333;
+  --raisin-black: #222222;
+
+  --black: #000000;
+  --white: #ffffff;
+}
+
+/* 
+padding: 4px, 8px, 12px, 16px, etc. (+4px)
+margin: 4px, 8px, 12px, 16px, etc. (+4px)
+border-radius: 4px, 8px, 12px
+*/
+.example {
+  color: var(--raisin-black);
+}
