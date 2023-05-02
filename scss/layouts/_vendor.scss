@@ -1,0 +1,160 @@
+#header {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: $header-shadow;
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0px $g-8;
+    .logo {
+      max-width: 200px;
+    }
+
+    .search-bar {
+      flex: 1;
+      form {
+        width: 100%;
+        max-width: 550px;
+        margin: 0 auto;
+        position: relative;
+        .form-control {
+          padding: $pd-3;
+          background-color: $cultured;
+          border: none;
+          color: $granite-gray;
+          font-weight: 400;
+          input {
+            background-color: $cultured;
+          }
+        }
+        .search-button {
+          button {
+            background-color: $primary;
+            color: $white;
+            border-radius: 0px 4px 4px 0px;
+            height: 100%;
+            width: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            &:hover {
+              background-color: $secondary;
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .user {
+        padding: $pd-3 $pd-5;
+        margin-right: $m-5;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.15s;
+        i {
+          font-size: $fs-6;
+          margin-right: 8px;
+        }
+
+        &:hover {
+          background-color: $bright-gray;
+        }
+      }
+      .logout {
+        button {
+          background-color: $primary;
+          color: $white;
+          padding: $pd-3 $pd-5;
+          border-radius: 4px;
+
+          transition: all 0.15s;
+
+          &:hover {
+            background-color: $secondary;
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+}
+
+#product {
+  margin-top: 48px;
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .add-button {
+      background-color: $primary;
+      color: $white;
+      transition: all 0.15s;
+      border-radius: 4px;
+
+      width: 40px;
+      height: 40px;
+      &:hover {
+        background-color: $secondary;
+        color: $black;
+      }
+    }
+  }
+
+  .table {
+    margin-top: 24px;
+    .thead-dark {
+      th {
+        background-color: $primary;
+      }
+    }
+    tbody {
+      tr td {
+        .update-button {
+          background-color: $primary;
+          color: $white;
+          padding: $pd-2 $pd-3;
+          border-radius: 4px;
+          transition: all 0.15s;
+
+          &:hover {
+            background-color: $secondary;
+            color: $black;
+          }
+        }
+        .delete-button {
+          background-color: $black;
+          color: $white;
+          padding: $pd-2 $pd-3;
+          border-radius: 4px;
+          transition: all 0.15s;
+
+          &:hover {
+            background-color: $secondary;
+            color: $black;
+          }
+        }
+        .product-image {
+          max-width: 120px;
+          min-height: 115px;
+          width: 100%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}
