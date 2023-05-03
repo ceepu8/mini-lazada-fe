@@ -77,6 +77,8 @@ window.addProduct = async () => {
     }
 
     renderProduct();
+    document.getElementById("modal-add-product-form").reset();
+    $("#add-product-modal").modal("hide");
   } catch (error) {
     console.log(error);
     new AWN().alert(error.message, {
