@@ -16,7 +16,32 @@ const renderProduct = async () => {
     "#product .product-table .table-body"
   );
   try {
-    const { data } = await axios.get(`${API_URL}/product`);
+    document.querySelector(".product-loading").style.visibility = "visible";
+    document.querySelector(".product-loading").style.opacity = "1";
+    document.querySelector(".product-loading").style.minHeight =
+      "calc(100vh - 240px)";
+    const { data } = await axios({
+      method: "GET",
+      url: `${API_URL}/product/get-my-products`,
+      headers: {
+        Authorization: `Bearer ${USER.accessToken}`,
+      },
+    });
+
+    if (data.products.length <= 0) {
+      const node = document.createElement("h3");
+      node.style.margin = "42px 0";
+      node.innerHTML = "There is not any products";
+
+      productTable.appendChild(node);
+
+      document.querySelector(".product-loading").style.visibility = "hidden";
+      document.querySelector(".product-loading").style.opacity = "0";
+      document.querySelector(".product-loading").style.minHeight = 0;
+
+      return;
+    }
+
     const html = data.products.reduce((result, product, idx) => {
       const { id, name, price, description, image } = product;
       return (
@@ -39,6 +64,9 @@ const renderProduct = async () => {
       );
     }, "");
 
+    document.querySelector(".product-loading").style.visibility = "hidden";
+    document.querySelector(".product-loading").style.opacity = "0";
+    document.querySelector(".product-loading").style.minHeight = 0;
     productTable.innerHTML = html;
   } catch (error) {
     console.log(error);
@@ -76,9 +104,12 @@ window.addProduct = async () => {
       });
     }
 
+    var myModal = new bootstrap.Modal(
+      document.getElementById("add-product-modal")
+    );
     renderProduct();
     document.getElementById("modal-add-product-form").reset();
-    $("#add-product-modal").modal("hide");
+    myModal.hide();
   } catch (error) {
     console.log(error);
     new AWN().alert(error.message, {

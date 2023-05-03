@@ -168,39 +168,48 @@ button:focus {
   background-color: #ffdf00;
   color: #000000;
 }
-#product .table {
+#product .product-table .table {
   margin-top: 24px;
 }
-#product .table .thead-dark th {
+#product .product-table .table .thead th {
   background-color: #0046be;
+  color: #ffffff;
 }
-#product .table tbody tr td .update-button {
+#product .product-table .table tbody tr td .update-button {
   background-color: #0046be;
   color: #ffffff;
   padding: 8px 12px;
   border-radius: 4px;
   transition: all 0.15s;
 }
-#product .table tbody tr td .update-button:hover {
+#product .product-table .table tbody tr td .update-button:hover {
   background-color: #ffdf00;
   color: #000000;
 }
-#product .table tbody tr td .delete-button {
+#product .product-table .table tbody tr td .delete-button {
   background-color: #000000;
   color: #ffffff;
   padding: 8px 12px;
   border-radius: 4px;
   transition: all 0.15s;
 }
-#product .table tbody tr td .delete-button:hover {
+#product .product-table .table tbody tr td .delete-button:hover {
   background-color: #ffdf00;
   color: #000000;
 }
-#product .table tbody tr td .product-image {
+#product .product-table .table tbody tr td .product-image {
   max-width: 120px;
   min-height: 115px;
   width: 100%;
   margin: 0 auto;
+}
+#product .product-table .product-loading {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .modal-dialog {
