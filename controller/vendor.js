@@ -61,7 +61,7 @@ window.addProduct = async () => {
   formData.append("description", description);
 
   try {
-    const { data } = await axios({
+    const { data, status } = await axios({
       method: "post",
       url: `${API_URL}/product`,
       data: formData,
@@ -70,23 +70,35 @@ window.addProduct = async () => {
         Authorization: `Bearer ${USER.accessToken}`,
       },
     });
+    if (status === 200) {
+      new AWN().success(data.message, {
+        durations: { success: 1000 },
+      });
+    }
 
-    console.log(data);
     renderProduct();
   } catch (error) {
     console.log(error);
+    new AWN().alert(error.message, {
+      durations: { success: 1000 },
+    });
   }
 };
 
 window.readURL = (input) => {
   if (input.files && input.files[0]) {
-    console.log(input.files);
     var reader = new FileReader();
 
     reader.onload = function (e) {
+      const node = document.createElement("img");
+      node.setAttribute("src", e.target.result);
+      node.setAttribute("alt", "product-image");
+
       document
-        .getElementById("product-preview-image")
-        .setAttribute("src", e.target.result);
+        .querySelector(
+          "#product .modal .modal-dialog .modal-body .form-group-upload-image"
+        )
+        .appendChild(node);
     };
 
     reader.readAsDataURL(input.files[0]);
