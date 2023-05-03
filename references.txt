@@ -7,3 +7,7 @@ https://storego-demo.myshopify.com/
 
 formik 
 https://formik.org/docs/overview
+
+
+read file and display image
+https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded

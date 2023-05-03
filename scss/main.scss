@@ -1,0 +1,10 @@
+@import "./helpers/variables";
+
+@import "./base/reset";
+
+// LAYOUTS
+@import "./layouts/vendor";
+
+// COMPONENTS
+@import "./components/header";
+@import "./components/footer";

@@ -1,0 +1,118 @@
+$primary: #0046be;
+$secondary: #ffdf00;
+
+$avocado: #4b8105;
+$red: #fe0000;
+
+$bright-gray: #eeeeee;
+$cultured: #f5f5f5;
+$granite-gray: #666666;
+$dark-charcoal: #333333;
+$raisin-black: #222222;
+
+$black: #000000;
+$white: #ffffff;
+
+//font size
+$fs-1: 4px;
+$fs-2: 8px;
+$fs-3: 12px;
+$fs-4: 16px;
+$fs-5: 20px;
+$fs-6: 24px;
+$fs-7: 28px;
+$fs-8: 32px;
+$fs-9: 36px;
+$fs-10: 40px;
+
+//font weight
+$fw-1: 400;
+$fw-2: 600;
+$fw-3: 700;
+
+//letter spacing
+$ls-1: 0.015rem;
+$ls-2: 0.03rem;
+
+//Padding
+$pd-1: 4px;
+$pd-2: 8px;
+$pd-3: 12px;
+$pd-4: 16px;
+$pd-5: 20px;
+$pd-6: 24px;
+$pd-7: 28px;
+$pd-8: 32px;
+$pd-9: 36px;
+$pd-10: 40px;
+$pd-11: 44px;
+$pd-12: 48px;
+$pd-13: 52px;
+$pd-14: 56px;
+$pd-15: 60px;
+$pd-16: 64px;
+$pd-17: 68px;
+$pd-18: 72px;
+$pd-18: 76px;
+$pd-20: 80px;
+$pd-21: 84px;
+
+//Gap
+$g-1: 4px;
+$g-2: 8px;
+$g-3: 12px;
+$g-4: 16px;
+$g-5: 20px;
+$g-6: 24px;
+$g-7: 28px;
+$g-8: 32px;
+$g-9: 36px;
+$g-10: 40px;
+
+//Margin
+$m-1: 4px;
+$m-2: 8px;
+$m-3: 12px;
+$m-4: 16px;
+$m-5: 20px;
+$m-6: 24px;
+$m-7: 28px;
+$m-8: 32px;
+$m-9: 36px;
+$m-10: 40px;
+$m-11: 44px;
+$m-12: 48px;
+$m-13: 52px;
+$m-14: 56px;
+$m-15: 60px;
+$m-16: 64px;
+$m-17: 68px;
+$m-18: 72px;
+$m-18: 76px;
+$m-20: 80px;
+$m-21: 84px;
+
+//border
+$bd-1: 2px;
+$bd-2: 8px;
+
+//shadow
+$image-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+  rgba(0, 0, 0, 0.23) 0px 6px 6px;
+$header-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+  rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+  rgba(0, 0, 0, 0.07) 0px 16px 16px;
+$setting-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+$card-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+
+//break points
+$breakpoints: (
+  "extra-large": 1200px,
+  "large": 992px,
+  "medium": 768px,
+  "small": 576px,
+  "extra-large-down": 1199.98px,
+  "large-down": 991.98px,
+  "medium-down": 767.98px,
+  "small-down": 575.98px,
+);
