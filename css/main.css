@@ -201,4 +201,42 @@ button:focus {
   min-height: 115px;
   width: 100%;
   margin: 0 auto;
+}
+
+.modal-dialog {
+  max-width: 650px;
+  margin: 1.75rem auto;
+}
+
+@media all and (max-width: 768px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+}
+.primary-button {
+  background-color: #0046be;
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.15s;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.primary-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
+}
+
+.secondary-button {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.secondary-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
 }/*# sourceMappingURL=main.css.map */
