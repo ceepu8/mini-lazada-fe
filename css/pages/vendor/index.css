@@ -68,3 +68,16 @@ html {
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background-color: #fe0000 !important;
 }
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #1100ff
+}
+
+.labels {
+    font-size: 11px;
+}
+
+.file{
+    display: none;
+}
