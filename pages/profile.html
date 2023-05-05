@@ -11,7 +11,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     
-    <link rel="stylesheet" href="/css/pages/vendor/index.css">
+    <style>
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #1100ff
+        }
+
+        .labels {
+            font-size: 11px;
+        }
+
+        .file{
+            display: none;
+        }
+    </style>
 </head>
     
 <body>
@@ -20,7 +33,7 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <input id="file" type="file" class="file" onchange="loadFile(event)"/>
-                    <img class="rounded-circle mt-5" width="150px" id="output" src="browser-icon.webp" alt="Avatar">
+                    <img class="rounded-circle mt-5" width="150px" id="output" src="/assets/browser-icon.webp" alt="Avatar">
                     <div class="mt-4 text-center"><label class="btn btn-secondary" for="file">Change Avatar</label></div>
                 </div>
             </div>
