@@ -1,5 +1,6 @@
 import { vendorApi } from "../api/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
+import { handleValidations } from "./validation.js";
 
 const USER = {
   accessToken:
@@ -85,38 +86,40 @@ window.addProduct = async () => {
   ).value;
   const file = document.getElementById("form-control-file-image").files[0];
 
-  formData.append("file", file);
-  formData.append("name", name);
-  formData.append("price", price);
-  formData.append("description", description);
+  const result = handleValidations("#modal-add-product-form");
 
-  try {
-    const { data, status } = await vendorApi.createProduct(
-      user.accessToken,
-      formData
-    );
-    if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
-    }
+  // formData.append("file", file);
+  // formData.append("name", name);
+  // formData.append("price", price);
+  // formData.append("description", description);
 
-    renderProduct();
-    document.getElementById("modal-add-product-form").reset();
+  // try {
+  //   const { data, status } = await vendorApi.createProduct(
+  //     user.accessToken,
+  //     formData
+  //   );
+  //   if (status === 200) {
+  //     new AWN().success(data.message, {
+  //       durations: { success: 1000 },
+  //     });
+  //   }
 
-    var myModalEl = document.getElementById("add-product-modal");
-    var modal = bootstrap.Modal.getInstance(myModalEl);
-    modal.hide();
+  //   renderProduct();
+  //   document.getElementById("modal-add-product-form").reset();
 
-    document.querySelector(
-      "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
-    ).innerHTML = "";
-  } catch (error) {
-    console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
-    });
-  }
+  //   var myModalEl = document.getElementById("add-product-modal");
+  //   var modal = bootstrap.Modal.getInstance(myModalEl);
+  //   modal.hide();
+
+  //   document.querySelector(
+  //     "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+  //   ).innerHTML = "";
+  // } catch (error) {
+  //   console.log(error);
+  //   new AWN().alert(error.message, {
+  //     durations: { success: 1000 },
+  //   });
+  // }
 };
 
 window.readURL = (input) => {
