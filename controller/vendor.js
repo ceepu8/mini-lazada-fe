@@ -1,4 +1,5 @@
 import { vendorApi } from "../api/vendorApi.js";
+import { currencyFormat } from "../utils/index.js";
 
 const USER = {
   accessToken:
@@ -47,9 +48,11 @@ const renderProduct = async () => {
                 <th scope="row">${idx + 1}</th>
                 <td>${name}</td>
                 <td>${description}</td>
-                <td>${price}</td>
+                <td>${currencyFormat(price)}</td>
                 <td>
-                    <img class="product-image" alt="product-image" src="${image}"/>
+                    <div class="product-image">
+                      <img alt="product-image" src="${image}"/>
+                    </div>
                 </td>
                 <td>
                   <div class="setting-buttons">

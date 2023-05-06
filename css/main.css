@@ -171,6 +171,12 @@ header .navbar .navbar-nav .logout button:hover {
   flex-direction: column;
   gap: 16px 0px;
 }
+#product .product-table {
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: clip;
+}
 #product .product-table .table {
   margin-top: 24px;
 }
@@ -203,10 +209,15 @@ header .navbar .navbar-nav .logout button:hover {
   color: #000000;
 }
 #product .product-table .table tbody tr td .product-image {
-  max-width: 120px;
-  min-height: 115px;
+  max-width: 180px;
+  height: 140px;
   width: 100%;
   margin: 0 auto;
+}
+#product .product-table .table tbody tr td .product-image img {
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 #product .product-table .product-loading {
   min-height: 0;
@@ -258,20 +269,16 @@ header .navbar .navbar-nav .logout button:hover {
     background-color: #ffdf00;
     color: #000000;
   }
+  #product .product-table .table tbody tr td .setting-buttons .update-button {
+    margin-bottom: 8px;
+  }
+  #product .product-table .table tbody tr td .product-image {
+    max-width: 250px;
+    height: 115px;
+  }
 }
 @media all and (max-width: 768px) {
-  .modal-dialog {
-    max-width: 500px;
-    margin: 1.75rem auto;
-  }
-  .product-table .table {
-    margin-top: 24px;
-  }
-  .product-table .table .thead th {
-    background-color: #0046be;
-    color: #ffffff;
-  }
-  .product-table .table tbody tr td .setting-buttons .update-button {
+  #product .product-table .table tbody tr td .setting-buttons .update-button {
     margin-bottom: 16px;
   }
 }
