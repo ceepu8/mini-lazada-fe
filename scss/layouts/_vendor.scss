@@ -1,14 +1,11 @@
-#header {
-  height: 80px;
+header {
+  min-height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: $header-shadow;
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0px $g-8;
+
+  .navbar {
     .logo {
       max-width: 200px;
     }
@@ -55,7 +52,7 @@
       }
     }
 
-    .user-menu {
+    .navbar-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -115,6 +112,22 @@
     }
   }
 
+  .modal {
+    .modal-dialog {
+      max-width: 650px;
+      margin: 1.75rem auto;
+      .modal-content {
+        .modal-body {
+          form#modal-add-product-form {
+            display: flex;
+            flex-direction: column;
+            gap: $g-4 0px;
+          }
+        }
+      }
+    }
+  }
+
   .product-table {
     .table {
       margin-top: 24px;
@@ -126,28 +139,34 @@
       }
       tbody {
         tr td {
-          .update-button {
-            background-color: $primary;
-            color: $white;
-            padding: $pd-2 $pd-3;
-            border-radius: 4px;
-            transition: all 0.15s;
+          .setting-buttons {
+            .update-button {
+              background-color: $primary;
+              color: $white;
+              border-radius: 4px;
+              transition: all 0.15s;
 
-            &:hover {
-              background-color: $secondary;
-              color: $black;
+              height: 32px;
+              width: 80px;
+
+              &:hover {
+                background-color: $secondary;
+                color: $black;
+              }
             }
-          }
-          .delete-button {
-            background-color: $black;
-            color: $white;
-            padding: $pd-2 $pd-3;
-            border-radius: 4px;
-            transition: all 0.15s;
+            .delete-button {
+              background-color: $black;
+              color: $white;
+              border-radius: 4px;
+              transition: all 0.15s;
 
-            &:hover {
-              background-color: $secondary;
-              color: $black;
+              height: 32px;
+              width: 80px;
+
+              &:hover {
+                background-color: $secondary;
+                color: $black;
+              }
             }
           }
           .product-image {
@@ -172,15 +191,101 @@
   }
 }
 
-.modal-dialog {
-  max-width: 650px;
-  margin: 1.75rem auto;
+@media all and (max-width: 992px) {
+  header {
+    .navbar {
+      .logo {
+      }
+
+      .search-bar {
+        flex: 1;
+        form {
+          width: 100%;
+          max-width: 100%;
+          margin: 0 auto;
+          position: relative;
+          .form-control {
+            input {
+            }
+          }
+          .search-button {
+            button {
+              &:hover {
+              }
+            }
+          }
+        }
+      }
+
+      .navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: $g-4 0px;
+        .user {
+          padding: $pd-3 $pd-5;
+          margin-right: $m-5;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.15s;
+          i {
+            font-size: $fs-6;
+            margin-right: 8px;
+          }
+
+          &:hover {
+            background-color: $bright-gray;
+          }
+        }
+        .logout {
+          button {
+            background-color: $primary;
+            color: $white;
+            border-radius: 4px;
+
+            transition: all 0.15s;
+
+            &:hover {
+              background-color: $secondary;
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 @media all and (max-width: 768px) {
   .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;
+  }
+  .product-table {
+    .table {
+      margin-top: 24px;
+      .thead {
+        th {
+          background-color: $primary;
+          color: $white;
+        }
+      }
+      tbody {
+        tr td {
+          .setting-buttons {
+            .update-button {
+              margin-bottom: $m-4;
+            }
+          }
+          .product-image {
+          }
+        }
+      }
+    }
+
+    .product-loading {
+    }
   }
 }
 
