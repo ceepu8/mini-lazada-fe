@@ -122,6 +122,14 @@ header {
             display: flex;
             flex-direction: column;
             gap: $g-4 0px;
+            .form-group-upload-image {
+              .preview-image {
+                max-width: 300px;
+                height: auto;
+                margin: 0 auto;
+                padding-top: 24px;
+              }
+            }
           }
         }
       }

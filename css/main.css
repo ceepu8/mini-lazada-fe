@@ -171,6 +171,12 @@ header .navbar .navbar-nav .logout button:hover {
   flex-direction: column;
   gap: 16px 0px;
 }
+#product .modal .modal-dialog .modal-content .modal-body form#modal-add-product-form .form-group-upload-image .preview-image {
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 24px;
+}
 #product .product-table {
   width: 100%;
   height: 100%;
