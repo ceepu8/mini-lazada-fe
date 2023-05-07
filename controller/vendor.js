@@ -1,10 +1,10 @@
 import { vendorApi } from "../api/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
-import { handleValidations } from "./validation.js";
+import { handleAddProductFormValidation } from "./validation.js";
 
 const USER = {
   accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODMzNDk1MDYsImV4cCI6MTY4MzM4NTUwNn0.rFbPbLpHUGr_a7NknXg_itTloEM2ceusVZ9NtA3tR7w",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM0Mjk1NDksImV4cCI6MTY4MzQ2NTU0OX0.y7nwmry6vwrwB3CzfiJkl2rGyekSKBteyGq0EgTWWJI",
   user: {
     username: "uyencaobusiness",
     role: "vendor",
@@ -79,47 +79,48 @@ window.addProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const formData = new FormData();
 
-  const name = document.getElementById("form-control-input-name").value;
-  const price = document.getElementById("form-control-input-price").value;
-  const description = document.getElementById(
-    "form-control-textarea-description"
-  ).value;
-  const file = document.getElementById("form-control-file-image").files[0];
+  const isValidated = handleAddProductFormValidation("#modal-add-product-form");
+  if (isValidated) {
+    return;
+  }
 
-  const result = handleValidations("#modal-add-product-form");
+  const name = document.getElementById("input-name").value;
+  const price = document.getElementById("input-price").value;
+  const description = document.getElementById("textarea-description").value;
+  const file = document.getElementById("file-image").files[0];
 
-  // formData.append("file", file);
-  // formData.append("name", name);
-  // formData.append("price", price);
-  // formData.append("description", description);
+  formData.append("file", file);
+  formData.append("name", name);
+  formData.append("price", price);
+  formData.append("description", description);
 
-  // try {
-  //   const { data, status } = await vendorApi.createProduct(
-  //     user.accessToken,
-  //     formData
-  //   );
-  //   if (status === 200) {
-  //     new AWN().success(data.message, {
-  //       durations: { success: 1000 },
-  //     });
-  //   }
+  try {
+    const { data, status } = await vendorApi.createProduct(
+      user.accessToken,
+      formData
+    );
+    if (status === 200) {
+      new AWN().success(data.message, {
+        durations: { success: 1000 },
+      });
+    }
 
-  //   renderProduct();
-  //   document.getElementById("modal-add-product-form").reset();
+    renderProduct();
+    document.getElementById("modal-add-product-form").reset();
 
-  //   var myModalEl = document.getElementById("add-product-modal");
-  //   var modal = bootstrap.Modal.getInstance(myModalEl);
-  //   modal.hide();
+    var myModalEl = document.getElementById("add-product-modal");
+    var modal = bootstrap.Modal.getInstance(myModalEl);
+    modal.hide();
 
-  //   document.querySelector(
-  //     "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
-  //   ).innerHTML = "";
-  // } catch (error) {
-  //   console.log(error);
-  //   new AWN().alert(error.message, {
-  //     durations: { success: 1000 },
-  //   });
-  // }
+    document.querySelector(
+      "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+    ).innerHTML = "";
+  } catch (error) {
+    console.log(error);
+    new AWN().alert(error.message, {
+      durations: { success: 1000 },
+    });
+  }
 };
 
 window.readURL = (input) => {

@@ -108,43 +108,63 @@
               <div class="modal-body">
                 <form id="modal-add-product-form">
                   <div class="form-group">
-                    <label for="form-control-input-name">Name</label>
+                    <label for="#form-control-input-name">Name</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="form-control-input-name n"
+                      id="input-name"
+                      validate="product-name"
                     />
-                    <span class="error-message name-error"></span>
-                  </div>
-                  <div class="form-group">
-                    <label for="form-control-input-price">Price</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="form-control-input-price"
-                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-name name-error"
+                    ></span>
                   </div>
 
                   <div class="form-group">
-                    <label for="form-control-textarea-description"
+                    <label for="#form-control-input-price">Price</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-price"
+                      validate="product-price"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-price price-error"
+                    ></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="#form-control-textarea-description"
                       >Description</label
                     >
                     <textarea
                       class="form-control"
-                      id="form-control-textarea-description"
+                      id="textarea-description"
+                      validate="product-description"
                       rows="2"
                     ></textarea>
+                    <span
+                      style="color: red"
+                      class="error-message textarea-description description-error"
+                    ></span>
                   </div>
 
                   <div class="form-group form-group-upload-image">
-                    <label for="form-control-file-image">Upload Image</label>
+                    <label for="#form-control-file-image">Upload Image</label>
                     <input
                       type="file"
                       class="form-control-file"
-                      id="form-control-file-image"
+                      id="file-image"
                       accept="image/*"
                       onchange="readURL(this)"
+                      validate="product-image"
                     />
+                    <span
+                      style="color: red"
+                      class="error-message file-image file-image-error"
+                    ></span>
                     <div class="preview-image"></div>
                   </div>
                 </form>
