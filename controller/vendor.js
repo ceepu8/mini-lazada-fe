@@ -4,7 +4,7 @@ import { handleAddProductFormValidation } from "./validation.js";
 
 const USER = {
   accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM0Mjk1NDksImV4cCI6MTY4MzQ2NTU0OX0.y7nwmry6vwrwB3CzfiJkl2rGyekSKBteyGq0EgTWWJI",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM1NDAwOTMsImV4cCI6MTY4MzU3NjA5M30.wsVf3CCR0HKvQ5ybPWTpQCVjA1hvj5etM2oxoY0K1kk",
   user: {
     username: "uyencaobusiness",
     role: "vendor",
@@ -94,33 +94,33 @@ window.addProduct = async () => {
   formData.append("price", price);
   formData.append("description", description);
 
-  try {
-    const { data, status } = await vendorApi.createProduct(
-      user.accessToken,
-      formData
-    );
-    if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
-    }
+  // try {
+  //   const { data, status } = await vendorApi.createProduct(
+  //     user.accessToken,
+  //     formData
+  //   );
+  //   if (status === 200) {
+  //     new AWN().success(data.message, {
+  //       durations: { success: 1000 },
+  //     });
+  //   }
 
-    renderProduct();
-    document.getElementById("modal-add-product-form").reset();
+  //   renderProduct();
+  //   document.getElementById("modal-add-product-form").reset();
 
-    var myModalEl = document.getElementById("add-product-modal");
-    var modal = bootstrap.Modal.getInstance(myModalEl);
-    modal.hide();
+  //   var myModalEl = document.getElementById("add-product-modal");
+  //   var modal = bootstrap.Modal.getInstance(myModalEl);
+  //   modal.hide();
 
-    document.querySelector(
-      "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
-    ).innerHTML = "";
-  } catch (error) {
-    console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
-    });
-  }
+  //   document.querySelector(
+  //     "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+  //   ).innerHTML = "";
+  // } catch (error) {
+  //   console.log(error);
+  //   new AWN().alert(error.message, {
+  //     durations: { success: 1000 },
+  //   });
+  // }
 };
 
 window.readURL = (input) => {

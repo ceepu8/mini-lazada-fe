@@ -1,13 +1,10 @@
-const VALIDATE_BY_TYPE = {
-  "product-name": ["required", "textOnly"],
-  "product-price": ["required", "numberOnly"],
-  "product-description": ["required"],
-  "product-image": ["required"],
-};
 const VALIDATION_MESSAGE = {
   required: "Không được bỏ trống",
   textOnly: "Chỉ chấp nhận chữ",
   numberOnly: "Chỉ chấp nhận số",
+  email: "Email không đúng định dạng",
+  max: (maxNumber) => `Không được vượt quá ${maxNumber} ký tự`,
+  min: (minNumber) => `Không được nhỏ hơn ${minNumber} ký tự`,
 };
 
 export const VALIDATIONS = {
@@ -42,40 +39,54 @@ export const handleAddProductFormValidation = (form) => {
 
   for (let field of fields) {
     const fieldName = field.id;
-    const fieldValidate = VALIDATE_BY_TYPE[field.getAttribute("validate")];
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
 
-    for (let valid of fieldValidate) {
-      if (valid === "required" && !VALIDATIONS.required(field.value)) {
-        isError = true;
-        errorElement.innerHTML = VALIDATION_MESSAGE[valid];
-        break;
-      } else {
-        isError = false;
-        errorElement.innerHTML = "";
-      }
+    const isRequired = Boolean(field.getAttribute("required")) || false;
+    const isNumberOnly = Boolean(field.getAttribute("numberOnly")) || false;
+    const isTextOnly = Boolean(field.getAttribute("textOnly")) || false;
+    const isEmail = Number(field.getAttribute("email"));
 
-      if (valid === "numberOnly" && !VALIDATIONS.number(field.value)) {
-        isError = true;
-        errorElement.innerHTML = VALIDATION_MESSAGE[valid];
+    const maxLength = Number(field.getAttribute("max"));
+    const minLength = Number(field.getAttribute("min"));
 
-        break;
-      } else {
-        isError = false;
-        errorElement.innerHTML = "";
-      }
-
-      if (valid === "textOnly" && !VALIDATIONS.text(field.value)) {
-        console.log(123);
-        isError = true;
-        errorElement.innerHTML = VALIDATION_MESSAGE[valid];
-
-        break;
-      } else {
-        isError = false;
-        errorElement.innerHTML = "";
-      }
+    if (isRequired && !VALIDATIONS.required(field.value)) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["required"];
+      continue;
     }
+
+    if (isNumberOnly && !VALIDATIONS.number(field.value)) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["numberOnly"];
+      continue;
+    }
+
+    if (isTextOnly && !VALIDATIONS.text(field.value)) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["textOnly"];
+      continue;
+    }
+
+    if (isEmail && !VALIDATIONS.email(field.value)) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["email"];
+      continue;
+    }
+
+    if (maxLength && field.value.length > maxLength) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["max"](maxLength);
+      continue;
+    }
+
+    if (minLength && field.value.length <= minLength) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["min"](minLength);
+      continue;
+    }
+
+    isError = false;
+    errorElement.innerHTML = "";
   }
 
   return isError;

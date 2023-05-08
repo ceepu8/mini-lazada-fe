@@ -113,7 +113,9 @@
                       type="text"
                       class="form-control"
                       id="input-name"
-                      validate="product-name"
+                      required="true"
+                      max="50"
+                      min="20"
                     />
                     <span
                       style="color: red"
@@ -127,7 +129,8 @@
                       type="text"
                       class="form-control"
                       id="input-price"
-                      validate="product-price"
+                      required="true"
+                      numberOnly="true"
                     />
                     <span
                       style="color: red"
@@ -142,8 +145,9 @@
                     <textarea
                       class="form-control"
                       id="textarea-description"
-                      validate="product-description"
                       rows="2"
+                      required="true"
+                      max="100"
                     ></textarea>
                     <span
                       style="color: red"
@@ -159,7 +163,7 @@
                       id="file-image"
                       accept="image/*"
                       onchange="readURL(this)"
-                      validate="product-image"
+                      required="true"
                     />
                     <span
                       style="color: red"
