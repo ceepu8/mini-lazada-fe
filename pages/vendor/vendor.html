@@ -27,34 +27,49 @@
     <link rel="stylesheet" href="../../css/main.css" />
   </head>
   <body>
-    <header id="header">
+    <header>
       <div class="container">
-        <div class="header-top">
-          <div class="logo">
-            <img src="../../assets/logo.png" alt="logo" />
-          </div>
-          <div class="search-bar">
-            <form>
-              <div class="form-control">
-                <input type="search" placeholder="Search..." />
-              </div>
-              <div class="search-button">
-                <button type="button">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </form>
-          </div>
-          <div class="user-menu">
-            <div class="user">
-              <i class="fa-solid fa-user"></i>
-              <span>My Account</span>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container-fluid">
+            <div class="logo">
+              <img src="../../assets/logo.png" alt="logo" />
             </div>
-            <div class="logout">
-              <button type="button">Logout</button>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="search-bar">
+                <form>
+                  <div class="form-control">
+                    <input type="search" placeholder="Search..." />
+                  </div>
+                  <div class="search-button">
+                    <button type="button">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item user">
+                  <i class="fa-solid fa-user"></i>
+                  <span>My Account</span>
+                </li>
+                <li class="nav-item logout">
+                  <button type="button">Logout</button>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
 
@@ -88,53 +103,75 @@
                   class="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                ></button>
               </div>
               <div class="modal-body">
-                <div class="modal-body">
-                  <form id="modal-add-product-form">
-                    <div class="form-group">
-                      <label for="form-control-input-name">Name</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="form-control-input-name"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <label for="form-control-input-price">Price</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="form-control-input-price"
-                      />
-                    </div>
+                <form id="modal-add-product-form">
+                  <div class="form-group">
+                    <label for="#form-control-input-name">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-name"
+                      required="true"
+                      max="50"
+                      min="20"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-name name-error"
+                    ></span>
+                  </div>
 
-                    <div class="form-group">
-                      <label for="form-control-textarea-description"
-                        >Description</label
-                      >
-                      <textarea
-                        class="form-control"
-                        id="form-control-textarea-description"
-                        rows="2"
-                      ></textarea>
-                    </div>
+                  <div class="form-group">
+                    <label for="#form-control-input-price">Price</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-price"
+                      required="true"
+                      numberOnly="true"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-price price-error"
+                    ></span>
+                  </div>
 
-                    <div class="form-group form-group-upload-image">
-                      <label for="form-control-file-image">Upload Image</label>
-                      <input
-                        type="file"
-                        class="form-control-file"
-                        id="form-control-file-image"
-                        accept="image/*"
-                        onchange="readURL(this)"
-                      />
-                    </div>
-                  </form>
-                </div>
+                  <div class="form-group">
+                    <label for="#form-control-textarea-description"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="textarea-description"
+                      rows="2"
+                      required="true"
+                      max="100"
+                    ></textarea>
+                    <span
+                      style="color: red"
+                      class="error-message textarea-description description-error"
+                    ></span>
+                  </div>
+
+                  <div class="form-group form-group-upload-image">
+                    <label for="#form-control-file-image">Upload Image</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="file-image"
+                      accept="image/*"
+                      onchange="readURL(this)"
+                      required="true"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message file-image file-image-error"
+                    ></span>
+                    <div class="preview-image"></div>
+                  </div>
+                </form>
               </div>
               <div class="modal-footer">
                 <button
@@ -160,12 +197,12 @@
           <table class="table table-hover table-striped">
             <thead class="thead">
               <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Image</th>
-                <th scope="col">Action</th>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody class="table-body"></tbody>
@@ -191,7 +228,9 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="../../utils/index.js"></script>
+    <script type="module" src="../../controller/validation.js"></script>
+    <script type="module" src="../../api/vendorApi.js"></script>
     <script type="module" src="../../controller/vendor.js"></script>
   </body>
 </html>

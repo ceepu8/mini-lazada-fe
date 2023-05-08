@@ -1,8 +1,10 @@
-const API_URL = "https://smoky-mini-lazada-be.onrender.com/api";
+import { vendorApi } from "../api/vendorApi.js";
+import { currencyFormat } from "../utils/index.js";
+import { handleFormValidation } from "./validation.js";
 
 const USER = {
   accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODMxMDQ0MTQsImV4cCI6MTY4MzE0MDQxNH0.rX-KPJ1T6LeDM7zAO2ED0iBCLNkXhQSrQRMUaPLL284",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM1NTU2NTcsImV4cCI6MTY4MzU5MTY1N30.9w0WSgDJVxxjlcUErJPgGgQssQFtMMTpGCQ95243Wzo",
   user: {
     username: "uyencaobusiness",
     role: "vendor",
@@ -12,21 +14,17 @@ const USER = {
 };
 
 const renderProduct = async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const productTable = document.querySelector(
     "#product .product-table .table-body"
   );
+
+  const loadingElement = document.querySelector(".product-loading");
   try {
-    document.querySelector(".product-loading").style.visibility = "visible";
-    document.querySelector(".product-loading").style.opacity = "1";
-    document.querySelector(".product-loading").style.minHeight =
-      "calc(100vh - 240px)";
-    const { data } = await axios({
-      method: "GET",
-      url: `${API_URL}/product/get-my-products`,
-      headers: {
-        Authorization: `Bearer ${USER.accessToken}`,
-      },
-    });
+    loadingElement.style.visibility = "visible";
+    loadingElement.style.opacity = "1";
+    loadingElement.style.minHeight = "calc(100vh - 240px)";
+    const { data } = await vendorApi.getMyProducts(user.accessToken);
 
     if (data.products.length <= 0) {
       const node = document.createElement("h3");
@@ -35,15 +33,15 @@ const renderProduct = async () => {
 
       productTable.appendChild(node);
 
-      document.querySelector(".product-loading").style.visibility = "hidden";
-      document.querySelector(".product-loading").style.opacity = "0";
-      document.querySelector(".product-loading").style.minHeight = 0;
+      loadingElement.style.visibility = "hidden";
+      loadingElement.style.opacity = "0";
+      loadingElement.style.minHeight = 0;
 
       return;
     }
 
     const html = data.products.reduce((result, product, idx) => {
-      const { id, name, price, description, image } = product;
+      const { name, price, description, image } = product;
       return (
         result +
         `
@@ -51,22 +49,26 @@ const renderProduct = async () => {
                 <th scope="row">${idx + 1}</th>
                 <td>${name}</td>
                 <td>${description}</td>
-                <td>${price}</td>
+                <td>${currencyFormat(price)}</td>
                 <td>
-                    <img class="product-image" alt="product-image" src="${image}"/>
+                    <div class="product-image">
+                      <img alt="product-image" src="${image}"/>
+                    </div>
                 </td>
                 <td>
-                  <button class="update-button" type="button">Update</button>
-                  <button class="delete-button" type="button">Delete</button>
+                  <div class="setting-buttons">
+                    <button class="update-button" type="button">Update</button>
+                    <button class="delete-button" type="button">Delete</button>
+                  </div>
                 </td>
               </tr>
             `
       );
     }, "");
 
-    document.querySelector(".product-loading").style.visibility = "hidden";
-    document.querySelector(".product-loading").style.opacity = "0";
-    document.querySelector(".product-loading").style.minHeight = 0;
+    loadingElement.style.visibility = "hidden";
+    loadingElement.style.opacity = "0";
+    loadingElement.style.minHeight = 0;
     productTable.innerHTML = html;
   } catch (error) {
     console.log(error);
@@ -74,48 +76,51 @@ const renderProduct = async () => {
 };
 
 window.addProduct = async () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const formData = new FormData();
 
-  const name = document.getElementById("form-control-input-name").value;
-  const price = document.getElementById("form-control-input-price").value;
-  const description = document.getElementById(
-    "form-control-textarea-description"
-  ).value;
-  const file = document.getElementById("form-control-file-image").files[0];
+  const isValidated = handleFormValidation("#modal-add-product-form");
+  if (isValidated) {
+    return;
+  }
+
+  const name = document.getElementById("input-name").value;
+  const price = document.getElementById("input-price").value;
+  const description = document.getElementById("textarea-description").value;
+  const file = document.getElementById("file-image").files[0];
 
   formData.append("file", file);
   formData.append("name", name);
   formData.append("price", price);
   formData.append("description", description);
 
-  try {
-    const { data, status } = await axios({
-      method: "post",
-      url: `${API_URL}/product`,
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${USER.accessToken}`,
-      },
-    });
-    if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
-    }
+  // try {
+  //   const { data, status } = await vendorApi.createProduct(
+  //     user.accessToken,
+  //     formData
+  //   );
+  //   if (status === 200) {
+  //     new AWN().success(data.message, {
+  //       durations: { success: 1000 },
+  //     });
+  //   }
 
-    var myModal = new bootstrap.Modal(
-      document.getElementById("add-product-modal")
-    );
-    renderProduct();
-    document.getElementById("modal-add-product-form").reset();
-    myModal.hide();
-  } catch (error) {
-    console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
-    });
-  }
+  //   renderProduct();
+  //   document.getElementById("modal-add-product-form").reset();
+
+  //   var myModalEl = document.getElementById("add-product-modal");
+  //   var modal = bootstrap.Modal.getInstance(myModalEl);
+  //   modal.hide();
+
+  //   document.querySelector(
+  //     "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+  //   ).innerHTML = "";
+  // } catch (error) {
+  //   console.log(error);
+  //   new AWN().alert(error.message, {
+  //     durations: { success: 1000 },
+  //   });
+  // }
 };
 
 window.readURL = (input) => {
@@ -123,15 +128,9 @@ window.readURL = (input) => {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      const node = document.createElement("img");
-      node.setAttribute("src", e.target.result);
-      node.setAttribute("alt", "product-image");
-
-      document
-        .querySelector(
-          "#product .modal .modal-dialog .modal-body .form-group-upload-image"
-        )
-        .appendChild(node);
+      document.querySelector(
+        "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+      ).innerHTML = `<img src="${e.target.result}" alt="product-image"/>`;
     };
 
     reader.readAsDataURL(input.files[0]);
@@ -139,5 +138,6 @@ window.readURL = (input) => {
 };
 
 window.onload = () => {
+  localStorage.setItem("user", JSON.stringify(USER));
   renderProduct();
 };
