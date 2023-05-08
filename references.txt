@@ -11,3 +11,7 @@ https://formik.org/docs/overview
 
 read file and display image
 https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
+
+how to close modal in bootstrap v5
+https://stackoverflow.com/questions/69170870/bootstrap-5-close-modal-with-vanilla-javascript
