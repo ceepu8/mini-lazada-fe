@@ -4,7 +4,7 @@ import { handleAddProductFormValidation } from "./validation.js";
 
 const USER = {
   accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM1NDAwOTMsImV4cCI6MTY4MzU3NjA5M30.wsVf3CCR0HKvQ5ybPWTpQCVjA1hvj5etM2oxoY0K1kk",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM1NTU2NTcsImV4cCI6MTY4MzU5MTY1N30.9w0WSgDJVxxjlcUErJPgGgQssQFtMMTpGCQ95243Wzo",
   user: {
     username: "uyencaobusiness",
     role: "vendor",
