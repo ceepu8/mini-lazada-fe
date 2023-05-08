@@ -1,6 +1,6 @@
 import { vendorApi } from "../api/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
-import { handleAddProductFormValidation } from "./validation.js";
+import { handleFormValidation } from "./validation.js";
 
 const USER = {
   accessToken:
@@ -79,7 +79,7 @@ window.addProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const formData = new FormData();
 
-  const isValidated = handleAddProductFormValidation("#modal-add-product-form");
+  const isValidated = handleFormValidation("#modal-add-product-form");
   if (isValidated) {
     return;
   }

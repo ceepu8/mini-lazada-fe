@@ -29,7 +29,7 @@ export const VALIDATIONS = {
   },
 };
 
-export const handleAddProductFormValidation = (form) => {
+export const handleFormValidation = (form) => {
   let isError = false;
   const myForm = document.querySelector(form);
   const inputs = myForm.querySelectorAll("input");
