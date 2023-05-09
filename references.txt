@@ -15,3 +15,7 @@ https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-upload
 
 how to close modal in bootstrap v5
 https://stackoverflow.com/questions/69170870/bootstrap-5-close-modal-with-vanilla-javascript
+
+
+đang làm nhánh registration
+làm tiếp
