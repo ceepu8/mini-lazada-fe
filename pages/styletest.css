@@ -1,59 +1,79 @@
+:root {
+  --primary: #0046be;
+  --secondary: #ffdf00;
+
+  --avocado: #4b8105;
+  --red: #fe0000;
+
+  --bright-gray: #eeeeee;
+  --cultured: #f5f5f5;
+  --granite-gray: #666666;
+  --dark-charcoal: #333333;
+  --raisin-black: #222222;
+
+  --black: #000000;
+  --white: #ffffff;
+}
+
 .registration-container {
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .registration-container h1 {
-    text-align: center;
-    margin-top: 0;
-  }
-  
-  .registration-container form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .registration-container .form-group {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .registration-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .registration-container input[type="email"],
-  .registration-container input[type="password"],
-  .registration-container input[type="text"],
-  .registration-container input[type="tel"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .registration-container input:focus {
-    border-color: #f90;
-  }
-  
-  .registration-container button[type="submit"] {
-    background-color: #f90;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 20px;
-    cursor: pointer;
-  }
-  
-  .registration-container button[type="submit"]:hover {
-    background-color: #f60;
-  }
-  
-  .registration-container p {
-    text-align: center;
-  }
+  max-width: 600px;
+  margin: auto;
+}
+
+.registration-container h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.registration-container form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.registration-container .form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.registration-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.registration-container input[type="email"],
+.registration-container input[type="password"],
+.registration-container input[type="text"],
+.registration-container input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.registration-container input:focus {
+  border-color: var(--primary);
+}
+
+.registration-container button[type="submit"] {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  cursor: pointer;
+
+  transition: all 0.15s;
+}
+
+.registration-container button[type="submit"]:hover {
+  background-color: var(--secondary);
+  color: var(--black);
+}
+
+.registration-container p {
+  text-align: center;
+}
