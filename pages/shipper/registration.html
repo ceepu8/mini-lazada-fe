@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Shiper Registration Page</title>
+  <link rel="stylesheet" type="text/css" href="../registration-style.css" />
+</head>
+
+<body>
+  <div class="registration-container">
+    <h1>Shiper Registration Page</h1>
+    <form novalidate id="shipper-registration-form" action="" method="post">
+      <div class="form-group">
+        <label for="username">Username*</label>
+        <input type="text" id="username" name="username" required="true" min="8" max="15"/>
+        <span style="color: red" class="error-message username name-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password*</label>
+        <input type="password" id="password" name="password" required="true" />
+        <span style="color: red" class="error-message password name-error"></span>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm password*</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required="true" />
+        <span style="color: red" class="error-message confirmPassword name-error"></span>
+      </div>
+      <!-- <div class="form-group">
+        <select name="lang" id="lang-select" required="true">
+          <option value="">--Distribution-hub--</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <span
+        style="color: red"
+        class="error-message confirmPassword name-error"
+      ></span>
+      </div> -->
+      <button type="submit">Register</button>
+    </form>
+
+    <p>If you already have an account, <a href="#">log in now</a></p>
+  </div>
+  <script type="module" src="../../controller/registration/shipper.js"></script>
+</body>
+
+</html>

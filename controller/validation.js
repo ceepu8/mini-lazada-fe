@@ -3,6 +3,7 @@ const VALIDATION_MESSAGE = {
   textOnly: "Chỉ chấp nhận chữ",
   numberOnly: "Chỉ chấp nhận số",
   email: "Email không đúng định dạng",
+  phoneNumber: "Số điện thoại không hợp lệ",
   max: (maxNumber) => `Không được vượt quá ${maxNumber} ký tự`,
   min: (minNumber) => `Không được nhỏ hơn ${minNumber} ký tự`,
 };
@@ -12,14 +13,10 @@ export const VALIDATIONS = {
     return value !== "";
   },
   phone: function (value) {
-    return value.match(
-      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-    );
+    return value.match(/(84|0[3|5|7|8|9])+([0-9]{8})\b/);
   },
   email: function (value) {
-    return value.match(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+    return value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
   },
   text: function (value) {
     return value.match(/^[a-zA-Z ]*$/);
@@ -42,9 +39,10 @@ export const handleFormValidation = (form) => {
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
 
     const isRequired = Boolean(field.getAttribute("required")) || false;
+    const isPhoneNumber = Boolean(field.getAttribute("phone")) || false;
     const isNumberOnly = Boolean(field.getAttribute("numberOnly")) || false;
     const isTextOnly = Boolean(field.getAttribute("textOnly")) || false;
-    const isEmail = Number(field.getAttribute("email"));
+    const isEmail = Boolean(field.getAttribute("email")) || false;
 
     const maxLength = Number(field.getAttribute("max"));
     const minLength = Number(field.getAttribute("min"));
@@ -52,6 +50,12 @@ export const handleFormValidation = (form) => {
     if (isRequired && !VALIDATIONS.required(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["required"];
+      continue;
+    }
+
+    if (isPhoneNumber && !VALIDATIONS.phone(field.value)) {
+      isError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["phoneNumber"];
       continue;
     }
 
@@ -87,6 +91,24 @@ export const handleFormValidation = (form) => {
 
     isError = false;
     errorElement.innerHTML = "";
+  }
+
+  const passwordField = document.querySelector(`${form} #password`);
+  const confirmPasswordField = document.querySelector(
+    `${form} #confirmPassword`
+  );
+
+  if (passwordField.value && confirmPasswordField.value) {
+    let confirmPassErrorElement = document.querySelector(
+      ".error-message.confirmPassword"
+    );
+    if (passwordField.value !== confirmPasswordField.value) {
+      isError = true;
+      confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
+    } else {
+      isError = false;
+      confirmPassErrorElement.innerHTML = "";
+    }
   }
 
   return isError;
