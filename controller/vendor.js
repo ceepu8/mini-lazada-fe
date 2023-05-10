@@ -2,17 +2,6 @@ import { vendorApi } from "../api/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
 import { handleFormValidation } from "./validation.js";
 
-const USER = {
-  accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IjY0NGY2YmY5OWEzZTI1YTE2YmIwODcwOSIsInVzZXJuYW1lIjoidXllbmNhb2J1c2luZXNzIiwicm9sZSI6InZlbmRvciJ9LCJpYXQiOjE2ODM1NTU2NTcsImV4cCI6MTY4MzU5MTY1N30.9w0WSgDJVxxjlcUErJPgGgQssQFtMMTpGCQ95243Wzo",
-  user: {
-    username: "uyencaobusiness",
-    role: "vendor",
-    businessName: "uyen cao with business",
-    businessAddress: "BUSINESS street",
-  },
-};
-
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const productTable = document.querySelector(
@@ -138,6 +127,10 @@ window.readURL = (input) => {
 };
 
 window.onload = () => {
-  localStorage.setItem("user", JSON.stringify(USER));
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.location.replace("../login.html");
+  }
+
   renderProduct();
 };
