@@ -1,68 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Shiper Registration Page</title>
-    <link rel="stylesheet" type="text/css" href="styletest.css">
-</head>
-<div class="registration-container">
+    <link rel="stylesheet" type="text/css" href="../styletest.css" />
+  </head>
+  <div class="registration-container">
     <h1>Shiper Registration Page</h1>
     <form action="" method="post">
       <div class="form-group">
         <label for="full_name">Full name*</label>
-        <input type="text" id="full_name" name="full_name" pattern="[a-zA-Z0-9]{8,15}" required>
+        <input
+          type="text"
+          id="full_name"
+          name="full_name"
+          pattern="[a-zA-Z0-9]{8,15}"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="email">Email*</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required />
       </div>
       <div class="form-group">
         <label for="password">Password*</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" required />
       </div>
       <div class="form-group">
         <label for="confirm_password">Confirm password*</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+        <input
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          required
+        />
       </div>
       <div class="form-group">
         <label for="phone_number">Phone number*</label>
-        <input type="tel" id="phone_number" name="phone_number" required>
+        <input type="tel" id="phone_number" name="phone_number" required />
       </div>
       <div class="form-group">
         <label for="license plates">License plates*</label>
-        <input type="tel" id="license plates" name="license plates" required>
+        <input type="tel" id="license plates" name="license plates" required />
       </div>
       <div class="form-group">
-        <input type="checkbox" id="terms_and_conditions" name="terms_and_conditions" required>
-        <label for="terms_and_conditions">I agree to the <a href="#">terms and conditions</a></label>
+        <input
+          type="checkbox"
+          id="terms_and_conditions"
+          name="terms_and_conditions"
+          required
+        />
+        <label for="terms_and_conditions"
+          >I agree to the <a href="#">terms and conditions</a></label
+        >
       </div>
       <button type="submit">Register</button>
     </form>
     <script>
-      window.onload = function() {
-        document.querySelector("form").onsubmit = function() {
+      window.onload = function () {
+        document.querySelector("form").onsubmit = function () {
           var password = document.querySelector("#password").value;
           var repassword = document.querySelector("#confirm_password").value;
-    
-          var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d@$!%*?&]{8,20}$/;
-    
-          if(!regex.test(password)) {
-            document.querySelector("#err_password").innerHTML = "* Password must meet: one uppercase letter, one lowercase letter, one digit, one special character, length 8-20";
+
+          var regex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d@$!%*?&]{8,20}$/;
+
+          if (!regex.test(password)) {
+            document.querySelector("#err_password").innerHTML =
+              "* Password must meet: one uppercase letter, one lowercase letter, one digit, one special character, length 8-20";
             return false;
           } else {
             document.querySelector("#err_password").innerHTML = "";
           }
-    
-          if(password !== confirm_password) {
-            document.querySelector("#err_confirm_password").innerHTML = "* Confirm password is incorrect";
+
+          if (password !== confirm_password) {
+            document.querySelector("#err_confirm_password").innerHTML =
+              "* Confirm password is incorrect";
             return false;
           } else {
             document.querySelector("#err_confirm_password").innerHTML = "";
           }
-    
+
           return true;
-        }
-      }
+        };
+      };
     </script>
     <p>If you already have an account, <a href="#">log in now</a></p>
   </div>
