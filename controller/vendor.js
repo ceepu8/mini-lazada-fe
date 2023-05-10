@@ -94,33 +94,33 @@ window.addProduct = async () => {
   formData.append("price", price);
   formData.append("description", description);
 
-  // try {
-  //   const { data, status } = await vendorApi.createProduct(
-  //     user.accessToken,
-  //     formData
-  //   );
-  //   if (status === 200) {
-  //     new AWN().success(data.message, {
-  //       durations: { success: 1000 },
-  //     });
-  //   }
+  try {
+    const { data, status } = await vendorApi.createProduct(
+      user.accessToken,
+      formData
+    );
+    if (status === 200) {
+      new AWN().success(data.message, {
+        durations: { success: 1000 },
+      });
+    }
 
-  //   renderProduct();
-  //   document.getElementById("modal-add-product-form").reset();
+    renderProduct();
+    document.getElementById("modal-add-product-form").reset();
 
-  //   var myModalEl = document.getElementById("add-product-modal");
-  //   var modal = bootstrap.Modal.getInstance(myModalEl);
-  //   modal.hide();
+    var myModalEl = document.getElementById("add-product-modal");
+    var modal = bootstrap.Modal.getInstance(myModalEl);
+    modal.hide();
 
-  //   document.querySelector(
-  //     "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
-  //   ).innerHTML = "";
-  // } catch (error) {
-  //   console.log(error);
-  //   new AWN().alert(error.message, {
-  //     durations: { success: 1000 },
-  //   });
-  // }
+    document.querySelector(
+      "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
+    ).innerHTML = "";
+  } catch (error) {
+    console.log(error);
+    new AWN().alert(error.message, {
+      durations: { success: 1000 },
+    });
+  }
 };
 
 window.readURL = (input) => {

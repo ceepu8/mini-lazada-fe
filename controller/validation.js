@@ -16,9 +16,7 @@ export const VALIDATIONS = {
     return value.match(/(84|0[3|5|7|8|9])+([0-9]{8})\b/);
   },
   email: function (value) {
-    return value.match(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+    return value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
   },
   text: function (value) {
     return value.match(/^[a-zA-Z ]*$/);
@@ -36,19 +34,20 @@ export const handleFormValidation = (form) => {
 
   const fields = [...inputs, ...textareas];
 
-  console.log(fields);
+  const passwordVal = document.querySelector(`${form} #password`).value;
+  const confirmPasswordVal = document.querySelector(
+    `${form} #confirm-password`
+  ).value;
 
   for (let field of fields) {
     const fieldName = field.id;
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
 
-    // console.log(errorElement);
-
     const isRequired = Boolean(field.getAttribute("required")) || false;
     const isPhoneNumber = Boolean(field.getAttribute("phone")) || false;
     const isNumberOnly = Boolean(field.getAttribute("numberOnly")) || false;
     const isTextOnly = Boolean(field.getAttribute("textOnly")) || false;
-    const isEmail = Number(field.getAttribute("email"));
+    const isEmail = Boolean(field.getAttribute("email")) || false;
 
     const maxLength = Number(field.getAttribute("max"));
     const minLength = Number(field.getAttribute("min"));
@@ -97,6 +96,19 @@ export const handleFormValidation = (form) => {
 
     isError = false;
     errorElement.innerHTML = "";
+  }
+
+  if (passwordVal && confirmPasswordVal) {
+    let confirmPassErrorElement = document.querySelector(
+      ".error-message.confirm-password"
+    );
+    if (passwordVal !== confirmPasswordVal) {
+      isError = true;
+      confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
+    } else {
+      isError = false;
+      confirmPassErrorElement.innerHTML = "";
+    }
   }
 
   return isError;
