@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Customer Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="../styletest.css" />
+  </head>
+  <body>
+    <div class="registration-container">
+      <h1>Customer Registration Page</h1>
+      <form id="customer-registration-form" action="">
+        <div class="form-group">
+          <label for="full_name">Full name*</label>
+          <input
+            type="text"
+            id="full_name"
+            name="full_name"
+            textOnly="true"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message full_name name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email*</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            email="true"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message email name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password*</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message password name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm password*</label>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message confirm_password name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="phone_number">Phone number*</label>
+          <input
+            type="tel"
+            id="phone_number"
+            name="phone_number"
+            phone="true"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message phone_number name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="address">Address*</label>
+          <input type="text" id="address" name="address" required="true" />
+          <span
+            style="color: red"
+            class="error-message address name-error"
+          ></span>
+        </div>
+        <!-- <div class="form-group">
+        <input
+          type="checkbox"
+          id="terms_and_conditions"
+          name="terms_and_conditions"
+          required="true"
+        />
+        <label for="terms_and_conditions"
+          >I agree to the <a href="#">terms and conditions</a></label
+        >
+      </div> -->
+        <button type="submit">Register</button>
+      </form>
+
+      <p>If you already have an account, <a href="#">log in now</a></p>
+    </div>
+
+    <script type="module" src="../../controller/registration.js"></script>
+  </body>
+</html>
