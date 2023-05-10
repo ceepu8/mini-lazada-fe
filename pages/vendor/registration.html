@@ -2,92 +2,103 @@
 <html lang="en">
   <head>
     <title>Vendor Registration Page</title>
+    <link
+      rel="stylesheet"
+      href="../../libraries/awesome-notifications/dist/style.css"
+    />
     <link rel="stylesheet" type="text/css" href="../styletest.css" />
   </head>
-  <div class="registration-container">
-    <h1>Vendor Registration Page</h1>
-    <form action="" method="post">
-      <div class="form-group">
-        <label for="full_name">Full name*</label>
-        <input
-          type="text"
-          id="full_name"
-          name="full_name"
-          pattern="[a-zA-Z0-9]{8,15}"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">Email*</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password*</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <div class="form-group">
-        <label for="confirm_password">Confirm password*</label>
-        <input
-          type="password"
-          id="confirm_password"
-          name="confirm_password"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="phone_number">Phone number*</label>
-        <input type="tel" id="phone_number" name="phone_number" required />
-      </div>
-      <div class="form-group">
-        <label for="address">Address*</label>
-        <input type="text" id="address" name="address" required />
-      </div>
-      <div class="form-group">
-        <label for="type of sold">Type of sold*</label>
-        <input type="text" id="type of sold" name="type of sold" required />
-      </div>
-      <div class="form-group">
-        <input
-          type="checkbox"
-          id="terms_and_conditions"
-          name="terms_and_conditions"
-          required
-        />
-        <label for="terms_and_conditions"
-          >I agree to the <a href="#">terms and conditions</a></label
-        >
-      </div>
-      <button type="submit">Register</button>
-    </form>
-    <script>
-      window.onload = function () {
-        document.querySelector("form").onsubmit = function () {
-          var password = document.querySelector("#password").value;
-          var repassword = document.querySelector("#confirm_password").value;
+  <body>
+    <div class="registration-container">
+      <h1>Vendor Registration Page</h1>
+      <form id="vendor-registration-form" novalidate action="" method="post">
+        <div class="form-group">
+          <label for="full_name">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required="true"
+            min="8"
+            max="15"
+          />
+          <span
+            style="color: red"
+            class="error-message username name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password*</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message password name-error"
+          ></span>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm password*</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message confirmPassword name-error"
+          ></span>
+        </div>
 
-          var regex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d@$!%*?&]{8,20}$/;
+        <div class="form-group">
+          <label for="businessName">Business Name*</label>
+          <input
+            type="text"
+            id="businessName"
+            name="businessName"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message businessName name-error"
+          ></span>
+        </div>
 
-          if (!regex.test(password)) {
-            document.querySelector("#err_password").innerHTML =
-              "* Password must meet: one uppercase letter, one lowercase letter, one digit, one special character, length 8-20";
-            return false;
-          } else {
-            document.querySelector("#err_password").innerHTML = "";
-          }
+        <div class="form-group">
+          <label for="business-address">Business Address*</label>
+          <input
+            type="text"
+            id="businessAddress"
+            name="businessAddress"
+            required="true"
+          />
+          <span
+            style="color: red"
+            class="error-message businessAddress name-error"
+          ></span>
+        </div>
 
-          if (password !== confirm_password) {
-            document.querySelector("#err_confirm_password").innerHTML =
-              "* Confirm password is incorrect";
-            return false;
-          } else {
-            document.querySelector("#err_confirm_password").innerHTML = "";
-          }
+        <button type="submit">Register</button>
+      </form>
 
-          return true;
-        };
-      };
-    </script>
-    <p>If you already have an account, <a href="#">log in now</a></p>
-  </div>
+      <p>
+        If you already have an account, <a href="../login.html">log in now</a>
+      </p>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script
+      type="module"
+      src="../../controller/registration/vendor.js"
+    ></script>
+  </body>
 </html>

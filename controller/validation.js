@@ -34,11 +34,6 @@ export const handleFormValidation = (form) => {
 
   const fields = [...inputs, ...textareas];
 
-  const passwordVal = document.querySelector(`${form} #password`).value;
-  const confirmPasswordVal = document.querySelector(
-    `${form} #confirm-password`
-  ).value;
-
   for (let field of fields) {
     const fieldName = field.id;
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
@@ -98,11 +93,16 @@ export const handleFormValidation = (form) => {
     errorElement.innerHTML = "";
   }
 
-  if (passwordVal && confirmPasswordVal) {
+  const passwordField = document.querySelector(`${form} #password`);
+  const confirmPasswordField = document.querySelector(
+    `${form} #confirmPassword`
+  );
+
+  if (passwordField.value && confirmPasswordField.value) {
     let confirmPassErrorElement = document.querySelector(
-      ".error-message.confirm-password"
+      ".error-message.confirmPassword"
     );
-    if (passwordVal !== confirmPasswordVal) {
+    if (passwordField.value !== confirmPasswordField.value) {
       isError = true;
       confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
     } else {
