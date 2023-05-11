@@ -4,7 +4,6 @@ function handleForm(e) {
   e.preventDefault();
   var username = document.querySelector("#username");
   var password = document.querySelector("#password");
-  var error_msg = document.querySelector(".error_msg");
 
   const isError = handleFormValidation("#login-form");
 
