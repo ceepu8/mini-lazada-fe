@@ -1,4 +1,4 @@
 var loadFile = function (event) {
-    var image = document.getElementById("output");
+    var image = document.getElementById("avatar");
     image.src = URL.createObjectURL(event.target.files[0]);
     };
