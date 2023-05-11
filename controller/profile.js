@@ -1,11 +1,11 @@
 
 function loadUser() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "https://smoky-mini-lazada-be.onrender.com/api/user");
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.setRequestHeader("Authorization", "Bearer "+jwt);
-    xhttp.send();
-    xhttp.onreadystatechange = function() {
+    const data = new XMLHttpRequest();
+    data.open("GET", "https://smoky-mini-lazada-be.onrender.com/api/user");
+    data.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    data.setRequestHeader("Authorization", "Bearer "+jwt);
+    data.send();
+    data.onreadystatechange = function() {
     if (this.readyState == 4) {
         const objects = JSON.parse(this.responseText);
         if (objects["status"] == "ok") {
