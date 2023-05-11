@@ -15,9 +15,23 @@
   --white: #ffffff;
 }
 
+.registration-design{
+  display: flex;
+}
+
+.picture-for-registration{
+  width: 30%;
+}
+
+.design-picture {
+  width: 450px;
+  height: auto;
+}
+
 .registration-container {
   max-width: 600px;
   margin: auto;
+  width: 70%;
 }
 
 .registration-container h1 {
