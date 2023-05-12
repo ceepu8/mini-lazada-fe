@@ -1,1 +1,287 @@
 <!-- detail page for each order -->
+<!-- view all orders in hub -->
+<!-- to view all products -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link rel="icon" href="./assets/browser-icon.webp" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="../../libraries/awesome-notifications/dist/style.css"
+    />
+    <link rel="stylesheet" href="../../css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container-fluid">
+            <div class="logo">
+              <img src="../../assets/logo.png" alt="logo" />
+            </div>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <div class="search-bar">
+                <form>
+                  <div class="form-control">
+                    <input type="search" placeholder="Search..." />
+                  </div>
+                  <div class="search-button">
+                    <button type="button">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item user">
+                  <i class="fa-solid fa-user"></i>
+                  <span>My Account</span>
+                </li>
+                <li class="nav-item logout">
+                  <button type="button">Logout</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <section id="order">
+      <div class="container">
+        <div class="table-header">
+          <h2>Orders Details</h2>
+          <button
+            type="button"
+            class="add-button"
+            data-bs-toggle="modal"
+            data-bs-target="#add-product-modal"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div
+          class="modal fade"
+          id="add-product-modal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="modal-add-product-form">
+                  <div class="form-group">
+                    <label for="#form-control-input-name">Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-name"
+                      required="true"
+                      max="50"
+                      min="20"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-name name-error"
+                    ></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="#form-control-input-price">Price</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="input-price"
+                      required="true"
+                      numberOnly="true"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message input-price price-error"
+                    ></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="#form-control-textarea-description"
+                      >Description</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="textarea-description"
+                      rows="2"
+                      required="true"
+                      max="100"
+                    ></textarea>
+                    <span
+                      style="color: red"
+                      class="error-message textarea-description description-error"
+                    ></span>
+                  </div>
+
+                  <div class="form-group form-group-upload-image">
+                    <label for="#form-control-file-image">Upload Image</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="file-image"
+                      accept="image/*"
+                      onchange="readURL(this)"
+                      required="true"
+                    />
+                    <span
+                      style="color: red"
+                      class="error-message file-image file-image-error"
+                    ></span>
+                    <div class="preview-image"></div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="primary-button"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="secondary-button"
+                  onclick="addProduct()"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="active-order">
+          <!-- <table class="table table-hover table-striped">
+            <thead class="thead">
+              <tr>
+                <th>Order ID.</th>
+                <th>Total Price</th>
+                <th>Cust Adress</th>
+                <th>Product</th>
+                <th>Hub</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td>123456</td>
+                <td>$29.99</td>
+                <td>123 ABC street</td>
+                <td>MockProd</td>
+                <td>Hub1</td>
+                <td>
+                    <select id="status">
+                        <option value="active">Active</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                  </select></th>
+              </tr>
+            </thead>
+            <tbody class="table-body"></tbody>
+          </table> -->
+            <div class="block">
+                <div class= "ProdImg">
+                    <img src="../../assets/ProdImages/bag.jpg" alt="bag">
+                </div>
+                <!-- <div class="ProdImg">
+                  <img src="../../assets/ProdImages/iphone.jpg" alt="phone">
+                </div> -->
+                <div class="OrdDetail">
+                  <table>
+                    <tr>
+                      <th>Order ID</th>
+                      <td>123456</td>
+                    </tr>
+                    <tr>
+                      <th>Product</th>
+                      <td>Bag</td>
+                    </tr>
+                    <tr>
+                      <th>Total Price</th>
+                      <td>29.99</td>
+                    </tr>
+                    <tr>
+                      <th>Address</th>
+                      <td>ABC street</td>
+                    </tr>
+                    <tr>
+                      <th>Status</th>
+                      <td><select name="Status">
+                        <option value="Active">Active</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Cancelled">Cancelled</option>
+                      </select></td>
+                    </tr>
+                  </table>
+              </div>
+            </div>
+          <div class="order-loading">
+            <div class="spinner-border text-primary text-center" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script> -->
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script> -->
+    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script type="module" src="../../utils/index.js"></script>
+    <script type="module" src="../../controller/validation.js"></script>
+    <script type="module" src="../../api/vendorApi.js"></script>
+    <script type="module" src="../../controller/vendor.js"></script>
+  </body>
+</html>
