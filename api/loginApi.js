@@ -16,7 +16,7 @@ function login() {
   }));
   user.onreadystatechange = function () {
     if (this.readyState == 4) {
-      const objects = JSON.parse(this.user);
+      const objects = JSON.parse(this.responseText);
       console.log(objects);
       if (objects['status'] == 'ok') {
         localStorage.setItem("user_login", objects['accessToken']);
