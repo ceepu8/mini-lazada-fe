@@ -54,7 +54,7 @@ const uploadAvatar = async () => {
     }
   };
   
-  window.addAvatar = async () => {
+  const addAvatar = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const formData = new FormData();
   
@@ -94,6 +94,8 @@ const uploadAvatar = async () => {
   
       reader.readAsDataURL(input.files[0]);
     }
+
+    addAvatar();
   };
 
 
