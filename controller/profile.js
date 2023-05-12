@@ -1,4 +1,5 @@
 import { profileApi } from "../api/profileApi.js";
+
 function loadUser() {
     const data = new XMLHttpRequest();
     data.open("GET", "https://smoky-mini-lazada-be.onrender.com/api/user");
@@ -81,7 +82,7 @@ const uploadAvatar = async () => {
     }
   };
   
-  window.readURL = (input) => {
+  window.loadFile = (input) => {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
   
