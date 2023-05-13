@@ -1,0 +1,196 @@
+#shipper-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .row {
+    border: 1px solid $bright-gray;
+    border-radius: 4px;
+    box-shadow: $card-shadow;
+    .image-col {
+      padding: 0;
+      .intro-img {
+        background-image: url(../assets/shipper-registration-bg.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 4px 0px 0px 4px;
+        height: 100%;
+      }
+    }
+  }
+}
+
+#vendor-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .row {
+    border: 1px solid $bright-gray;
+    border-radius: 4px;
+    box-shadow: $card-shadow;
+    margin: 0 auto;
+    .image-col {
+      padding: 0;
+      .intro-img {
+        background-image: url(../assets/registration-bg.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 4px 0px 0px 4px;
+        height: 100%;
+      }
+    }
+  }
+}
+
+#customer-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .row {
+    border: 1px solid $bright-gray;
+    border-radius: 4px;
+    box-shadow: $card-shadow;
+    margin: 0 auto;
+
+    .image-col {
+      padding: 0;
+      .intro-img {
+        background-image: url(../assets/customer-registration-bg.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 4px 0px 0px 4px;
+        height: 100%;
+      }
+    }
+    .form-col {
+      height: 100%;
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.form-col {
+  padding: 42px 24px;
+  .back-button {
+    top: 42px;
+    left: 12px;
+    background-color: $primary;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms;
+    color: $white;
+    cursor: pointer;
+    margin-bottom: 12px;
+
+    &:hover {
+      background-color: $secondary;
+      color: $raisin-black;
+    }
+  }
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
+
+form .form-group {
+  padding-bottom: 16px;
+}
+
+form .form-group .form-field {
+  font-family: inherit;
+  width: 100%;
+  border: 1px solid $bright-gray;
+  border-radius: 4px;
+  outline: 0;
+  font-size: 16px;
+  color: $raisin-black;
+  padding: 6px 12px;
+  background: transparent;
+  transition: all 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+form .form-group .form-label {
+  display: block;
+  transition: 0.2s;
+  font-size: 16px;
+  color: $granite-gray;
+}
+
+form .form-group .form-field:focus {
+  ~ .form-label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 14px;
+    color: $primary;
+  }
+  //   padding-bottom: 6px;
+  border-width: 1px;
+  border-color: $primary;
+}
+form .form-group .form-field {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+.primary-button {
+  background-color: $primary;
+  color: $white;
+  border-radius: 4px;
+  transition: all 0.15s;
+  padding: $pd-2 $pd-3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: $secondary;
+    color: $black;
+  }
+}
