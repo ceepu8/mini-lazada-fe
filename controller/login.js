@@ -8,7 +8,6 @@ const spinner = `
     aria-hidden="true"
     ></span>
     Loading...
-
 `
 const handleForm = async (e) => {
   e.preventDefault();

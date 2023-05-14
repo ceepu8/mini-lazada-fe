@@ -60,8 +60,10 @@
               </div>
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item user">
-                  <i class="fa-solid fa-user"></i>
-                  <span>My Account</span>
+                  <a href="./profile.html">
+                    <i class="fa-solid fa-user"></i>
+                    My Profile</a
+                  >
                 </li>
                 <li class="nav-item logout">
                   <button type="button" onClick="handleLogout()">Logout</button>
@@ -183,7 +185,7 @@
                 </button>
                 <button
                   type="button"
-                  class="secondary-button"
+                  class="secondary-button btn submit-btn"
                   onclick="addProduct()"
                 >
                   Add
@@ -227,7 +229,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="../../utils/index.js"></script>
     <script type="module" src="../../controller/validation.js"></script>
     <script type="module" src="../../api/vendorApi.js"></script>
