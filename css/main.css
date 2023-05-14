@@ -1,4 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;900&display=swap");
+:root {
+  --primary: #0046be;
+  --secondary: #ffdf00;
+  --avocado: #4b8105;
+  --red: #fe0000;
+  --bright-gray: #eeeeee;
+  --cultured: #f5f5f5;
+  --granite-gray: #666666;
+  --dark-charcoal: #333333;
+  --raisin-black: #222222;
+  --black: #000000;
+  --white: #ffffff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -311,6 +325,199 @@ header .navbar .navbar-nav .logout button:hover {
   transition: all 0.15s;
 }
 .secondary-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
+}
+
+#shipper-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#shipper-registration .row {
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+#shipper-registration .row .image-col {
+  padding: 0;
+}
+#shipper-registration .row .image-col .intro-img {
+  background-image: url(../assets/shipper-registration-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 4px 0px 0px 4px;
+  height: 100%;
+}
+
+#vendor-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#vendor-registration .row {
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  margin: 0 auto;
+}
+#vendor-registration .row .image-col {
+  padding: 0;
+}
+#vendor-registration .row .image-col .intro-img {
+  background-image: url(../assets/registration-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 4px 0px 0px 4px;
+  height: 100%;
+}
+
+#customer-registration {
+  max-width: 980px;
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#customer-registration .row {
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  margin: 0 auto;
+}
+#customer-registration .row .image-col {
+  padding: 0;
+}
+#customer-registration .row .image-col .intro-img {
+  background-image: url(../assets/customer-registration-bg.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 4px 0px 0px 4px;
+  height: 100%;
+}
+#customer-registration .row .form-col {
+  height: 100%;
+}
+#customer-registration .row .form-col form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-col {
+  padding: 42px 24px;
+}
+.form-col .back-button {
+  top: 42px;
+  left: 12px;
+  background-color: #0046be;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms;
+  color: #ffffff;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.form-col .back-button:hover {
+  background-color: #ffdf00;
+  color: #222222;
+}
+.form-col h1 {
+  font-size: 32px;
+}
+.form-col h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+form .form-group {
+  padding-bottom: 16px;
+}
+
+form .form-group .form-field {
+  font-family: inherit;
+  width: 100%;
+  border: 1px solid #eeeeee;
+  border-radius: 4px;
+  outline: 0;
+  font-size: 16px;
+  color: #222222;
+  padding: 6px 12px;
+  background: transparent;
+  transition: all 0.2s;
+}
+form .form-group .form-field::-moz-placeholder {
+  color: transparent;
+}
+form .form-group .form-field::placeholder {
+  color: transparent;
+}
+form .form-group .form-field:-moz-placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+form .form-group .form-field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+form .form-group .form-label {
+  display: block;
+  transition: 0.2s;
+  font-size: 16px;
+  color: #666666;
+}
+
+form .form-group .form-field:focus {
+  border-width: 1px;
+  border-color: #0046be;
+}
+form .form-group .form-field:focus ~ .form-label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 14px;
+  color: #0046be;
+}
+
+form .form-group .form-field:required, form .form-group .form-field:invalid {
+  box-shadow: none;
+}
+
+.primary-button {
+  background-color: #0046be;
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.15s;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.primary-button:hover {
   background-color: #ffdf00;
   color: #000000;
 }/*# sourceMappingURL=main.css.map */

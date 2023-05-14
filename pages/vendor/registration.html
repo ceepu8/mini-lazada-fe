@@ -3,99 +3,151 @@
   <head>
     <title>Vendor Registration Page</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="../../libraries/awesome-notifications/dist/style.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="../registration-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
   </head>
   <body>
-    <div class="registration-container">
-      <h1>Vendor Registration Page</h1>
-      <form id="vendor-registration-form" novalidate action="" method="post">
-        <div class="form-group">
-          <label for="full_name">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required="true"
-            min="8"
-            max="15"
-          />
-          <span
-            style="color: red"
-            class="error-message username name-error"
-          ></span>
+    <div id="vendor-registration" class="container">
+      <div class="row w-100">
+        <div class="col-sm image-col">
+          <div class="intro-img"></div>
         </div>
-        <div class="form-group">
-          <label for="password">Password*</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required="true"
-          />
-          <span
-            style="color: red"
-            class="error-message password name-error"
-          ></span>
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirm password*</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            required="true"
-          />
-          <span
-            style="color: red"
-            class="error-message confirmPassword name-error"
-          ></span>
-        </div>
+        <div class="col-sm form-col">
+          <div class="back-button">
+            <a href="../../index.html">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="registration-container">
+            <h1>Vendor Registration Page</h1>
+            <h2>Welcome to our website!</h2>
+            <form
+              id="vendor-registration-form"
+              novalidate
+              action=""
+              method="post"
+            >
+              <div class="form-group">
+                <label class="form-label" for="full_name">Username</label>
+                <input
+                  class="form-field"
+                  type="text"
+                  id="username"
+                  name="username"
+                  required="true"
+                  min="8"
+                  max="15"
+                />
+                <span
+                  style="color: red"
+                  class="error-message username name-error"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="password">Password*</label>
+                <input
+                  class="form-field"
+                  type="password"
+                  id="password"
+                  name="password"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message password name-error"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword"
+                  >Confirm password*</label
+                >
+                <input
+                  class="form-field"
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message confirmPassword name-error"
+                ></span>
+              </div>
 
-        <div class="form-group">
-          <label for="businessName">Business Name*</label>
-          <input
-            type="text"
-            id="businessName"
-            name="businessName"
-            required="true"
-          />
-          <span
-            style="color: red"
-            class="error-message businessName name-error"
-          ></span>
+              <div class="form-group">
+                <label class="form-label" for="businessName"
+                  >Business Name*</label
+                >
+                <input
+                  class="form-field"
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message businessName name-error"
+                ></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="business-address"
+                  >Business Address*</label
+                >
+                <input
+                  class="form-field"
+                  type="text"
+                  id="businessAddress"
+                  name="businessAddress"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message businessAddress name-error"
+                ></span>
+              </div>
+
+              <button type="submit" class="primary-button w-100">
+                Register
+              </button>
+            </form>
+
+            <span>
+              If you already have an account,
+              <a style="color: var(--primary)" href="../login.html"
+                >Login Now</a
+              >
+            </span>
+          </div>
         </div>
-
-        <div class="form-group">
-          <label for="business-address">Business Address*</label>
-          <input
-            type="text"
-            id="businessAddress"
-            name="businessAddress"
-            required="true"
-          />
-          <span
-            style="color: red"
-            class="error-message businessAddress name-error"
-          ></span>
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
-
-      <p>
-        If you already have an account, <a href="../login.html">Login Now</a>
-      </p>
+      </div>
     </div>
+
+    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
       integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script src="../../libraries/awesome-notifications/index.var.js"></script>
     <script
       type="module"
       src="../../controller/registration/vendor.js"
