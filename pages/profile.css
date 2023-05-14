@@ -1,12 +1,12 @@
 .form-control:focus {
-    box-shadow: none;
-    border-color: #1100ff
+  box-shadow: none;
+  border-color: #1100ff;
 }
 
 .labels {
-    font-size: 11px;
+  font-size: 11px;
 }
 
-.file{
-    display: none;
+.file {
+  display: none;
 }

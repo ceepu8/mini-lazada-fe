@@ -50,42 +50,56 @@ export const handleFormValidation = (form) => {
     if (isRequired && !VALIDATIONS.required(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["required"];
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (isPhoneNumber && !VALIDATIONS.phone(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["phoneNumber"];
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (isNumberOnly && !VALIDATIONS.number(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["numberOnly"];
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (isTextOnly && !VALIDATIONS.text(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["textOnly"];
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (isEmail && !VALIDATIONS.email(field.value)) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["email"];
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (maxLength && field.value.length > maxLength) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["max"](maxLength);
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
     if (minLength && field.value.length <= minLength) {
       isError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["min"](minLength);
+      errorElement.style.color = "#a64452";
+
       continue;
     }
 
@@ -98,7 +112,7 @@ export const handleFormValidation = (form) => {
     `${form} #confirmPassword`
   );
 
-  if (passwordField.value && confirmPasswordField.value) {
+  if (passwordField && confirmPasswordField) {
     let confirmPassErrorElement = document.querySelector(
       ".error-message.confirmPassword"
     );
