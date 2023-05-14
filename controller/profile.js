@@ -1,29 +1,22 @@
 import { profileApi } from "../api/profileApi.js";
 
-function loadUser() {
-  // const data = new XMLHttpRequest();
-  // data.open("GET", "https://smoky-mini-lazada-be.onrender.com/api/user");
-  // data.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  // data.setRequestHeader("Authorization", "Bearer " + jwt);
-  // data.send();
-  // data.onreadystatechange = function () {
-  //   if (this.readyState == 4) {
-  //     const objects = JSON.parse(this.responseText);
-  //     if (objects["status"] == "ok") {
-  //       const user = objects["user"]
-  //       document.getElementById("name").innerHTML = user["name"];
-  //       document.getElementById("avatar").src = user["avatar"];
-  //       document.getElementById("username").innerHTML = user["username"];
-  //       document.getElementById("address").innerHTML = user["address"];
-  //       document.getElementById("email").innerHTML = user["email"];
-  //       document.getElementById("businessName").innerHTML = user["businessName"];
-  //       document.getElementById("businessAddress").innerHTML = user["businessAddress"];
-  //     }
-  //   }
-  // };
+const loadUser = () => {
+  const user = JSON.parse(localStorage.getItem("user"))
+  if (!user) {
+    window.location.replace("../login.html");
+  }
+
+  const form = document.querySelector("form#profile-form")
+
+  const inputs = form.querySelectorAll(".form-field")
+
+  for (let input of inputs) {
+    const inputId = input.id
+    input.value = user.user[inputId]
+  }
+
 }
 
-loadUser();
 
 
 const uploadAvatar = async () => {
@@ -68,17 +61,10 @@ const addAvatar = async () => {
       formData
     );
     if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
     }
-
     uploadAvatar();
   } catch (error) {
     console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
-    });
   }
 };
 
@@ -99,3 +85,7 @@ window.loadFile = (input) => {
 };
 
 
+
+window.onload = () => {
+  loadUser()
+}
