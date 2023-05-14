@@ -115,7 +115,6 @@ window.addProduct = async () => {
       "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
     ).innerHTML = "";
   } catch (error) {
-    console.log(error);
     new AWN().alert(error.message, {
       durations: { success: 1000 },
     });
@@ -136,9 +135,12 @@ window.readURL = (input) => {
   }
 };
 
-window.onload = () => {
-  localStorage.setItem("user", JSON.stringify(USER));
+window.handleLogout = () => {
+  localStorage.removeItem("user")
+  location.reload()
+}
 
+window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
     window.location.replace("../login.html");
