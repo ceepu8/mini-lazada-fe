@@ -9,7 +9,6 @@ const spinner = `
     ></span>
     Loading...
 `
-
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const productTable = document.querySelector(
@@ -145,6 +144,8 @@ window.handleLogout = () => {
 }
 
 window.onload = () => {
+  localStorage.setItem("user", JSON.stringify(USER));
+
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
     window.location.replace("../login.html");
