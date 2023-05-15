@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shiper Registration Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../css/main.css" />
+  </head>
+
+  <body>
+    <div id="shipper-registration" class="container">
+      <div class="row w-100">
+        <div class="col-sm image-col">
+          <div class="intro-img"></div>
+        </div>
+        <div class="col-sm form-col">
+          <div class="back-button">
+            <a href="../../index.html">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="registration-container">
+            <h1>Shipper Registration Page</h1>
+            <h2>Welcome to our website!</h2>
+            <form
+              novalidate
+              id="shipper-registration-form"
+              action=""
+              method="post"
+            >
+              <div class="form-group">
+                <label class="form-label" for="username">Username*</label>
+                <input
+                  class="form-field"
+                  type="text"
+                  id="username"
+                  name="username"
+                  required="true"
+                  min="8"
+                  max="15"
+                />
+                <span
+                  style="color: red"
+                  class="error-message username name-error"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="password">Password*</label>
+                <input
+                  class="form-field"
+                  type="password"
+                  id="password"
+                  name="password"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message password name-error"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label
+                  class="form-label"
+                  for="confirmPassword"
+                  class="form-label"
+                  >Confirm password*</label
+                >
+                <input
+                  class="form-field"
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required="true"
+                />
+                <span
+                  style="color: red"
+                  class="error-message confirmPassword name-error"
+                ></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="#hub-select"
+                  >Select your hub</label
+                >
+                <select class="form-field" id="hub" name="hub" required="true">
+                  <option value="">--Distribution-hub--</option>
+                </select>
+                <span
+                  style="color: red"
+                  class="error-message confirmPassword name-error"
+                ></span>
+              </div>
+              <button type="submit" class="primary-button w-100 btn submit-btn">
+                Register
+              </button>
+            </form>
+
+            <span class="text-center">
+              If you already have an account,
+              <a href="#" style="color: var(--primary)">Log in now</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      type="module"
+      src="../../controller/registration/shipper.js"
+    ></script>
+  </body>
+</html>

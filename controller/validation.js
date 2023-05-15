@@ -3,6 +3,7 @@ const VALIDATION_MESSAGE = {
   textOnly: "Chỉ chấp nhận chữ",
   numberOnly: "Chỉ chấp nhận số",
   email: "Email không đúng định dạng",
+  phoneNumber: "Số điện thoại không hợp lệ",
   max: (maxNumber) => `Không được vượt quá ${maxNumber} ký tự`,
   min: (minNumber) => `Không được nhỏ hơn ${minNumber} ký tự`,
 };
@@ -12,14 +13,10 @@ export const VALIDATIONS = {
     return value !== "";
   },
   phone: function (value) {
-    return value.match(
-      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
-    );
+    return value.match(/(84|0[3|5|7|8|9])+([0-9]{8})\b/);
   },
   email: function (value) {
-    return value.match(
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+    return value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
   },
   text: function (value) {
     return value.match(/^[a-zA-Z ]*$/);
@@ -30,64 +27,82 @@ export const VALIDATIONS = {
 };
 
 export const handleFormValidation = (form) => {
-  let isError = false;
   const myForm = document.querySelector(form);
   const inputs = myForm.querySelectorAll("input");
   const textareas = myForm.querySelectorAll("textarea");
+  const errorArr = []
 
   const fields = [...inputs, ...textareas];
 
   for (let field of fields) {
     const fieldName = field.id;
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
+    let isFieldError = false
 
-    const isRequired = Boolean(field.getAttribute("required")) || false;
-    const isNumberOnly = Boolean(field.getAttribute("numberOnly")) || false;
-    const isTextOnly = Boolean(field.getAttribute("textOnly")) || false;
-    const isEmail = Number(field.getAttribute("email"));
+    const isRequired = field.hasAttribute("required");
+    const isPhoneNumber = field.hasAttribute("phone");
+    const isNumberOnly = field.hasAttribute("numberOnly");
+    const isTextOnly = field.hasAttribute("textOnly");
+    const isEmail = field.hasAttribute("email");
 
     const maxLength = Number(field.getAttribute("max"));
     const minLength = Number(field.getAttribute("min"));
 
     if (isRequired && !VALIDATIONS.required(field.value)) {
-      isError = true;
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["required"];
-      continue;
-    }
-
-    if (isNumberOnly && !VALIDATIONS.number(field.value)) {
-      isError = true;
+      errorElement.style.color = "#a64452";
+    } else if (isPhoneNumber && !VALIDATIONS.phone(field.value)) {
+      isFieldError = true
+      errorElement.innerHTML = VALIDATION_MESSAGE["phoneNumber"];
+      errorElement.style.color = "#a64452";
+    } else if (isNumberOnly && !VALIDATIONS.number(field.value)) {
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["numberOnly"];
-      continue;
-    }
-
-    if (isTextOnly && !VALIDATIONS.text(field.value)) {
-      isError = true;
+      errorElement.style.color = "#a64452";
+    } else if (isTextOnly && !VALIDATIONS.text(field.value)) {
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["textOnly"];
-      continue;
-    }
-
-    if (isEmail && !VALIDATIONS.email(field.value)) {
-      isError = true;
+      errorElement.style.color = "#a64452";
+    } else if (isEmail && !VALIDATIONS.email(field.value)) {
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["email"];
-      continue;
-    }
-
-    if (maxLength && field.value.length > maxLength) {
-      isError = true;
+      errorElement.style.color = "#a64452";
+    } else if (maxLength && field.value.length > maxLength) {
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["max"](maxLength);
-      continue;
-    }
-
-    if (minLength && field.value.length <= minLength) {
-      isError = true;
+      errorElement.style.color = "#a64452";
+    } else if (minLength && field.value.length <= minLength) {
+      isFieldError = true
       errorElement.innerHTML = VALIDATION_MESSAGE["min"](minLength);
-      continue;
+      errorElement.style.color = "#a64452";
+    } else {
+      isFieldError = false
+      errorElement.innerHTML = ""
     }
 
-    isError = false;
-    errorElement.innerHTML = "";
-  }
+    let isPassword = false
+    const passwordField = document.querySelector(`${form} #password`);
+    const confirmPasswordField = document.querySelector(
+      `${form} #confirmPassword`
+    );
 
-  return isError;
+    if (passwordField && confirmPasswordField) {
+      let confirmPassErrorElement = document.querySelector(
+        ".error-message.confirmPassword"
+      );
+      if (passwordField.value !== confirmPasswordField.value) {
+        isPassword = true
+        confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
+      } else {
+        isPassword = false
+        confirmPassErrorElement.innerHTML = "";
+      }
+    }
+
+    errorArr.push(isFieldError || isPassword)
+  }
+  if (errorArr.includes(true)) return true;
+
+  return false;
 };

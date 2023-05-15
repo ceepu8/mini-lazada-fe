@@ -1,7 +1,14 @@
 import { vendorApi } from "../api/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
 import { handleFormValidation } from "./validation.js";
-
+const spinner = `
+    <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+    ></span>
+    Loading...
+`
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const productTable = document.querySelector(
@@ -69,10 +76,9 @@ window.addProduct = async () => {
   const formData = new FormData();
 
   const isValidated = handleFormValidation("#modal-add-product-form");
-  if (isValidated) {
-    return;
-  }
+  if (isValidated) return
 
+  const loginBtn = document.querySelector(".btn.submit-btn")
   const name = document.getElementById("input-name").value;
   const price = document.getElementById("input-price").value;
   const description = document.getElementById("textarea-description").value;
@@ -84,14 +90,18 @@ window.addProduct = async () => {
   formData.append("description", description);
 
   try {
+    loginBtn.innerHTML = spinner
+    loginBtn.setAttribute("disabled", true)
     const { data, status } = await vendorApi.createProduct(
       user.accessToken,
       formData
     );
     if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      })
     }
 
     renderProduct();
@@ -105,11 +115,13 @@ window.addProduct = async () => {
       "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
     ).innerHTML = "";
   } catch (error) {
-    console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
-    });
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
+    })
   }
+  loginBtn.innerHTML = "Add"
+  loginBtn.removeAttribute("disabled")
 };
 
 window.readURL = (input) => {
@@ -125,6 +137,11 @@ window.readURL = (input) => {
     reader.readAsDataURL(input.files[0]);
   }
 };
+
+window.handleLogout = () => {
+  localStorage.removeItem("user")
+  location.reload()
+}
 
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
