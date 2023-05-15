@@ -8,7 +8,7 @@ const spinner = `
     aria-hidden="true"
     ></span>
     Loading...
-`
+`;
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const productTable = document.querySelector(
@@ -76,9 +76,9 @@ window.addProduct = async () => {
   const formData = new FormData();
 
   const isValidated = handleFormValidation("#modal-add-product-form");
-  if (isValidated) return
+  if (isValidated) return;
 
-  const loginBtn = document.querySelector(".btn.submit-btn")
+  const loginBtn = document.querySelector(".btn.submit-btn");
   const name = document.getElementById("input-name").value;
   const price = document.getElementById("input-price").value;
   const description = document.getElementById("textarea-description").value;
@@ -90,8 +90,8 @@ window.addProduct = async () => {
   formData.append("description", description);
 
   try {
-    loginBtn.innerHTML = spinner
-    loginBtn.setAttribute("disabled", true)
+    loginBtn.innerHTML = spinner;
+    loginBtn.setAttribute("disabled", true);
     const { data, status } = await vendorApi.createProduct(
       user.accessToken,
       formData
@@ -101,7 +101,7 @@ window.addProduct = async () => {
         title: data.message,
         icon: "success",
         button: "Close",
-      })
+      });
     }
 
     renderProduct();
@@ -118,10 +118,10 @@ window.addProduct = async () => {
     swal({
       title: "ERROR!",
       text: error.response?.data?.message,
-    })
+    });
   }
-  loginBtn.innerHTML = "Add"
-  loginBtn.removeAttribute("disabled")
+  loginBtn.innerHTML = "Add";
+  loginBtn.removeAttribute("disabled");
 };
 
 window.readURL = (input) => {
@@ -139,9 +139,9 @@ window.readURL = (input) => {
 };
 
 window.handleLogout = () => {
-  localStorage.removeItem("user")
-  location.reload()
-}
+  localStorage.removeItem("user");
+  location.reload();
+};
 
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));

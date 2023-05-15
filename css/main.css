@@ -89,9 +89,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
-    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
-    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 }
 header .navbar .logo {
   max-width: 200px;
@@ -189,24 +187,12 @@ header .navbar .navbar-nav li.logout button:hover {
   max-width: 650px;
   margin: 1.75rem auto;
 }
-#product
-  .modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  form#modal-add-product-form {
+#product .modal .modal-dialog .modal-content .modal-body form#modal-add-product-form {
   display: flex;
   flex-direction: column;
   gap: 16px 0px;
 }
-#product
-  .modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  form#modal-add-product-form
-  .form-group-upload-image
-  .preview-image {
+#product .modal .modal-dialog .modal-content .modal-body form#modal-add-product-form .form-group-upload-image .preview-image {
   max-width: 300px;
   height: auto;
   margin: 0 auto;
@@ -233,14 +219,7 @@ header .navbar .navbar-nav li.logout button:hover {
   height: 32px;
   width: 80px;
 }
-#product
-  .product-table
-  .table
-  tbody
-  tr
-  td
-  .setting-buttons
-  .update-button:hover {
+#product .product-table .table tbody tr td .setting-buttons .update-button:hover {
   background-color: #ffdf00;
   color: #000000;
 }
@@ -252,14 +231,7 @@ header .navbar .navbar-nav li.logout button:hover {
   height: 32px;
   width: 80px;
 }
-#product
-  .product-table
-  .table
-  tbody
-  tr
-  td
-  .setting-buttons
-  .delete-button:hover {
+#product .product-table .table tbody tr td .setting-buttons .delete-button:hover {
   background-color: #ffdf00;
   color: #000000;
 }
@@ -272,9 +244,8 @@ header .navbar .navbar-nav li.logout button:hover {
 #product .product-table .table tbody tr td .product-image img {
   height: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
-
 #product .product-table .product-loading {
   min-height: 0;
   display: flex;
@@ -284,289 +255,112 @@ header .navbar .navbar-nav li.logout button:hover {
   opacity: 0;
 }
 
-#order {
-  margin-top: 48px;
+#profile {
+  margin-top: 80px;
 }
-#order .table-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+#profile .row .avatar-col .file {
+  display: none;
 }
-#order .table-header .add-button {
-  background-color: #0046be;
-  color: #ffffff;
-  transition: all 0.15s;
-  border-radius: 4px;
-  width: 40px;
-  height: 40px;
+#profile .row .avatar-col .image-container {
+  max-width: 160px;
+  height: 160px;
+  display: block;
+  border: 0.75px solid #222222;
+  border-radius: 50%;
 }
-#order .table-header .add-button:hover {
-  background-color: #ffdf00;
-  color: #000000;
-}
-#order .modal .modal-dialog {
-  max-width: 650px;
-  margin: 1.75rem auto;
-}
-#order
-  .modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  form#modal-add-product-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px 0px;
-}
-#order
-  .modal
-  .modal-dialog
-  .modal-content
-  .modal-body
-  form#modal-add-product-form
-  .form-group-upload-image
-  .preview-image {
-  max-width: 300px;
-  height: auto;
-  margin: 0 auto;
-  padding-top: 24px;
-}
-#order .active-order {
-  width: 100%;
+#profile .row .avatar-col .image-container #profile-image {
   height: 100%;
-  overflow-x: scroll;
-  overflow-y: clip;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-#order .active-order .table {
-  margin-top: 24px;
-}
-#order .active-order .table .thead th {
-  background-color: #0046be;
-  color: #ffffff;
-}
-#order .active-order .table tbody tr td .setting-buttons .update-button {
-  background-color: #0046be;
-  color: #ffffff;
+#profile .row .info-col {
+  padding: 24px;
+  border: 0.75px solid #222222;
   border-radius: 4px;
-  transition: all 0.15s;
-  height: 32px;
-  width: 80px;
 }
-#order .active-order .table tbody tr td .setting-buttons .update-button:hover {
-  background-color: #ffdf00;
-  color: #000000;
-}
-#order .active-order .table tbody tr td .setting-buttons .delete-button {
-  background-color: #000000;
-  color: #ffffff;
-  border-radius: 4px;
-  transition: all 0.15s;
-  height: 32px;
-  width: 80px;
+#profile .row .info-col #profile-form .form-group .form-field {
+  border: 0.75px solid #222222;
 }
 
-#order .active-order .table tbody tr td .setting-buttons .delete-button:hover {
-  background-color: #ffdf00;
-  color: #000000;
-}
-#order .active-order .table tbody tr td .product-image {
-  max-width: 180px;
-  height: 140px;
-  width: 100%;
-  margin: 0 auto;
-}
-#order .active-order .table tbody tr td .product-image img {
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-}
-
-#order .active-order .order-loading {
-  min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  #profile {
-    margin-top: 80px;
+@media all and (max-width: 992px) {
+  header .navbar .search-bar {
+    flex: 1;
   }
-  #profile .row .avatar-col .file {
-    display: none;
+  header .navbar .search-bar form {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
   }
-  #profile .row .avatar-col .image-container {
-    max-width: 160px;
-    height: 160px;
-    display: block;
-    border: 0.75px solid #222222;
-    border-radius: 50%;
+  header .navbar .navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 16px 0px;
   }
-  #profile .row .avatar-col .image-container #profile-image {
-    height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
-  }
-  #profile .row .info-col {
-    padding: 24px;
-    border: 0.75px solid #222222;
+  header .navbar .navbar-nav .user {
+    padding: 12px 20px;
+    margin-right: 20px;
     border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
   }
-  #profile .row .info-col #profile-form .form-group .form-field {
-    border: 0.75px solid #222222;
+  header .navbar .navbar-nav .user i {
+    font-size: 24px;
+    margin-right: 8px;
   }
-
-  @media all and (max-width: 992px) {
-    header .navbar .search-bar {
-      flex: 1;
-    }
-    header .navbar .search-bar form {
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      position: relative;
-    }
-    header .navbar .navbar-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: row;
-      gap: 16px 0px;
-    }
-    header .navbar .navbar-nav .user {
-      padding: 12px 20px;
-      margin-right: 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    header .navbar .navbar-nav .user i {
-      font-size: 24px;
-      margin-right: 8px;
-    }
-    header .navbar .navbar-nav .user:hover {
-      background-color: #eeeeee;
-    }
-    header .navbar .navbar-nav .logout button {
-      background-color: #0046be;
-      color: #ffffff;
-      border-radius: 4px;
-      transition: all 0.15s;
-    }
-    header .navbar .navbar-nav .logout button:hover {
-      background-color: #ffdf00;
-      color: #000000;
-    }
-    #product .product-table .table tbody tr td .setting-buttons .update-button {
-      margin-bottom: 8px;
-    }
-    #product .product-table .table tbody tr td .product-image {
-      max-width: 250px;
-      height: 115px;
-    }
+  header .navbar .navbar-nav .user:hover {
+    background-color: #eeeeee;
   }
-  @media all and (max-width: 768px) {
-    #product .product-table .table tbody tr td .setting-buttons .update-button {
-      margin-bottom: 16px;
-    }
-  }
-  .primary-button {
+  header .navbar .navbar-nav .logout button {
     background-color: #0046be;
     color: #ffffff;
     border-radius: 4px;
     transition: all 0.15s;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .primary-button:hover {
+  header .navbar .navbar-nav .logout button:hover {
     background-color: #ffdf00;
     color: #000000;
   }
-
-  .secondary-button {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: all 0.15s;
+  #product .product-table .table tbody tr td .setting-buttons .update-button {
+    margin-bottom: 8px;
   }
-  .secondary-button:hover {
-    background-color: #ffdf00;
-    color: #000000;
-  } /*# sourceMappingURL=main.css.map */
-
-  .block {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    border: 5px solid #333;
-    border-radius: 5px;
-    margin: 10px;
-    width: 600px;
+  #product .product-table .table tbody tr td .product-image {
+    max-width: 250px;
+    height: 115px;
   }
-
-  .block .OrdDetail .table {
-    margin: 10px;
-    width: 100%;
+}
+@media all and (max-width: 768px) {
+  #product .product-table .table tbody tr td .setting-buttons .update-button {
+    margin-bottom: 16px;
   }
+}
+.primary-button {
+  background-color: #0046be;
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.15s;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.primary-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
+}
 
-  .block .OrdDetail .table .th,
-  td {
-    padding: 10px;
-    text-align: left;
-  }
-
-  /* IE11 hide native button */
-  /* select::-ms-expand {
-    display: none;
-  } */
-
-  .OrdStatus:after {
-    content: "<>";
-    font: 17px "Consolas", monospace;
-    color: #333;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-    right: 11px;
-    /*Adjust for position however you want*/
-
-    top: 18px;
-    padding: 0 0 2px;
-    border-bottom: 1px solid #999;
-    /*left line */
-
-    position: absolute;
-    pointer-events: none;
-  }
-
-  .OrdStatus select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* Add some styling */
-
-    display: block;
-    width: 100%;
-    max-width: 320px;
-    height: 30px;
-    float: right;
-    margin: 1px 0px;
-    padding: 0px 20px;
-    font-size: 16px;
-    line-height: 1.75;
-    color: #333;
-    background-color: #ffffff;
-    background-image: none;
-    border: 1px solid #cccccc;
-    -ms-word-break: normal;
-    word-break: normal;
-    color: darkcyan;
-  }
+.secondary-button {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.secondary-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
 }
 
 #shipper-registration {
@@ -743,8 +537,7 @@ form .form-group .form-field:focus ~ .form-label {
   color: #0046be;
 }
 
-form .form-group .form-field:required,
-form .form-group .form-field:invalid {
+form .form-group .form-field:required, form .form-group .form-field:invalid {
   box-shadow: none;
 }
 
@@ -761,4 +554,114 @@ form .form-group .form-field:invalid {
 .primary-button:hover {
   background-color: #ffdf00;
   color: #000000;
-} /*# sourceMappingURL=main.css.map */
+}
+
+#order {
+  padding-top: 40px;
+  background: #f5f5f5;
+  min-height: calc(100vh - 40px);
+}
+#order .order-list .order-item {
+  background-color: #ffffff;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+#order .order-list .order-item:last-child {
+  margin-bottom: 0;
+}
+#order .order-list .order-item .order-customer {
+  padding: 16px;
+}
+#order .order-list .order-item .order-products {
+  padding: 0px 16px 16px 16px;
+}
+#order .order-list .order-item .order-products .product-infor {
+  padding: 16px 0px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+}
+#order .order-list .order-item .order-products .product-infor:last-child {
+  border-bottom: none;
+}
+#order .order-list .order-item .order-products .product-infor .product-other-infor {
+  display: flex;
+}
+#order .order-list .order-item .order-products .product-infor .product-other-infor .product-image {
+  max-width: 100px;
+  width: 100px;
+  height: 100px;
+  width: 100%;
+  margin-right: 12px;
+  border: 0.75px solid #666666;
+}
+#order .order-list .order-item .order-products .product-infor .product-other-infor .product-image img {
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+#order .order-list .order-item .order-products .product-infor .product-other-infor .product-quantity .name {
+  white-space: nowrap;
+  margin-bottom: 0px;
+}
+#order .order-list .order-item .order-price {
+  text-align: right;
+  padding: 16px;
+}
+#order .order-list .order-item .order-price .total-price {
+  font-size: 24px;
+  font-weight: 500;
+  color: #0046be;
+}
+#order .order-list .order-item .order-price .button-group {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0 16px;
+}
+#order .order-list .order-item .order-price .button-group .view-detail-btn {
+  margin-left: auto;
+  margin-top: 16px;
+}
+#order .order-loading {
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.line-break {
+  width: 100%;
+  height: 1px;
+  background-color: #666666;
+}
+
+.return-badge {
+  margin-top: 8px;
+  font-size: 12px;
+  padding: 2px;
+  border: 1px solid #0046be;
+  font-weight: 500;
+  color: #0046be;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.badge-group {
+  display: flex;
+  align-items: center;
+  gap: 0 8px;
+  margin-bottom: 16px;
+}
+
+.badge {
+  text-transform: capitalize;
+}
+.badge.active {
+  background-color: green;
+}
+.badge.mall {
+  background-color: #0046be;
+}/*# sourceMappingURL=main.css.map */
