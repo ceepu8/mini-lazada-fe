@@ -9,11 +9,11 @@ const spinner = `
     aria-hidden="true"
     ></span>
     Loading...
-`
+`;
 
 const handleVendorRegistrationForm = async (e) => {
   e.preventDefault();
-  const submitBtn = document.querySelector(".btn.submit-btn")
+  const submitBtn = document.querySelector(".btn.submit-btn");
   const isError = handleFormValidation(`#${formElementName}`);
   console.log(isError);
 
@@ -32,23 +32,29 @@ const handleVendorRegistrationForm = async (e) => {
   }
   delete newVendor.confirmPassword;
 
-
-  // try {
-  //   submitBtn.innerHTML = spinner
-  //   submitBtn.setAttribute("disabled", true)
-  //   const { data, status } = await authApi.register(newVendor);
-  //   console.log(status);
-  //   if (status === 200) {
-
-  //     setTimeout(() => {
-  //       window.location.assign("../../pages/login.html");
-  //     }, 1000);
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  // }
-  // submitBtn.innerHTML = "Register"
-  // submitBtn.removeAttribute("disabled")
+  try {
+    submitBtn.innerHTML = spinner;
+    submitBtn.setAttribute("disabled", true);
+    const { data, status } = await authApi.register(newVendor);
+    console.log(status);
+    if (status === 200) {
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      }).then(() => {
+        window.location.assign("../../pages/login.html");
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
+    });
+  }
+  submitBtn.innerHTML = "Register";
+  submitBtn.removeAttribute("disabled");
 };
 
 window.onload = () => {

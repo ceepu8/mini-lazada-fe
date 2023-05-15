@@ -3,15 +3,22 @@ import { shipperApi } from "../../api/shipperApi.js";
 import { handleFormValidation } from "../validation.js";
 
 const formElementName = "shipper-registration-form";
+const spinner = `
+    <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+    ></span>
+    Loading...
+`;
 
 const handleVendorRegistrationForm = async (e) => {
   e.preventDefault();
+  const submitBtn = document.querySelector(".btn.submit-btn");
   const isError = handleFormValidation(`#${formElementName}`);
   if (isError) return;
   const myForm = document.querySelector(`#${formElementName}`);
-  const inputs = myForm.querySelectorAll("input");
-  const textareas = myForm.querySelectorAll("textarea");
-  const fields = [...inputs, ...textareas];
+  const fields = myForm.querySelectorAll("input, textarea, select");
 
   const newShipper = {
     role: "shipper",
@@ -22,24 +29,29 @@ const handleVendorRegistrationForm = async (e) => {
   }
   delete newShipper.confirmPassword;
 
-  console.log(newShipper);
-  //   try {
-  //     const { data, status } = await authApi.register(newShipper);
-  //     console.log(status);
-  //     if (status === 200) {
-  //       new AWN().success(data.message, {
-  //         durations: { success: 1000 },
-  //       });
-  //       setTimeout(() => {
-  //         window.location.assign("../../pages/login.html");
-  //       }, 1000);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     new AWN().alert(error.message, {
-  //       durations: { success: 1000 },
-  //     });
-  //   }
+  try {
+    submitBtn.innerHTML = spinner;
+    submitBtn.setAttribute("disabled", true);
+    const { data, status } = await authApi.register(newShipper);
+    console.log(status);
+    if (status === 200) {
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      }).then(() => {
+        window.location.assign("../../pages/login.html");
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
+    });
+  }
+  submitBtn.innerHTML = "Register";
+  submitBtn.removeAttribute("disabled");
 };
 
 const renderHubSelectOptions = async () => {
@@ -50,7 +62,7 @@ const renderHubSelectOptions = async () => {
       return result + `<option value="${id}">${name}</option>`;
     }, "");
 
-    const select = document.querySelector("select#hub-select");
+    const select = document.querySelector("select#hub");
     select.innerHTML = html;
   } catch (error) {}
 };

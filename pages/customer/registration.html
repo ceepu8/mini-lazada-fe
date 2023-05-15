@@ -45,7 +45,6 @@
                   type="text"
                   id="username"
                   name="username"
-                  textOnly="true"
                   required="true"
                   min="8"
                   max="15"
@@ -62,27 +61,12 @@
                   type="tel"
                   id="name"
                   name="name"
-                  phone="true"
+                  textOnly="true"
                   required="true"
                 />
                 <span
                   style="color: red"
                   class="error-message name name-error"
-                ></span>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="email">Email*</label>
-                <input
-                  class="form-field"
-                  type="email"
-                  id="email"
-                  name="email"
-                  email="true"
-                  required="true"
-                />
-                <span
-                  style="color: red"
-                  class="error-message email name-error"
                 ></span>
               </div>
               <div class="form-group">
@@ -129,7 +113,7 @@
                   class="error-message address name-error"
                 ></span>
               </div>
-              <button type="submit" class="primary-button w-100">
+              <button type="submit" class="primary-button w-100 btn submit-btn">
                 Register
               </button>
             </form>
@@ -144,8 +128,7 @@
         </div>
       </div>
     </div>
-
-    <script src="../../libraries/awesome-notifications/dist/index.var.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -157,7 +140,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="../../libraries/awesome-notifications/index.var.js"></script>
     <script
       type="module"
       src="../../controller/registration/customer.js"
