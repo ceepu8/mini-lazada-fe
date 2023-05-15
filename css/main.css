@@ -263,15 +263,23 @@ header .navbar .navbar-nav li.logout button:hover {
 }
 #profile .row .avatar-col .image-container {
   max-width: 160px;
+  height: 160px;
   display: block;
+  border: 0.75px solid #222222;
+  border-radius: 50%;
+}
+#profile .row .avatar-col .image-container #profile-image {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 #profile .row .info-col {
   padding: 24px;
-  border: 1px solid #eeeeee;
+  border: 0.75px solid #222222;
   border-radius: 4px;
 }
 #profile .row .info-col #profile-form .form-group .form-field {
-  border: 1px solid #eeeeee;
+  border: 0.75px solid #222222;
 }
 
 @media all and (max-width: 992px) {

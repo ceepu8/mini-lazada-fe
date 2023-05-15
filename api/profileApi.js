@@ -11,10 +11,10 @@ export const profileApi = {
     });
   },
 
-  createAvatar: (token, data) => {
+  uploadAvatar: (token, data) => {
     return axios({
-      method: "post",
-      url: `${API_URL}/user`,
+      method: "POST",
+      url: `${API_URL}/user/upload-image`,
       data,
       headers: {
         "Content-Type": "multipart/form-data",
@@ -22,4 +22,14 @@ export const profileApi = {
       },
     });
   },
+
+  getProfile: (token) => {
+    return axios({
+      method: "GET",
+      url: `${API_URL}/auth/profile`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  }
 };

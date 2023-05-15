@@ -1,51 +1,46 @@
 import { profileApi } from "../api/profileApi.js";
 
-const loadUser = () => {
+const loginBtn = document.querySelector(".btn.submit-btn")
+const spinner = `
+    <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+    ></span>
+    Loading...
+`
+
+const loadUser = async () => {
   const user = JSON.parse(localStorage.getItem("user"))
-  if (!user) {
-    window.location.replace("../login.html");
-  }
-
-  const form = document.querySelector("form#profile-form")
-
-  const inputs = form.querySelectorAll(".form-field")
-
-  for (let input of inputs) {
-    const inputId = input.id
-    input.value = user.user[inputId]
-  }
-
-}
-
-
-
-const uploadAvatar = async () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const avatar = document.querySelector(
-    ".container .row .avatar"
-  );
   try {
-    const { data } = await vendorApi.getMyAvatar(user.accessToken);
+    loginBtn.innerHTML = spinner
+    loginBtn.setAttribute("disabled", true)
 
+    const { data } = await profileApi.getProfile(user.accessToken)
+    if (!data) {
+      window.location.replace("../login.html");
+    }
+    const form = document.querySelector("form#profile-form")
 
-    const html = data.products.reduce((result, product, idx) => {
-      const { file } = product;
+    const inputs = form.querySelectorAll(".form-field")
 
-      return (
-        result +
-        `
-                <div class="avatar">
-                    <img alt="avatar" src="${file}"/>
-                </div>
-              `
-      );
-    }, "");
-    avatar.innerHTML = html;
+    for (let input of inputs) {
+      const inputId = input.id
+      input.value = data.data[inputId]
+    }
+
+    const imageURL = data.data.profileImage || "../../assets/browser-icon.webp"
+
+    const imageElement = document.getElementById("profile-image")
+    imageElement.src = imageURL
+
+    loginBtn.innerHTML = "Change Avatar"
+    loginBtn.removeAttribute("disabled")
 
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 const addAvatar = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -56,16 +51,28 @@ const addAvatar = async () => {
   formData.append("file", file);
 
   try {
-    const { data, status } = await profileApi.createAvatar(
+    loginBtn.innerHTML = spinner
+    loginBtn.setAttribute("disabled", true)
+    const { data, status } = await profileApi.uploadAvatar(
       user.accessToken,
       formData
     );
     if (status === 200) {
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      })
     }
-    uploadAvatar();
   } catch (error) {
     console.log(error);
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
+    })
   }
+  loginBtn.innerHTML = "Change Avatar"
+  loginBtn.removeAttribute("disabled")
 };
 
 window.loadFile = (input) => {
@@ -73,9 +80,8 @@ window.loadFile = (input) => {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      document.querySelector(
-        "#product .modal .modal-dialog .modal-body .form-group-upload-image .preview-image"
-      ).innerHTML = `<img src="${e.target.result}" alt="product-image"/>`;
+      const imageElement = document.getElementById("profile-image")
+      imageElement.src = e.target.result
     };
 
     reader.readAsDataURL(input.files[0]);
