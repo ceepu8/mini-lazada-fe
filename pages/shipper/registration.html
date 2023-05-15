@@ -92,12 +92,7 @@
                 <label class="form-label" for="#hub-select"
                   >Select your hub</label
                 >
-                <select
-                  class="form-field"
-                  id="hub-select"
-                  name="hub-select"
-                  required="true"
-                >
+                <select class="form-field" id="hub" name="hub" required="true">
                   <option value="">--Distribution-hub--</option>
                 </select>
                 <span
@@ -105,7 +100,7 @@
                   class="error-message confirmPassword name-error"
                 ></span>
               </div>
-              <button type="submit" class="primary-button w-100">
+              <button type="submit" class="primary-button w-100 btn submit-btn">
                 Register
               </button>
             </form>
@@ -119,6 +114,7 @@
       </div>
     </div>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -130,7 +126,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="../../libraries/awesome-notifications/index.var.js"></script>
     <script
       type="module"
       src="../../controller/registration/shipper.js"

@@ -2,11 +2,23 @@ import { authApi } from "../../api/authApi.js";
 import { handleFormValidation } from "../validation.js";
 
 const formElementName = "vendor-registration-form";
+const spinner = `
+    <span
+    class="spinner-border spinner-border-sm"
+    role="status"
+    aria-hidden="true"
+    ></span>
+    Loading...
+`;
 
 const handleVendorRegistrationForm = async (e) => {
   e.preventDefault();
+  const submitBtn = document.querySelector(".btn.submit-btn");
   const isError = handleFormValidation(`#${formElementName}`);
+  console.log(isError);
+
   if (isError) return;
+
   const myForm = document.querySelector(`#${formElementName}`);
   const inputs = myForm.querySelectorAll("input");
   const textareas = myForm.querySelectorAll("textarea");
@@ -21,22 +33,28 @@ const handleVendorRegistrationForm = async (e) => {
   delete newVendor.confirmPassword;
 
   try {
+    submitBtn.innerHTML = spinner;
+    submitBtn.setAttribute("disabled", true);
     const { data, status } = await authApi.register(newVendor);
     console.log(status);
     if (status === 200) {
-      new AWN().success(data.message, {
-        durations: { success: 1000 },
-      });
-      setTimeout(() => {
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      }).then(() => {
         window.location.assign("../../pages/login.html");
-      }, 1000);
+      });
     }
   } catch (error) {
     console.log(error);
-    new AWN().alert(error.message, {
-      durations: { success: 1000 },
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
     });
   }
+  submitBtn.innerHTML = "Register";
+  submitBtn.removeAttribute("disabled");
 };
 
 window.onload = () => {

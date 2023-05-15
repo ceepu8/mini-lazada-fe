@@ -120,7 +120,7 @@ window.addProduct = async () => {
       text: error.response?.data?.message,
     })
   }
-  loginBtn.innerHTML = "Login"
+  loginBtn.innerHTML = "Add"
   loginBtn.removeAttribute("disabled")
 };
 
