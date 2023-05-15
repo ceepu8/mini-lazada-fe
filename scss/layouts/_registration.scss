@@ -95,26 +95,7 @@
 
 .form-col {
   padding: 42px 24px;
-  .back-button {
-    top: 42px;
-    left: 12px;
-    background-color: $primary;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 150ms;
-    color: $white;
-    cursor: pointer;
-    margin-bottom: 12px;
 
-    &:hover {
-      background-color: $secondary;
-      color: $raisin-black;
-    }
-  }
   h1 {
     font-size: 32px;
   }
@@ -192,5 +173,26 @@ form .form-group .form-field {
   &:hover {
     background-color: $secondary;
     color: $black;
+  }
+}
+
+.back-button {
+  top: 42px;
+  left: 12px;
+  background-color: $primary;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 150ms;
+  color: $white;
+  cursor: pointer;
+  margin-bottom: 12px;
+
+  &:hover {
+    background-color: $secondary;
+    color: $raisin-black;
   }
 }
