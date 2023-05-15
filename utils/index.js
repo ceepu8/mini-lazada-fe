@@ -4,3 +4,12 @@ export const currencyFormat = (value) => {
     currency: "VND",
   });
 };
+
+export function parseQueryString(queryString) {
+  const pairs = queryString.substring(1).split("&");
+  return pairs.reduce((params, pair) => {
+    const [key, value] = pair.split("=");
+    params[key] = decodeURIComponent(value);
+    return params;
+  }, {});
+}

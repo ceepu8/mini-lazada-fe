@@ -16,4 +16,22 @@ export const shipperApi = {
       },
     });
   },
+  getOrder: (token, orderId) => {
+    return axios({
+      method: "GET",
+      url: `${API_URL}/order/${orderId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  updateOrderStatus: (token, orderId, status) => {
+    return axios({
+      method: "PUT",
+      url: `${API_URL}/order/${orderId}?status=${status}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };

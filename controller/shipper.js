@@ -1,6 +1,10 @@
 import { shipperApi } from "../api/shipperApi.js";
 import { currencyFormat } from "../utils/index.js";
 
+window.goToDetailPage = (orderId) => {
+  window.location.replace(`./order-detail.html?id=${orderId}`);
+};
+
 const renderOrderList = async () => {
   const loadingElement = document.querySelector(".order-loading");
 
@@ -13,8 +17,18 @@ const renderOrderList = async () => {
 
     const { data } = await shipperApi.getOrders(accessToken);
 
-    const html = data?.order?.order.reduce((result, each, index) => {
-      const { product, totalPrice, customer, status = "active" } = each;
+    if (!data.order.order.length) {
+      document.querySelector(".order-list").innerHTML = `
+        <h3>There is not any orders</h3>
+      `;
+      loadingElement.style.visibility = "hidden";
+      loadingElement.style.opacity = "0";
+      loadingElement.style.minHeight = 0;
+      return;
+    }
+
+    const html = data?.order?.order.reduce((result, each) => {
+      const { id, product, totalPrice, customer, status = "active" } = each;
       return (
         result +
         `   
@@ -24,7 +38,7 @@ const renderOrderList = async () => {
                   <span class="badge ${status}">${status}</span>
                   <span class="badge mall">Mall</span>
                   </div>
-                  <h5>Order ID: ${index}</h5>
+                  <h5>Order ID: ${id}</h5>
                   <div><span>Customer's Name:</span> ${customer.name}</div>
                   <div><span>Customer's Address:</span> ${
                     customer.address
@@ -34,7 +48,7 @@ const renderOrderList = async () => {
                 <div class="order-products">
                     ${product
                       .map((each) => {
-                        const { name, image, price } = each;
+                        const { name, quantity, image, price } = each;
                         return `
                             <div class="product-infor">
                                 <div class="product-other-infor">
@@ -42,8 +56,8 @@ const renderOrderList = async () => {
                                     <img src='${image}' alt="product-image"/>
                                   </div>
                                   <div class="product-quantity">
-                                    <p class="name">Product name</p>
-                                    <span>x${name}</span>
+                                    <p class="name">${name}</p>
+                                    <span>x${quantity}</span>
                                     <div class="return-badge">7 ngày trả hàng</div>
                                   </div>
                                 </div>
@@ -65,7 +79,7 @@ const renderOrderList = async () => {
                     </span>
                     <div class="button-group">
                       <button class="btn secondary-button">Cancel</button>
-                      <button class="btn primary-button">View detail</button>
+                      <button class="btn primary-button" onclick="goToDetailPage('${id}')">View detail</button>
                     </div>
                 </div>
               </div>
@@ -95,6 +109,11 @@ const renderHubInfor = () => {
         <li>Address: ${hub.address}</li>
     </ul>
   `;
+};
+
+window.handleLogout = () => {
+  localStorage.removeItem("user");
+  location.reload();
 };
 
 window.onload = () => {

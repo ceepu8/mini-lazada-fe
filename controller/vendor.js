@@ -146,7 +146,7 @@ window.handleLogout = () => {
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
-    window.location.replace("../login.html");
+    window.location.replace("../pages/login.html");
   }
 
   renderProduct();
