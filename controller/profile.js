@@ -10,12 +10,7 @@ const spinner = `
     Loading...
 `;
 
-window.handleLogout = () => {
-  localStorage.removeItem("user");
-  location.reload();
-};
-
-const loadUser = async () => {
+const getProfile = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   try {
     loginBtn.innerHTML = spinner;
@@ -46,6 +41,26 @@ const loadUser = async () => {
   }
 };
 
+const loadUser = async () => {
+  const { user } = JSON.parse(localStorage.getItem("user"));
+
+  const form = document.querySelector("form#profile-form");
+  const inputs = form.querySelectorAll(".form-field");
+
+  for (let input of inputs) {
+    const inputId = input.id;
+    input.value = user[inputId];
+  }
+
+  const imageURL = user.profileImage || "../../assets/browser-icon.webp";
+
+  const imageElement = document.getElementById("profile-image");
+  imageElement.src = imageURL;
+
+  loginBtn.innerHTML = "Change Avatar";
+  loginBtn.removeAttribute("disabled");
+};
+
 const addAvatar = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const formData = new FormData();
@@ -67,6 +82,7 @@ const addAvatar = async () => {
         icon: "success",
         button: "Close",
       });
+      getProfile();
     }
   } catch (error) {
     console.log(error);

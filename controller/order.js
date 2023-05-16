@@ -1,12 +1,19 @@
 import { shipperApi } from "../api/shipperApi.js";
-import { currencyFormat, parseQueryString } from "../utils/index.js";
+import {
+  currencyFormat,
+  formatDate,
+  parseQueryString,
+} from "../utils/index.js";
 
-window.handleLogout = () => {
-  localStorage.removeItem("user");
-  location.reload();
+const handleRedirect = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.location.replace("../login.html");
+  }
 };
 
 window.handleUpdateOrderStatus = async (orderId) => {
+  handleRedirect();
   const { accessToken } = JSON.parse(localStorage.getItem("user"));
   const orderStatus = document.getElementById("order-status").value || "active";
   const spinner = document.querySelector(".spinner.status-spinner");
@@ -61,6 +68,7 @@ const renderOrderDetail = async (orderId) => {
         products,
         totalPrice,
         id = orderId,
+        createdAt,
       } = data.order;
 
       const html = `
@@ -89,6 +97,7 @@ const renderOrderDetail = async (orderId) => {
                     <span class="badge mall">Mall</span>
                   </div>
                   <h5>Order ID: ${id}</h5>
+                  <div><span>Created at: ${formatDate(createdAt)}</span></div>
                   <div><span>Customer's Name:</span> ${customer.name}</div>
                   <div><span>Customer's Address:</span> ${
                     customer.address
@@ -145,11 +154,10 @@ const renderOrderDetail = async (orderId) => {
 };
 
 window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) window.location.assign("../pages/login.html");
+  handleRedirect();
 
   const { id } = parseQueryString(window.location.search);
-  if (!id) window.location.assign("../pages/shipper/shipper.html");
+  if (!id) window.location.assign("../login.html");
 
   renderOrderDetail(id);
 };

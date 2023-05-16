@@ -1,0 +1,55 @@
+footer {
+  background-color: $cultured;
+  color: $dark-blue;
+  font-size: $fs-3;
+  padding: $pd-8 0px;
+  .promotion-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $g-4;
+    margin-bottom: $m-12;
+    .banner-image {
+      @include mobile {
+        width: 100%;
+      }
+    }
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+  .footer-cols {
+    .column {
+      padding-bottom: $pd-4;
+      .col-header {
+        text-transform: uppercase;
+        font-size: $fs-4;
+      }
+      .app-promotion {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0 $g-4;
+        .logo-wrapper {
+          max-width: 40px;
+        }
+        .text-promotion {
+          .slogan {
+            font-size: $fs-4;
+            color: $primary;
+            display: block;
+          }
+        }
+      }
+      .social-media-apps {
+        display: flex;
+        flex-wrap: wrap;
+        .app-item {
+          width: 50%;
+          max-width: 150px;
+          padding: 0 $pd-2 $pd-2 0;
+        }
+      }
+    }
+  }
+}
