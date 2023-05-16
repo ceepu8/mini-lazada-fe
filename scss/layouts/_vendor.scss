@@ -94,7 +94,7 @@ header {
 }
 
 #product {
-  margin-top: 48px;
+  margin: $m-12 0px;
 
   .table-header {
     display: flex;
@@ -139,65 +139,58 @@ header {
     }
   }
 
-  .product-table {
-    width: 100%;
-    height: 100%;
-    overflow-x: scroll;
-    overflow-y: clip;
-    .table {
-      margin-top: 24px;
-      .thead {
-        th {
-          background-color: $primary;
-          color: $white;
-        }
-      }
-      tbody {
-        tr td {
-          .setting-buttons {
-            .update-button {
-              background-color: $primary;
-              color: $white;
-              border-radius: 4px;
-              transition: all 0.15s;
-
-              height: 32px;
-              width: 80px;
-
-              &:hover {
-                background-color: $secondary;
-                color: $black;
-              }
-            }
-            .delete-button {
-              background-color: $black;
-              color: $white;
-              border-radius: 4px;
-              transition: all 0.15s;
-
-              height: 32px;
-              width: 80px;
-
-              &:hover {
-                background-color: $secondary;
-                color: $black;
-              }
-            }
+  .product-list-wrapper {
+    .product-list {
+      gap: $g-4 0;
+      .product-item-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid $bright-gray;
+        box-shadow: $card-shadow;
+        .product-image {
+          padding: $pd-4;
+          height: 260px;
+          width: 100%;
+          border-radius: 4px;
+          img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
           }
-          .product-image {
-            max-width: 180px;
-            height: 140px;
-            width: 100%;
-            margin: 0 auto;
-            img {
-              height: 100%;
-              object-fit: contain;
-            }
+        }
+        .product-infor {
+          padding: $pd-4;
+          flex: 1;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .product-name {
+            font-size: $fs-5;
+            text-transform: capitalize;
+            color: $primary;
+            margin: 0;
+          }
+          .product-description {
+            margin-bottom: 0;
+            color: $granite-gray;
+            font-size: $fs-3;
+          }
+          .product-price {
+            font-weight: 500;
+            color: $primary;
+            font-size: $fs-5;
+          }
+        }
+        .setting-buttons {
+          button {
+            border-radius: 0px;
           }
         }
       }
     }
-
     .product-loading {
       min-height: 0;
       display: flex;
@@ -211,7 +204,7 @@ header {
 }
 
 #profile {
-  margin-top: 80px;
+  margin: $m-12 0px;
   .row {
     .avatar-col {
       .file {
@@ -327,12 +320,12 @@ header {
             .product-image {
               max-width: 250px;
               height: 115px;
+              @include mobile {
+                min-width: 120px;
+              }
             }
           }
         }
-      }
-
-      .product-loading {
       }
     }
   }

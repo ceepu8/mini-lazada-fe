@@ -11,8 +11,8 @@ const spinner = `
 `;
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const productTable = document.querySelector(
-    "#product .product-table .table-body"
+  const productListElement = document.querySelector(
+    "#product .product-list-wrapper .product-list"
   );
 
   const loadingElement = document.querySelector(".product-loading");
@@ -35,29 +35,27 @@ const renderProduct = async () => {
 
       return;
     }
-
     const html = data.products.reduce((result, product, idx) => {
       const { name, price, description, image } = product;
       return (
         result +
         `
-              <tr>
-                <th scope="row">${idx + 1}</th>
-                <td>${name}</td>
-                <td>${description}</td>
-                <td>${currencyFormat(price)}</td>
-                <td>
-                    <div class="product-image">
-                      <img alt="product-image" src="${image}"/>
-                    </div>
-                </td>
-                <td>
-                  <div class="setting-buttons">
-                    <button class="update-button" type="button">Update</button>
-                    <button class="delete-button" type="button">Delete</button>
+              <div class="col-md-3">
+                <div class="product-item-card">
+                  <div class="product-image">
+                    <img alt="product-image" src="${image}"/>
                   </div>
-                </td>
-              </tr>
+                  <div class="product-infor">
+                    <h3 class="product-name line-clamp-1" title="${name}">${name}</h3>
+                    <p class="product-description line-clamp-3">${description} </p>
+                    <span class="product-price">${currencyFormat(price)}</span>
+                  </div>
+                  <div class="setting-buttons">
+                    <button class="btn primary-button w-100" type="button">Update</button>
+                    <button class="btn secondary-button w-100" type="button">Delete</button>
+                  </div>
+                </div>
+              </div>
             `
       );
     }, "");
@@ -65,7 +63,7 @@ const renderProduct = async () => {
     loadingElement.style.visibility = "hidden";
     loadingElement.style.opacity = "0";
     loadingElement.style.minHeight = 0;
-    productTable.innerHTML = html;
+    productListElement.innerHTML = html;
   } catch (error) {
     console.log(error);
   }
