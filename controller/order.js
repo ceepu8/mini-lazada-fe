@@ -1,5 +1,9 @@
 import { shipperApi } from "../api/shipperApi.js";
-import { currencyFormat, parseQueryString } from "../utils/index.js";
+import {
+  currencyFormat,
+  formatDate,
+  parseQueryString,
+} from "../utils/index.js";
 
 const handleRedirect = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -64,6 +68,7 @@ const renderOrderDetail = async (orderId) => {
         products,
         totalPrice,
         id = orderId,
+        createdAt,
       } = data.order;
 
       const html = `
@@ -92,6 +97,7 @@ const renderOrderDetail = async (orderId) => {
                     <span class="badge mall">Mall</span>
                   </div>
                   <h5>Order ID: ${id}</h5>
+                  <div><span>Created at: ${formatDate(createdAt)}</span></div>
                   <div><span>Customer's Name:</span> ${customer.name}</div>
                   <div><span>Customer's Address:</span> ${
                     customer.address

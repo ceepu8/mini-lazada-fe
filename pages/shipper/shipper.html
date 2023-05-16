@@ -75,10 +75,25 @@
     <section id="order">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="hub-infor"></div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-9">
+            <div class="select-wrapper mb-4">
+              <select
+                class="form-field"
+                id="order-status"
+                name="order-status"
+                required="true"
+                onchange="filterOrdersByStatus()"
+              >
+                <option value="all">All</option>
+                <option value="active">Active</option>
+                <option value="delivered">Delivered</option>
+                <option value="canceled">Canceled</option>
+              </select>
+              <i class="fa-solid fa-chevron-down" id="chevron-arrow-select"></i>
+            </div>
             <div class="order-list"></div>
             <div class="order-loading">
               <div

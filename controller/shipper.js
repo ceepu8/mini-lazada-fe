@@ -1,5 +1,7 @@
 import { shipperApi } from "../api/shipperApi.js";
-import { currencyFormat } from "../utils/index.js";
+import { currencyFormat, formatDate } from "../utils/index.js";
+
+let orderList = [];
 
 const handleRedirect = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -11,41 +13,35 @@ const handleRedirect = () => {
 window.goToDetailPage = (orderId) => {
   window.location.replace(`./order-detail.html?id=${orderId}`);
 };
-
-const renderOrderList = async () => {
-  const loadingElement = document.querySelector(".order-loading");
-
-  const { accessToken } = JSON.parse(localStorage.getItem("user"));
-
-  try {
-    loadingElement.style.visibility = "visible";
-    loadingElement.style.opacity = "1";
-    loadingElement.style.minHeight = "calc(100vh - 240px)";
-
-    const { data } = await shipperApi.getOrders(accessToken);
-
-    if (!data.order.order.length) {
-      document.querySelector(".order-list").innerHTML = `
+const renderOrderList = (data = []) => {
+  if (!data?.length) {
+    document.querySelector(".order-list").innerHTML = `
         <h3>There is not any orders</h3>
       `;
-      loadingElement.style.visibility = "hidden";
-      loadingElement.style.opacity = "0";
-      loadingElement.style.minHeight = 0;
-      return;
-    }
 
-    const html = data?.order?.order.reduce((result, each) => {
-      const { id, product, totalPrice, customer, status = "active" } = each;
-      return (
-        result +
-        `   
+    return;
+  }
+
+  const html = data.reduce((result, each) => {
+    const {
+      id,
+      product,
+      totalPrice,
+      customer,
+      status = "active",
+      createdAt,
+    } = each;
+    return (
+      result +
+      `   
              <div class="order-item">
                 <div class="order-customer">
                   <div class="badge-group">
                   <span class="badge ${status}">${status}</span>
                   <span class="badge mall">Mall</span>
                   </div>
-                  <h5>Order ID: ${id}</h5>
+                  <h5 class="line-clamp-2">Order ID: ${id}</h5>
+                  <div><span>Created at: ${formatDate(createdAt)}</span></div>
                   <div><span>Customer's Name:</span> ${customer.name}</div>
                   <div><span>Customer's Address:</span> ${
                     customer.address
@@ -57,8 +53,8 @@ const renderOrderList = async () => {
                       .map((each) => {
                         const { name, quantity, image, price } = each;
                         return `
-                            <div class="product-infor">
-                                <div class="product-other-infor">
+                            <div class="product-infor row">
+                                <div class="product-other-infor col-sm-9">
                                   <div class="product-image">
                                     <img src='${image}' alt="product-image"/>
                                   </div>
@@ -68,7 +64,7 @@ const renderOrderList = async () => {
                                     <div class="return-badge">7 ngày trả hàng</div>
                                   </div>
                                 </div>
-                                <div class="product-price">
+                                <div class="product-price col-sm-3">
                                   <span>${currencyFormat(price)}</span>
                                 </div>
                             </div>
@@ -91,12 +87,28 @@ const renderOrderList = async () => {
                 </div>
               </div>
         `
-      );
-    }, "");
+    );
+  }, "");
+
+  document.querySelector(".order-list").innerHTML = html;
+};
+
+const fetchOrderList = async () => {
+  const loadingElement = document.querySelector(".order-loading");
+  const { accessToken } = JSON.parse(localStorage.getItem("user"));
+
+  try {
+    loadingElement.style.visibility = "visible";
+    loadingElement.style.opacity = "1";
+    loadingElement.style.minHeight = "calc(100vh - 240px)";
+
+    const { data } = await shipperApi.getOrders(accessToken);
+    orderList = data?.order?.order || [];
+    renderOrderList(data?.order?.order);
+
     loadingElement.style.visibility = "hidden";
     loadingElement.style.opacity = "0";
     loadingElement.style.minHeight = 0;
-    document.querySelector(".order-list").innerHTML = html;
   } catch (error) {
     console.log(error);
   }
@@ -118,8 +130,19 @@ const renderHubInfor = () => {
   `;
 };
 
+window.filterOrdersByStatus = () => {
+  const orderStatus = document.getElementById("order-status").value;
+  if (orderStatus === "all") {
+    renderOrderList(orderList);
+  }
+  const filteredOrders = orderList.filter(
+    (order) => order.status === orderStatus
+  );
+  renderOrderList(filteredOrders);
+};
+
 window.onload = () => {
   handleRedirect();
   renderHubInfor();
-  renderOrderList();
+  fetchOrderList();
 };
