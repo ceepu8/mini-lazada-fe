@@ -1,6 +1,13 @@
 import { shipperApi } from "../api/shipperApi.js";
 import { currencyFormat } from "../utils/index.js";
 
+const handleRedirect = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.location.replace("../login.html");
+  }
+};
+
 window.goToDetailPage = (orderId) => {
   window.location.replace(`./order-detail.html?id=${orderId}`);
 };
@@ -9,7 +16,7 @@ const renderOrderList = async () => {
   const loadingElement = document.querySelector(".order-loading");
 
   const { accessToken } = JSON.parse(localStorage.getItem("user"));
-  if (!accessToken) return;
+
   try {
     loadingElement.style.visibility = "visible";
     loadingElement.style.opacity = "1";
@@ -111,17 +118,8 @@ const renderHubInfor = () => {
   `;
 };
 
-window.handleLogout = () => {
-  localStorage.removeItem("user");
-  location.reload();
-};
-
 window.onload = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) {
-    window.location.replace("../login.html");
-  }
-
+  handleRedirect();
   renderHubInfor();
   renderOrderList();
 };

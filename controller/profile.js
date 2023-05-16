@@ -10,11 +10,6 @@ const spinner = `
     Loading...
 `;
 
-window.handleLogout = () => {
-  localStorage.removeItem("user");
-  location.reload();
-};
-
 const loadUser = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   try {

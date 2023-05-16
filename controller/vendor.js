@@ -138,15 +138,10 @@ window.readURL = (input) => {
   }
 };
 
-window.handleLogout = () => {
-  localStorage.removeItem("user");
-  location.reload();
-};
-
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
-    window.location.replace("../pages/login.html");
+    window.location.replace("../login.html");
   }
 
   renderProduct();
