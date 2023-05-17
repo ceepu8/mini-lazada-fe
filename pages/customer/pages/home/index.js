@@ -3,15 +3,32 @@ import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
 const fetchProducts = async (page = 1, limit = 8) => {
   try {
+    toggleLoading(true);
     const {
       data: { currentPage, totalPages, products },
       status,
     } = await customerApi.getProducts({ page, limit });
 
     renderProducts(products, currentPage, totalPages);
+    toggleLoading(false);
   } catch (error) {
     console.log(error);
   }
+};
+
+const toggleLoading = (isLoading) => {
+  const loadingElement = document.querySelector(".fetching-loading");
+
+  if (isLoading) {
+    loadingElement.style.visibility = "visible";
+    loadingElement.style.opacity = "1";
+    loadingElement.style.minHeight = "calc(100vh - 240px)";
+    return;
+  }
+
+  loadingElement.style.visibility = "hidden";
+  loadingElement.style.opacity = "0";
+  loadingElement.style.minHeight = 0;
 };
 
 const renderPagination = (currentPage, totalPages) => {
@@ -30,9 +47,11 @@ const renderPagination = (currentPage, totalPages) => {
                   const isActive = currentPage === index + 1;
                   return `<li class="page-item ${
                     isActive && "active"
-                  }"><a class="page-link" href="./index.html?page=${
+                  }"><a class="page-link ${
+                    isActive && "disabled"
+                  }" href="./index.html?page=${index + 1}">${
                     index + 1
-                  }">${index + 1}</a></li>`;
+                  }</a></li>`;
                 })
                 .join("")}
             <li class="page-item">
@@ -58,7 +77,7 @@ const renderProducts = (products = [], currentPage, totalPages) => {
             <div class="product-img">
               <img class="indexImage" src="${image}" alt="" />
               <div class="product-label">
-                <span class="sale">-30%</span>
+                <span class="sale">-15%</span>
                 <span class="new">NEW</span>
               </div>
             </div>
@@ -70,9 +89,9 @@ const renderProducts = (products = [], currentPage, totalPages) => {
               <h4 class="product-price indexPrice">
                 ${currencyFormat(
                   price
-                )} <del class="product-old-price">${currencyFormat(
+                )} <div class="product-old-price">${currencyFormat(
         price + price * 0.15
-      )}</del>
+      )}</div>
               </h4>
               <div class="product-rating">
                 <i class="fa fa-star"></i>
@@ -93,6 +112,11 @@ const renderProducts = (products = [], currentPage, totalPages) => {
                 <button class="quick-view">
                   <i class="fa fa-eye"></i
                   ><span class="tooltipp">quick view</span>
+                </button>
+              </div>
+              <div class="add-to-cart">
+                <button class="add-to-cart-btn">
+                  <i class="fa fa-shopping-cart"></i> add to cart
                 </button>
               </div>
             </div>

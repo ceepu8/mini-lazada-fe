@@ -1,14 +1,30 @@
 import { customerApi } from "../../../../api/customerApi.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
+const toggleLoading = (isLoading) => {
+  const loadingElement = document.querySelector(".fetching-loading");
+
+  if (isLoading) {
+    loadingElement.style.visibility = "visible";
+    loadingElement.style.opacity = "1";
+    loadingElement.style.minHeight = "calc(100vh - 240px)";
+    return;
+  }
+
+  loadingElement.style.visibility = "hidden";
+  loadingElement.style.opacity = "0";
+  loadingElement.style.minHeight = 0;
+};
 
 const fetchProducts = async (page = 1, limit = 8) => {
   try {
+    toggleLoading(true);
     const {
       data: { currentPage, totalPages, products },
       status,
     } = await customerApi.getProducts({ page, limit });
 
     renderProducts(products, currentPage, totalPages);
+    toggleLoading(false);
   } catch (error) {
     console.log(error);
   }
@@ -93,6 +109,11 @@ const renderProducts = (products = [], currentPage, totalPages) => {
                 <button class="quick-view">
                   <i class="fa fa-eye"></i
                   ><span class="tooltipp">quick view</span>
+                </button>
+              </div>
+                <div class="add-to-cart">
+                <button class="add-to-cart-btn">
+                  <i class="fa fa-shopping-cart"></i> add to cart
                 </button>
               </div>
             </div>
