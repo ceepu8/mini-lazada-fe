@@ -1,5 +1,32 @@
 import { customerApi } from "../../../../api/customerApi.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
+
+window.addToCart = (id, price, name, image) => {
+  const product = {
+    productID: id,
+    price,
+    name,
+    image,
+  };
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let newCart = [];
+  let newProduct = {};
+  const foundProduct = cart.findIndex(
+    (prod) => prod.productID === product.productID
+  );
+  if (foundProduct !== -1) {
+    newCart = cart.map((prod) => {
+      if (prod.productID === product.productID) {
+        return { ...prod, quantity: prod.quantity + 1 };
+      }
+      return prod;
+    });
+  } else {
+    newProduct = { ...product, quantity: 1 };
+    newCart = [...cart, newProduct];
+  }
+  localStorage.setItem("cart", JSON.stringify(newCart));
+};
 const toggleLoading = (isLoading) => {
   const loadingElement = document.querySelector(".fetching-loading");
 
@@ -68,6 +95,7 @@ const renderProducts = (products = [], currentPage, totalPages) => {
   const html = products
     .map((product) => {
       const { id, image, name, price, description, vendor } = product;
+
       return `
         <div class="col-md-4">
           <div class="product">
@@ -112,7 +140,7 @@ const renderProducts = (products = [], currentPage, totalPages) => {
                 </button>
               </div>
                 <div class="add-to-cart">
-                <button class="add-to-cart-btn">
+                <button class="add-to-cart-btn" onclick="addToCart('${id}', ${price}, '${name}','${image}')">
                   <i class="fa fa-shopping-cart"></i> add to cart
                 </button>
               </div>
