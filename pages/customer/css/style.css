@@ -1,5 +1,5 @@
 :root {
-  --primary: #0046be;
+  --primary: #f36f37;
   --secondary: #ffdf00;
 
   --avocado: #4b8105;
@@ -45,6 +45,11 @@ a {
   font-weight: 500;
   transition: 0.2s color;
   text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
 }
 
 a:hover,
@@ -403,7 +408,7 @@ textarea.input {
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #1e1f29;
+  background-color: var(--bright-gray);
 }
 
 .header-links li {
@@ -434,13 +439,12 @@ textarea.input {
 \*----------------------------*/
 
 #header {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: #15161d;
+  padding-top: 16px 0px;
+  background-color: var(--bright-gray);
 }
 
 .header-logo {
-  float: left;
+  max-width: 200px;
 }
 
 .header-logo .logo img {
@@ -453,23 +457,21 @@ textarea.input {
 
 .header-search {
   padding: 15px 0px;
-}
-
-.header-search div {
   position: relative;
+  display: flex;
 }
 
-.header-search div .input-select {
+.header-search .input-select {
   margin-right: -4px;
   border-radius: 40px 0px 0px 40px;
 }
 
-.header-search div .input {
+.header-search .input {
   width: calc(100% - 260px);
   margin-right: -4px;
 }
 
-.header-search div .search-btn {
+.header-search .search-btn {
   height: 40px;
   width: 100px;
   background: var(--primary);
@@ -501,7 +503,7 @@ textarea.input {
   position: relative;
   width: 90px;
   text-align: center;
-  color: #fff;
+  color: var(--raisin-black);
 }
 
 .header-ctn > div > a > i {
@@ -1019,7 +1021,7 @@ textarea.input {
   right: 1px;
   bottom: 1px;
   padding: 15px;
-  background: #1e1f29;
+  background: var(--granite-gray);
   text-align: center;
   transform: translateY(0%);
   transition: 0.15s all;
@@ -1281,6 +1283,33 @@ textarea.input {
   width: calc(50% - 7px);
 }
 
+.price-filter .price-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price-filter .price-inputs .input-connection {
+  padding: 0 16px;
+  font-size: 24px;
+}
+
+.price-filter .filter-button {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.15s;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  margin-top: 12px;
+}
+.price-filter .filter-button:hover {
+  background-color: #ffdf00;
+  color: #000000;
+}
 /*----------------------------*\
 	Store
 \*----------------------------*/
@@ -1958,6 +1987,7 @@ textarea.input {
   position: relative;
   max-width: 520px;
   margin: 30px auto;
+  display: flex;
 }
 
 .newsletter form:after {
@@ -2027,12 +2057,12 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  background: #15161d;
-  color: #b9babc;
+  background-color: var(--bright-gray);
+  color: var(--raisin-black);
 }
 
 #bottom-footer {
-  background: #1e1f29;
+  background: var(--bright-gray);
 }
 
 .footer {
@@ -2040,7 +2070,7 @@ textarea.input {
 }
 
 .footer .footer-title {
-  color: #fff;
+  color: var(--dark-charcoal);
   text-transform: uppercase;
   font-size: 18px;
   margin: 0px 0px 30px;
@@ -2051,7 +2081,7 @@ textarea.input {
 }
 
 .footer-links li a {
-  color: #b9babc;
+  color: var(--raisin-black);
 }
 
 .footer-links li i {
@@ -2252,7 +2282,16 @@ textarea.input {
   color: var(--primary);
 }
 
+.page-item.active .page-link {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
 .page-item.active .page-link.disabled {
   pointer-events: none;
   cursor: not-allowed;
+}
+
+.page-link:hover {
+  color: var(--primary);
 }
