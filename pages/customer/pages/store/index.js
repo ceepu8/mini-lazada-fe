@@ -1,63 +1,114 @@
-const apiUrl = "https://smoky-mini-lazada-be.onrender.com/api/product";
+import { customerApi } from "../../../../api/customerApi.js";
+import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
-const numPd2 = document.querySelector(".numStore");
-const storedNumber4 = localStorage.getItem("r1-name");
-numPd2.innerHTML = storedNumber4;
+const fetchProducts = async (page = 1, limit = 8) => {
+  try {
+    const {
+      data: { currentPage, totalPages, products },
+      status,
+    } = await customerApi.getProducts({ page, limit });
 
-// view data
-const pokemonImage = document.querySelectorAll(".store-img");
-const pokemonName = document.querySelectorAll(".name-pd");
-const pokemonPrice = document.querySelectorAll(".hello");
+    renderProducts(products, currentPage, totalPages);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-function getPokemonData() {
-  axios
-    .get(apiUrl)
-    .then(function (response) {
-      for (let i = 0; i < 9; i++) {
-        pokemonImage[i].src = response.data.products[i].image;
-        pokemonName[i].innerHTML = response.data.products[i].name;
-        pokemonPrice[i].innerHTML = response.data.products[i].price;
-      }
+const renderPagination = (currentPage, totalPages) => {
+  const html = `
+      <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+            ${Array(totalPages)
+              .fill()
+              .map((_, index) => {
+                const isActive = currentPage === index + 1;
+                return `<li class="page-item ${
+                  isActive && "active"
+                }"><a class="page-link" href="./index.html?page=${index + 1}">${
+                  index + 1
+                }</a></li>`;
+              })
+              .join("")}
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>  
+      </div>
+  `;
+
+  return html;
+};
+
+const renderProducts = (products = [], currentPage, totalPages) => {
+  const html = products
+    .map((product) => {
+      const { id, image, name, price, description, vendor } = product;
+      return `
+        <div class="col-md-4">
+          <div class="product">
+            <div class="product-img">
+              <img class="indexImage" src="${image}" alt="" />
+              <div class="product-label">
+                <span class="sale">-15%</span>
+                <span class="new">NEW</span>
+              </div>
+            </div>
+            <div class="product-body">
+              <p class="product-category">Category</p>
+              <h3 title="${name}" class="product-name indexName line-clamp-1">
+                <a href="#">${name}</a>
+              </h3>
+              <h4 class="product-price indexPrice">
+                ${currencyFormat(
+                  price
+                )} <del class="product-old-price">${currencyFormat(
+        price + price * 0.15
+      )}</del>
+              </h4>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="product-btns">
+                <button class="add-to-wishlist">
+                  <i class="fa fa-heart-o"></i
+                  ><span class="tooltipp">add to wishlist</span>
+                </button>
+                <button class="add-to-compare">
+                  <i class="fa fa-exchange"></i
+                  ><span class="tooltipp">add to compare</span>
+                </button>
+                <button class="quick-view">
+                  <i class="fa fa-eye"></i
+                  ><span class="tooltipp">quick view</span>
+                </button>
+              </div>
+            </div>
+          </div>    
+        </div>              
+    `;
     })
-    .catch(function (error) {
-      pokemonName.innerHTML = "(An error has occurred.)";
-      pokemonImage.src = "";
-    });
-}
+    .join("");
 
-getPokemonData();
+  const productElement = document.querySelector(".product-list");
+  productElement.innerHTML = html + renderPagination(currentPage, totalPages);
+};
 
-// search data
-const button = document.querySelector(".input2");
-const searchHid = document.querySelectorAll(".pd2");
-const input = document.querySelector(".input1");
+window.onload = () => {
+  const LIMIT_PRODUCT_PAGE = 9;
+  const { page = 1 } = parseQueryString(window.location.search);
 
-function searchData() {
-  axios
-    .get(apiUrl)
-    .then(function (response) {
-      for (let m = 0; m < 9; m++) {
-        if (input.value == response.data.products[m].name) {
-          pokemonImage[0].src = response.data.products[m].image;
-          pokemonName[0].innerHTML = response.data.products[m].name;
-          pokemonPrice[0].innerHTML = response.data.products[m].price;
-        }
-      }
-      for (let n = 1; n < 9; n++) {
-        searchHid[n].remove();
-      }
-    })
-    .catch(function (error) {
-      pokemonName.innerHTML = "(An error has occurred.)";
-      pokemonImage.src = "";
-    });
-}
-
-button.addEventListener("click", searchData);
-
-// detail page
-for (let r = 0; r < 9; r++) {
-  pokemonName[r].addEventListener("click", function () {
-    localStorage.setItem("r-name", r);
-  });
-}
+  fetchProducts(page, LIMIT_PRODUCT_PAGE);
+};

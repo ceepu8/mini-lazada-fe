@@ -16,31 +16,33 @@ const fetchProducts = async (page = 1, limit = 8) => {
 
 const renderPagination = (currentPage, totalPages) => {
   const html = `
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-            ${Array(totalPages - 1)
-              .fill()
-              .map((_, index) => {
-                const isActive = currentPage === index + 1;
-                return `<li class="page-item ${
-                  isActive && "active"
-                }"><a class="page-link" href="./index.html?page=${index + 1}">${
-                  index + 1
-                }</a></li>`;
-              })
-              .join("")}
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+              ${Array(totalPages)
+                .fill()
+                .map((_, index) => {
+                  const isActive = currentPage === index + 1;
+                  return `<li class="page-item ${
+                    isActive && "active"
+                  }"><a class="page-link" href="./index.html?page=${
+                    index + 1
+                  }">${index + 1}</a></li>`;
+                })
+                .join("")}
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
   `;
 
   return html;
