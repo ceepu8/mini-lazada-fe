@@ -14,10 +14,12 @@
       rel="stylesheet"
     />
 
-    <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="../../css/bootstrap.min.css" />
-
-    <!-- Slick -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
     <link type="text/css" rel="stylesheet" href="../../css/slick.css" />
     <link type="text/css" rel="stylesheet" href="../../css/slick-theme.css" />
 
@@ -44,136 +46,99 @@
   <body>
     <!-- HEADER -->
     <header>
-      <!-- TOP HEADER -->
       <div id="top-header"></div>
-      <!-- /TOP HEADER -->
-
-      <!-- MAIN HEADER -->
       <div id="header">
-        <!-- container -->
         <div class="container">
-          <!-- row -->
           <div class="row">
-            <!-- LOGO -->
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="" alt="" />
+                  <img src="../../../../assets/logo.png" alt="header-logo" />
                 </a>
               </div>
             </div>
-            <!-- /LOGO -->
-
-            <!-- SEARCH BAR -->
             <div class="col-md-6">
               <div class="header-search">
                 <select class="input-select">
                   <option value="0">All Categories</option>
                 </select>
-                <input class="input" placeholder="Search here" />
-                <button class="search-btn">Search</button>
+                <input
+                  class="input input1"
+                  type="text"
+                  placeholder="Search here"
+                  .
+                />
+                <button class="search-btn input2">Search</button>
               </div>
             </div>
-            <!-- /SEARCH BAR -->
-
-            <!-- ACCOUNT -->
             <div class="col-md-3 clearfix">
               <div class="header-ctn">
-                <!-- Wishlist -->
                 <div>
                   <a href="#">
                     <i class="fa fa-heart-o"></i>
                     <span>Your Wishlist</span>
-                    <!--<div class="qty"></div>-->
                   </a>
                 </div>
-                <!-- /Wishlist -->
-
-                <!-- Cart -->
                 <div class="dropdown">
                   <a
+                    href="./shoppingCart.html"
                     class="dropdown-toggle"
                     data-toggle="dropdown"
                     aria-expanded="true"
                   >
                     <i class="fa fa-shopping-cart"></i>
                     <span>Your Cart</span>
-                    <div class="qty shopNum">0</div>
+                    <div class="qty numStore"></div>
                   </a>
-                  <!--<div class="cart-dropdown">
-										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="../../img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="../../img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
-										</div>
-										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
-										</div>
-										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-										</div>
-									</div>-->
                 </div>
-                <!-- /Cart -->
-
-                <!-- Menu Toogle -->
                 <div class="menu-toggle">
                   <a href="#">
                     <i class="fa fa-bars"></i>
                     <span>Menu</span>
                   </a>
                 </div>
-                <!-- /Menu Toogle -->
               </div>
             </div>
-            <!-- /ACCOUNT -->
           </div>
-          <!-- row -->
         </div>
-        <!-- container -->
       </div>
-      <!-- /MAIN HEADER -->
     </header>
     <!-- /HEADER -->
 
     <!-- NAVIGATION -->
-    <nav id="navigation">
-      <!-- container -->
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <!-- responsive-nav -->
-        <div id="responsive-nav">
-          <!-- NAV -->
-          <ul class="main-nav nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="store.html">Store</a></li>
-            <li><a href="shoppingCart.html">Shopping Cart</a></li>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="../home/index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Store</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../shopping-cart/index.html"
+                >Shopping Cart</a
+              >
+            </li>
           </ul>
-          <!-- /NAV -->
         </div>
-        <!-- /responsive-nav -->
       </div>
-      <!-- /container -->
     </nav>
+
     <!-- /NAVIGATION -->
 
     <!-- BREADCRUMB -->
@@ -998,13 +963,13 @@
 
     <!-- jQuery Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
-    <script src="./index.js"></script>
-    <!--<script src="shopping.js"></script>-->
-
-    <script src="../../js/jquery.min.js"></script>
-    <script src="../../js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script src="../../js/slick.min.js"></script>
     <script src="../../js/nouislider.min.js"></script>
-    <script src="../../js/jquery.zoom.min.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>
