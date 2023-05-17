@@ -1,35 +1,112 @@
-const apiUrl = "https://smoky-mini-lazada-be.onrender.com/api/product";
-// view data
-const pokemonImage3 = document.querySelectorAll(".indexImage");
-const pokemonName3 = document.querySelectorAll(".indexName");
-const pokemonPrice3 = document.querySelectorAll(".indexPrice");
+import { customerApi } from "../../../../api/customerApi.js";
+import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
-const pokemonImage4 = document.querySelectorAll(".indexImage1");
-const pokemonName4 = document.querySelectorAll(".indexName1");
-const pokemonPrice4 = document.querySelectorAll(".indexPrice1");
+const fetchProducts = async (page = 1, limit = 8) => {
+  try {
+    const {
+      data: { currentPage, totalPages, products },
+      status,
+    } = await customerApi.getProducts({ page, limit });
 
-const numPd1 = document.querySelector(".indexCart");
-const storedNumber3 = localStorage.getItem("r1-name");
-numPd1.innerHTML = storedNumber3;
+    renderProducts(products, currentPage, totalPages);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-function getPokemonData() {
-  axios
-    .get(apiUrl)
-    .then(function (response) {
-      for (let i = 0; i < 6; i++) {
-        pokemonImage3[i].src = response.data.products[i].image;
-        pokemonName3[i].innerHTML = response.data.products[i].name;
-        pokemonPrice3[i].innerHTML = response.data.products[i].price;
+const renderPagination = (currentPage, totalPages) => {
+  const html = `
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+            ${Array(totalPages - 1)
+              .fill()
+              .map((_, index) => {
+                const isActive = currentPage === index + 1;
+                return `<li class="page-item ${
+                  isActive && "active"
+                }"><a class="page-link" href="./index.html?page=${index + 1}">${
+                  index + 1
+                }</a></li>`;
+              })
+              .join("")}
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+  `;
 
-        pokemonImage4[i].src = response.data.products[i].image;
-        pokemonName4[i].innerHTML = response.data.products[i].name;
-        pokemonPrice4[i].innerHTML = response.data.products[i].price;
-      }
+  return html;
+};
+
+const renderProducts = (products = [], currentPage, totalPages) => {
+  const html = products
+    .map((product) => {
+      const { id, image, name, price, description, vendor } = product;
+      return `
+        <div class="col-md-3">
+          <div class="product">
+            <div class="product-img">
+              <img class="indexImage" src="${image}" alt="" />
+              <div class="product-label">
+                <span class="sale">-30%</span>
+                <span class="new">NEW</span>
+              </div>
+            </div>
+            <div class="product-body">
+              <p class="product-category">Category</p>
+              <h3 title="${name}" class="product-name indexName line-clamp-1">
+                <a href="#">${name}</a>
+              </h3>
+              <h4 class="product-price indexPrice">
+                ${currencyFormat(
+                  price
+                )} <del class="product-old-price">${currencyFormat(
+        price + price * 0.15
+      )}</del>
+              </h4>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+              <div class="product-btns">
+                <button class="add-to-wishlist">
+                  <i class="fa fa-heart-o"></i
+                  ><span class="tooltipp">add to wishlist</span>
+                </button>
+                <button class="add-to-compare">
+                  <i class="fa fa-exchange"></i
+                  ><span class="tooltipp">add to compare</span>
+                </button>
+                <button class="quick-view">
+                  <i class="fa fa-eye"></i
+                  ><span class="tooltipp">quick view</span>
+                </button>
+              </div>
+            </div>
+          </div>    
+        </div>              
+    `;
     })
-    .catch(function (error) {
-      pokemonName.innerHTML = "(An error has occurred.)";
-      pokemonImage.src = "";
-    });
-}
+    .join("");
 
-getPokemonData();
+  const productElement = document.querySelector(".product-list");
+  productElement.innerHTML = html + renderPagination(currentPage, totalPages);
+};
+
+window.onload = () => {
+  const LIMIT_PRODUCT_PAGE = 8;
+  const { page = 1 } = parseQueryString(window.location.search);
+
+  fetchProducts(page, LIMIT_PRODUCT_PAGE);
+};
