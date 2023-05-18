@@ -32,3 +32,13 @@ export function formatDate(date) {
   var year = d.getUTCFullYear().toString();
   return `${hours}:${minutes}:${seconds}, ${day}-${month}-${year}`;
 }
+
+export function filterUndefinedProperties(obj) {
+  const filtered = {};
+  for (let prop in obj) {
+    if (obj[prop] !== undefined) {
+      filtered[prop] = obj[prop];
+    }
+  }
+  return filtered;
+}

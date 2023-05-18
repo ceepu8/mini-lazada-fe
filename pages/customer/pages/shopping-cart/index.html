@@ -15,6 +15,13 @@
       rel="stylesheet"
     />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
@@ -135,92 +142,48 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+              <a class="nav-link" aria-current="page" href="../home/index.html"
+                >Home</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../store/index.html">Store</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="../shopping-cart/index.html"
-                >Shopping Cart</a
-              >
+              <a class="nav-link active" href="index.html">Shopping Cart</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <!-- BREADCRUMB -->
     <div id="breadcrumb" class="section">
-      <!-- container -->
       <div class="container">
-        <!-- row -->
         <div class="row">
           <div class="col-md-12">
-            <h3 class="breadcrumb-header">Regular Page</h3>
-            <ul class="breadcrumb-tree">
-              <li><a href="#">Home</a></li>
-              <li class="active">Blank</li>
-            </ul>
+            <h3 class="breadcrumb-header">Your cart</h3>
           </div>
         </div>
-        <!-- /row -->
       </div>
-      <!-- /container -->
     </div>
-    <!-- /BREADCRUMB -->
-
-    <!-- SECTION -->
     <section id="cart-list">
-      <!-- container -->
       <div class="container">
-        <!-- row -->
         <div class="row cart-list"></div>
-        <!-- /row -->
+        <div class="total-price"></div>
       </div>
-      <!-- /container -->
     </section>
-    <!-- /SECTION -->
-
-    <!-- NEWSLETTER -->
     <div id="newsletter" class="section">
-      <!-- container -->
       <div class="container">
-        <!-- row -->
         <div class="row">
           <div class="col-md-12">
             <div class="newsletter">
-              <!--<p>Sign Up for the <strong>NEWSLETTER</strong></p>-->
-              <div>
-                <a class="btn btn-success verifyOrder" href="checkout.html"
-                  >VERIFY ORDER</a
-                >
+              <div class="btn primary-btn">
+                <a href="../checkout/index.html">VERIFY ORDER</a>
               </div>
-              <!--<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>-->
             </div>
           </div>
         </div>
-        <!-- /row -->
       </div>
-      <!-- /container -->
     </div>
-    <!-- /NEWSLETTER -->
 
     <footer id="footer">
       <div class="section">
@@ -337,6 +300,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../../js/slick.min.js"></script>
     <script src="../../js/nouislider.min.js"></script>
     <script type="module" src="./index.js"></script>

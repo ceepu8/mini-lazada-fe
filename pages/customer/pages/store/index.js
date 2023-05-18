@@ -1,32 +1,6 @@
 import { customerApi } from "../../../../api/customerApi.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
-window.addToCart = (id, price, name, image) => {
-  const product = {
-    productID: id,
-    price,
-    name,
-    image,
-  };
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let newCart = [];
-  let newProduct = {};
-  const foundProduct = cart.findIndex(
-    (prod) => prod.productID === product.productID
-  );
-  if (foundProduct !== -1) {
-    newCart = cart.map((prod) => {
-      if (prod.productID === product.productID) {
-        return { ...prod, quantity: prod.quantity + 1 };
-      }
-      return prod;
-    });
-  } else {
-    newProduct = { ...product, quantity: 1 };
-    newCart = [...cart, newProduct];
-  }
-  localStorage.setItem("cart", JSON.stringify(newCart));
-};
 const toggleLoading = (isLoading) => {
   const loadingElement = document.querySelector(".fetching-loading");
 
@@ -42,13 +16,15 @@ const toggleLoading = (isLoading) => {
   loadingElement.style.minHeight = 0;
 };
 
-const fetchProducts = async (page = 1, limit = 8) => {
+const fetchProducts = async (page = 1, limit = 8, max, min) => {
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = "";
   try {
     toggleLoading(true);
     const {
       data: { currentPage, totalPages, products },
       status,
-    } = await customerApi.getProducts({ page, limit });
+    } = await customerApi.getProducts({ page, limit, max, min });
 
     renderProducts(products, currentPage, totalPages);
     toggleLoading(false);
@@ -57,7 +33,26 @@ const fetchProducts = async (page = 1, limit = 8) => {
   }
 };
 
+window.getMaxMinFilterPrice = () => {
+  const max = document.querySelector(".input-number #price-max").value * 1;
+  const min = document.querySelector(".input-number #price-min").value * 1;
+  let searchURL = `index.html?page=1&limit=9&max=${max}&min=${min}`;
+
+  if (!max || !min) {
+    searchURL = `index.html?page=1&limit=9`;
+  }
+
+  window.location.replace(searchURL);
+};
+
 const renderPagination = (currentPage, totalPages) => {
+  const {
+    page = 1,
+    limit = 9,
+    max,
+    min,
+  } = parseQueryString(window.location.search);
+
   const html = `
       <div class="col-md-12">
         <nav aria-label="Page navigation example">
@@ -71,9 +66,17 @@ const renderPagination = (currentPage, totalPages) => {
               .fill()
               .map((_, index) => {
                 const isActive = currentPage === index + 1;
+                let nextPage = `./index.html?page=${index + 1}&limit=${limit}`;
+
+                if (max && min) {
+                  nextPage = `./index.html?page=${
+                    index + 1
+                  }&limit=${limit}&max=${max}&min=${min}`;
+                }
+
                 return `<li class="page-item ${
                   isActive && "active"
-                }"><a class="page-link" href="./index.html?page=${index + 1}">${
+                }"><a class="page-link" href="${nextPage}">${
                   index + 1
                 }</a></li>`;
               })
@@ -91,13 +94,18 @@ const renderPagination = (currentPage, totalPages) => {
   return html;
 };
 
+window.goToProductDetailPage = (productID) => {
+  let url = `../product-detail/index.html?id=${productID}`;
+  window.location.replace(url);
+};
+
 const renderProducts = (products = [], currentPage, totalPages) => {
   const html = products
     .map((product) => {
       const { id, image, name, price, description, vendor } = product;
 
       return `
-        <div class="col-md-4">
+        <div class="col-md-4" onclick="goToProductDetailPage('${id}')">
           <div class="product">
             <div class="product-img">
               <img class="indexImage" src="${image}" alt="" />
@@ -139,11 +147,6 @@ const renderProducts = (products = [], currentPage, totalPages) => {
                   ><span class="tooltipp">quick view</span>
                 </button>
               </div>
-                <div class="add-to-cart">
-                <button class="add-to-cart-btn" onclick="addToCart('${id}', ${price}, '${name}','${image}')">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
             </div>
           </div>    
         </div>              
@@ -157,7 +160,20 @@ const renderProducts = (products = [], currentPage, totalPages) => {
 
 window.onload = () => {
   const LIMIT_PRODUCT_PAGE = 9;
-  const { page = 1 } = parseQueryString(window.location.search);
+  const {
+    page = 1,
+    limit = LIMIT_PRODUCT_PAGE,
+    max,
+    min,
+  } = parseQueryString(window.location.search);
 
-  fetchProducts(page, LIMIT_PRODUCT_PAGE);
+  console.log(limit);
+
+  const maxElement = document.querySelector(".input-number #price-max");
+  const minElement = document.querySelector(".input-number #price-min");
+
+  maxElement.value = max;
+  minElement.value = min;
+
+  fetchProducts(page, limit, max, min);
 };

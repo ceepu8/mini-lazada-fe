@@ -216,7 +216,9 @@
                     <span class="qty-down">-</span>
                   </div>
                 </div>
-                <button class="filter-button">Load Filter</button>
+                <button class="filter-button" onclick="getMaxMinFilterPrice()">
+                  Load Filter
+                </button>
               </div>
             </div>
             <div class="aside">
@@ -323,14 +325,10 @@
           </div>
 
           <section id="store" class="col-md-9">
-            <div class="row product-list text-center">
-              <div class="fetching-loading">
-                <div
-                  class="spinner-border text-primary m-auto mt-5"
-                  role="status"
-                >
-                  <span class="visually-hidden">Loading...</span>
-                </div>
+            <div class="row product-list text-center"></div>
+            <div class="fetching-loading text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
               </div>
             </div>
           </section>
@@ -493,6 +491,7 @@
     <script src="../../js/slick.min.js"></script>
     <script src="../../js/nouislider.min.js"></script>
     <script src="../../js/main.js"></script>
+    <script type="module" src="../../../../api/customerApi.js"></script>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
