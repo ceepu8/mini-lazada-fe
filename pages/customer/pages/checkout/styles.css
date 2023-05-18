@@ -1,0 +1,7 @@
+form#billing-form {
+}
+
+form#billing-form .form-title {
+  font-size: 28px;
+  text-transform: uppercase;
+}

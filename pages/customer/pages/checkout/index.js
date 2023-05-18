@@ -1,43 +1,94 @@
-const apiUrl2 = "https://smoky-mini-lazada-be.onrender.com/api/product";
-const deleteDa1 = document.querySelectorAll(".dele1");
-const name1 = document.querySelectorAll(".name");
-const price1 = document.querySelectorAll(".price");
-const priceTotal1 = document.querySelector(".priceTotal");
-var count = 0;
-var arrNames = [];
-//localStorage.productNames = JSON.stringify(arrNames);
-let $savedClassName1 = $(".dele1");
-var arrNames = JSON.parse(localStorage.productNames);
-//
-const numPd1 = document.querySelector(".numPd");
-const storedNumber3 = localStorage.getItem("r1-name");
-numPd1.innerHTML = storedNumber3;
-//
-console.log(arrNames);
-for (let fil = 2; fil >= 0; fil--) {
-  deleteDa1[fil].remove();
-}
-function viewData() {
-  axios
-    .get(apiUrl2)
-    .then(function (response) {
-      for (let vd = 0; vd < arrNames.length; vd++) {
-        $(".order").append($savedClassName1[vd]);
-        price1[vd].innerHTML = response.data.products[arrNames[vd]].price;
+import { customerApi } from "../../../../api/customerApi.js";
+import { currencyFormat } from "../../../../utils/index.js";
 
-        name1[vd].innerHTML = response.data.products[arrNames[vd]].name;
-      }
-      for (let vd1 = 0; vd1 < arrNames.length; vd1++) {
-        count = count + response.data.products[arrNames[vd1]].price;
-      }
+window.handlePlaceOrder = async () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const { accessToken } = JSON.parse(localStorage.getItem("user"));
 
-      priceTotal1.innerHTML = count;
-      count = 0;
-    })
-    .catch(function (error) {
-      //pokemonName.innerHTML = "(An error has occurred.)";
-      //pokemonImage.src = "";
+  const products = cart.map((each) => ({
+    productID: each.productID,
+    quantity: each.quantity,
+  }));
+
+  const totalPrice = cart.reduce(
+    (total, each) => (total += each.quantity * each.price),
+    0
+  );
+
+  const hub = "644f6a047ab49644e2b97fa5";
+
+  const order = { products, hub, totalPrice };
+  try {
+    const { data, status } = await customerApi.createOrder(accessToken, order);
+
+    if (status === 200) {
+      swal({
+        title: data.message,
+        icon: "success",
+        button: "Close",
+      }).then(() => {
+        window.location.assign("../home/index.html");
+      });
+      localStorage.removeItem("cart");
+    }
+  } catch (error) {
+    console.log(error);
+    swal({
+      title: "ERROR!",
+      text: error.response?.data?.message,
     });
-}
+  }
+};
 
-viewData();
+const renderCartProducts = () => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const orderProductElement = document.querySelector(".order-products");
+  const totalPriceElement = document.querySelector(".order-total");
+
+  const totalPrice = cart.reduce(
+    (total, each) => (total += each.quantity * each.price),
+    0
+  );
+
+  const html = cart
+    .map((each) => {
+      const { productID, quantity, name, price } = each;
+
+      const prodTotalPrice = quantity * price;
+      return `
+        <div class="order-col dele1">
+          <div class="name">${quantity}x ${name}</div>
+          <div class="price">${currencyFormat(prodTotalPrice)}</div>
+        </div>
+    `;
+    })
+    .join("");
+
+  orderProductElement.innerHTML = html;
+  totalPriceElement.innerHTML = currencyFormat(totalPrice);
+};
+
+const renderUserInfo = () => {
+  const { user } = JSON.parse(localStorage.getItem("user"));
+
+  const form = document.getElementById("billing-form");
+  const inputs = form.querySelectorAll("input");
+
+  for (let input of inputs) {
+    const inputId = input.id;
+    console.log(inputId);
+    input.value = user[inputId];
+  }
+};
+
+window.onload = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const cart = JSON.parse(localStorage.getItem("cart"));
+
+  if (!user || (!cart && !cart?.length)) {
+    window.location.assign("../home/index.html");
+  }
+
+  renderUserInfo();
+  renderCartProducts();
+};

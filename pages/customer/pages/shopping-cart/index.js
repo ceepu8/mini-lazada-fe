@@ -1,13 +1,34 @@
 import { currencyFormat } from "../../../../utils/index.js";
 
+window.handleCheckout = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (!cart.length) {
+    return;
+  }
+
+  if (!user) {
+    swal({
+      title: "Login required!",
+      icon: "warning",
+      text: "Please login before checkout!",
+      button: "Move to next page!",
+    }).then(() => {
+      window.location.assign(`../../../login.html?verifyCheckout=true`);
+    });
+    return;
+  }
+  window.location.assign(`../checkout/index.html`);
+};
+
 const calculateTotalPrice = () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const totalPrice = cart.reduce(
-    (total, each) => each.quantity * each.price,
+    (total, each) => (total += each.quantity * each.price),
     0
   );
-  console.log(totalPrice);
 
   document.querySelector(".total-price").innerHTML = `
     <div>Total: <span class="price-value">${currencyFormat(

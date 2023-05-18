@@ -53,6 +53,12 @@
   font-weight: 500;
 }
 
+#cart-list .verify-order-btn {
+  text-align: right;
+  max-width: 920px;
+  margin: 16px auto 0 auto;
+}
+
 .total-price {
   max-width: 920px;
   margin: 0 auto;

@@ -17,4 +17,14 @@ export const customerApi = {
       url: `${API_URL}/product/${id}`,
     });
   },
+  createOrder: (token, data) => {
+    return axios({
+      method: "POST",
+      url: `${API_URL}/order`,
+      data: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };

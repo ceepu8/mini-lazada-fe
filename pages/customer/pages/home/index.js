@@ -67,12 +67,17 @@ const renderPagination = (currentPage, totalPages) => {
   return html;
 };
 
+window.goToProductDetailPage = (productID) => {
+  let url = `../product-detail/index.html?id=${productID}`;
+  window.location.replace(url);
+};
+
 const renderProducts = (products = [], currentPage, totalPages) => {
   const html = products
     .map((product) => {
       const { id, image, name, price, description, vendor } = product;
       return `
-        <div class="col-md-3">
+        <div class="col-md-3" onclick="goToProductDetailPage('${id}')">
           <div class="product">
             <div class="product-img">
               <img class="indexImage" src="${image}" alt="" />
