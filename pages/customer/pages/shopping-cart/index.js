@@ -1,3 +1,4 @@
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat } from "../../../../utils/index.js";
 
 window.handleCheckout = () => {
@@ -115,4 +116,5 @@ const renderCart = () => {
 
 window.onload = () => {
   renderCart();
+  renderHeaderUserAuth();
 };

@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../api/customerApi.js";
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
 const toggleLoading = (isLoading) => {
@@ -177,4 +178,5 @@ window.onload = () => {
   const { id } = parseQueryString(window.location.search);
   if (!id) window.location.replace("../home/index.html");
   fetchProduct(id);
+  renderHeaderUserAuth();
 };

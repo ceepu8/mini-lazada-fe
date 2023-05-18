@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../api/customerApi.js";
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat } from "../../../../utils/index.js";
 
 window.handlePlaceOrder = async () => {
@@ -91,4 +92,5 @@ window.onload = () => {
 
   renderUserInfo();
   renderCartProducts();
+  renderHeaderUserAuth();
 };

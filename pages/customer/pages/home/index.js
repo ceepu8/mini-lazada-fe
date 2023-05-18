@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../api/customerApi.js";
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
 const fetchProducts = async (page = 1, limit = 8) => {
@@ -131,9 +132,15 @@ const renderProducts = (products = [], currentPage, totalPages) => {
   productElement.innerHTML = html + renderPagination(currentPage, totalPages);
 };
 
+window.handleLogout = () => {
+  localStorage.removeItem("user");
+  location.reload();
+};
+
 window.onload = () => {
   const LIMIT_PRODUCT_PAGE = 8;
   const { page = 1 } = parseQueryString(window.location.search);
 
   fetchProducts(page, LIMIT_PRODUCT_PAGE);
+  renderHeaderUserAuth();
 };

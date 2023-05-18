@@ -72,13 +72,12 @@ ol {
 
 .primary-btn {
   display: inline-block;
-  padding: 12px 30px;
+  padding: 10px 24px;
   background-color: var(--primary);
   border: none;
   border-radius: 40px;
   color: #fff;
-  text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
@@ -94,7 +93,7 @@ ol {
   background-color: #000000;
   color: #ffffff;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: 40px;
   transition: all 0.15s;
 }
 .secondary-btn:hover,
@@ -504,7 +503,9 @@ textarea.input {
 \*----------------------------*/
 
 .header-ctn {
-  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   padding: 15px 0px;
 }
 
