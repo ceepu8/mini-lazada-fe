@@ -1,4 +1,4 @@
-import { authApi } from "../../api/authApi.js";
+import { authApi } from "../apis/authApi.js";
 import { handleFormValidation } from "../validation.js";
 
 const formElementName = "vendor-registration-form";

@@ -1,4 +1,4 @@
-import { authApi } from "../../api/authApi.js";
+import { authApi } from "../apis/authApi.js";
 import { shipperApi } from "../../api/shipperApi.js";
 import { handleFormValidation } from "../validation.js";
 
