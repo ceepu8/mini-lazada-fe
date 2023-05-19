@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../api/customerApi.js";
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat } from "../../../../utils/index.js";
 
 window.handlePlaceOrder = async () => {
@@ -15,7 +16,7 @@ window.handlePlaceOrder = async () => {
     0
   );
 
-  const hub = "644f6a047ab49644e2b97fa5";
+  const hub = "646716803e1be5ecaf3ce4a4";
 
   const order = { products, hub, totalPrice };
   try {
@@ -27,7 +28,7 @@ window.handlePlaceOrder = async () => {
         icon: "success",
         button: "Close",
       }).then(() => {
-        window.location.assign("../home/index.html");
+        window.location = "/pages/customer/pages/profile/index.html";
       });
       localStorage.removeItem("cart");
     }
@@ -86,9 +87,10 @@ window.onload = () => {
   const cart = JSON.parse(localStorage.getItem("cart"));
 
   if (!user || (!cart && !cart?.length)) {
-    window.location.assign("../home/index.html");
+    window.location = "/index.html";
   }
 
   renderUserInfo();
   renderCartProducts();
+  renderHeaderUserAuth();
 };

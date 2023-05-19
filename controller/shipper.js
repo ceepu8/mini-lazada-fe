@@ -6,12 +6,12 @@ let orderList = [];
 const handleRedirect = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
-    window.location.replace("../login.html");
+    window.location = "/pages/login.html";
   }
 };
 
 window.goToDetailPage = (orderId) => {
-  window.location.replace(`./order-detail.html?id=${orderId}`);
+  window.location = `/pages/shipper/order-detail.html?id=${orderId}`;
 };
 const renderOrderList = (data = []) => {
   if (!data?.length) {
@@ -103,8 +103,8 @@ const fetchOrderList = async () => {
     loadingElement.style.minHeight = "calc(100vh - 240px)";
 
     const { data } = await shipperApi.getOrders(accessToken);
-    orderList = data?.order?.order || [];
-    renderOrderList(data?.order?.order);
+    orderList = data?.data;
+    renderOrderList(data?.data);
 
     loadingElement.style.visibility = "hidden";
     loadingElement.style.opacity = "0";

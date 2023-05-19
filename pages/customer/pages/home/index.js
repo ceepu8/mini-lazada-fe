@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../api/customerApi.js";
+import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
 const fetchProducts = async (page = 1, limit = 8) => {
@@ -68,8 +69,7 @@ const renderPagination = (currentPage, totalPages) => {
 };
 
 window.goToProductDetailPage = (productID) => {
-  let url = `../product-detail/index.html?id=${productID}`;
-  window.location.replace(url);
+  window.location = `/pages/customer/pages/product-detail/index.html?id=${productID}`;
 };
 
 const renderProducts = (products = [], currentPage, totalPages) => {
@@ -131,9 +131,15 @@ const renderProducts = (products = [], currentPage, totalPages) => {
   productElement.innerHTML = html + renderPagination(currentPage, totalPages);
 };
 
+window.handleLogout = () => {
+  localStorage.removeItem("user");
+  location.reload();
+};
+
 window.onload = () => {
   const LIMIT_PRODUCT_PAGE = 8;
   const { page = 1 } = parseQueryString(window.location.search);
 
   fetchProducts(page, LIMIT_PRODUCT_PAGE);
+  renderHeaderUserAuth();
 };
