@@ -17,6 +17,15 @@ export const customerApi = {
       url: `${API_URL}/product/${id}`,
     });
   },
+  getOrders: (token) => {
+    return axios({
+      method: "GET",
+      url: `${API_URL}/order`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
   createOrder: (token, data) => {
     return axios({
       method: "POST",

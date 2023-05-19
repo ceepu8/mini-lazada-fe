@@ -28,7 +28,7 @@ window.handlePlaceOrder = async () => {
         icon: "success",
         button: "Close",
       }).then(() => {
-        window.location.assign("../home/index.html");
+        window.location.assign("../profile/index.html");
       });
       localStorage.removeItem("cart");
     }

@@ -103,8 +103,7 @@ const fetchOrderList = async () => {
     loadingElement.style.minHeight = "calc(100vh - 240px)";
 
     const { data } = await shipperApi.getOrders(accessToken);
-    orderList = data?.order?.order || [];
-    renderOrderList(data?.order?.order);
+    renderOrderList(data?.data);
 
     loadingElement.style.visibility = "hidden";
     loadingElement.style.opacity = "0";
