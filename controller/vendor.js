@@ -1,4 +1,4 @@
-import { vendorApi } from "../api/vendorApi.js";
+import { vendorApi } from "../controller/apis/vendorApi.js";
 import { currencyFormat } from "../utils/index.js";
 import { handleFormValidation } from "./validation.js";
 const spinner = `

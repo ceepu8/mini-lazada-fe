@@ -1,4 +1,4 @@
-import { customerApi } from "../../../../api/customerApi.js";
+import { customerApi } from "../../../../controller/apis/customerApi.js";
 import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
 
