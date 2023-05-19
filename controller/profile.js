@@ -1,4 +1,4 @@
-import { profileApi } from "../api/profileApi.js";
+import { profileApi } from "./apis/profileApi.js";
 
 const loginBtn = document.querySelector(".btn.submit-btn");
 const spinner = `

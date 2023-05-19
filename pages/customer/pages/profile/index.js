@@ -1,6 +1,6 @@
 import { renderHeaderUserAuth } from "../../../../controller/main.js";
-import { profileApi } from "../../../../api/profileApi.js";
-import { customerApi } from "../../../../api/customerApi.js";
+import { profileApi } from "../../../../controller/apis/profileApi.js";
+import { customerApi } from "../../../../controller/apis/customerApi.js";
 import { currencyFormat, formatDate } from "../../../../utils/index.js";
 
 const loginBtn = document.querySelector(".btn.submit-btn");

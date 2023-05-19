@@ -1,5 +1,5 @@
 import { handleFormValidation } from "./validation.js";
-import { loginApi } from "../api/loginApi.js";
+import { loginApi } from "./apis/loginApi.js";
 import { parseQueryString } from "../utils/index.js";
 
 const spinner = `

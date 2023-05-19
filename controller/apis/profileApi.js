@@ -30,6 +30,6 @@ export const profileApi = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-  }
+    });
+  },
 };

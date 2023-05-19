@@ -1,5 +1,5 @@
 import { authApi } from "../apis/authApi.js";
-import { shipperApi } from "../../api/shipperApi.js";
+import { shipperApi } from "../../controller/apis/shipperApi.js";
 import { handleFormValidation } from "../validation.js";
 
 const formElementName = "shipper-registration-form";

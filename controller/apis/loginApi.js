@@ -5,7 +5,7 @@ export const loginApi = {
     return axios({
       method: "POST",
       url: `${API_URL}/auth/login`,
-      data: data
-    })
-  }
-}
+      data: data,
+    });
+  },
+};
