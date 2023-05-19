@@ -22,17 +22,13 @@ const renderProduct = async () => {
     loadingElement.style.minHeight = "calc(100vh - 240px)";
     const { data } = await vendorApi.getMyProducts(user.accessToken);
 
-    if (data.products.length <= 0) {
-      const node = document.createElement("h3");
-      node.style.margin = "42px 0";
-      node.innerHTML = "There is not any products";
-
-      productTable.appendChild(node);
-
+    if (!data?.products.length) {
       loadingElement.style.visibility = "hidden";
       loadingElement.style.opacity = "0";
       loadingElement.style.minHeight = 0;
 
+      productListElement.innerHTML =
+        "<h5 class='text-center'>There is not any products created</h5>";
       return;
     }
     const html = data.products.reduce((result, product, idx) => {
@@ -139,7 +135,7 @@ window.readURL = (input) => {
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
-    window.location.replace("../login.html");
+    window.location = "/pages/login.html";
   }
 
   renderProduct();

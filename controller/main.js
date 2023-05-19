@@ -4,11 +4,11 @@ window.handleLogout = () => {
 };
 
 window.goToLoginPage = () => {
-  window.location.assign("../../../login.html");
+  window.location = "/pages/login.html";
 };
 
 window.goToRegisterPage = () => {
-  window.location.assign("../../registration.html");
+  window.location = "/pages/customer/registration.html";
 };
 
 export const renderHeaderUserAuth = () => {
@@ -26,7 +26,7 @@ export const renderHeaderUserAuth = () => {
                   </a>
                 </div>
                 <div class="dropdown">
-                  <a href="../shopping-cart/index.html">
+                  <a href="/pages/customer/pages/shopping-cart/index.html">
                     <i class="fa fa-shopping-cart"></i>
                     <span>Your Cart</span>
                     <div class="qty indexCart">${cart?.length || 0}</div>

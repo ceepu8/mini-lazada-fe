@@ -43,7 +43,7 @@ const handleVendorRegistrationForm = async (e) => {
         icon: "success",
         button: "Close",
       }).then(() => {
-        window.location.assign("../../pages/login.html");
+        window.location = "/pages/login.html";
       });
     }
   } catch (error) {

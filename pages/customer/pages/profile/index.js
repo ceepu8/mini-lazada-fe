@@ -21,7 +21,7 @@ const getProfile = async () => {
 
     const { data } = await profileApi.getProfile(user.accessToken);
     if (!data) {
-      window.location.replace("../login.html");
+      window.location = "/pages/login.html";
     }
     const form = document.querySelector("form#profile-form");
 
@@ -208,7 +208,7 @@ window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
-    window.location.assign("../home/index.html");
+    window.location = "/index.html";
   }
 
   loadUser();

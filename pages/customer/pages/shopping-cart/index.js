@@ -16,11 +16,11 @@ window.handleCheckout = () => {
       text: "Please login before checkout!",
       button: "Move to next page!",
     }).then(() => {
-      window.location.assign(`../../../login.html?verifyCheckout=true`);
+      window.location = "/pages/login.html?verifyCheckout=true";
     });
     return;
   }
-  window.location.assign(`../checkout/index.html`);
+  window.location = "/pages/customer/pages/checkout/index.html";
 };
 
 const calculateTotalPrice = () => {

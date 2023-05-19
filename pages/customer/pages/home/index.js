@@ -69,8 +69,7 @@ const renderPagination = (currentPage, totalPages) => {
 };
 
 window.goToProductDetailPage = (productID) => {
-  let url = `../product-detail/index.html?id=${productID}`;
-  window.location.replace(url);
+  window.location = `/pages/customer/pages/product-detail/index.html?id=${productID}`;
 };
 
 const renderProducts = (products = [], currentPage, totalPages) => {

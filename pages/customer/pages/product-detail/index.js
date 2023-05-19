@@ -84,7 +84,7 @@ const renderProduct = (product) => {
           </div>
           <div class="col-md-5">
             <div class="product-details">
-              <h2 class="product-name detailName">product name goes here</h2>
+              <h2 class="product-name detailName">${name}</h2>
               <div>
                 <div class="product-rating">
                   <i class="fa fa-star"></i>
@@ -176,7 +176,7 @@ const fetchProduct = async (id) => {
 
 window.onload = () => {
   const { id } = parseQueryString(window.location.search);
-  if (!id) window.location.replace("../home/index.html");
+  if (!id) window.location = "/index.html";
   fetchProduct(id);
   renderHeaderUserAuth();
 };
