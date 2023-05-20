@@ -480,14 +480,11 @@ header .navbar .navbar-nav li.logout button:hover {
 }
 
 form .form-group {
-  padding-bottom: 24px;
-  position: relative;
+  padding-bottom: 12px;
 }
 form .form-group .error-message {
-  position: absolute;
-  bottom: 2px;
-  left: 0;
-  font-size: 15px;
+  font-size: 14px;
+  color: #a64452;
 }
 
 form .form-group .form-field {
@@ -631,7 +628,7 @@ form .form-group .form-field:required, form .form-group .form-field:invalid {
   background-color: cornflowerblue;
 }
 .badge.canceled {
-  background-color: #fe0000;
+  background-color: #a64452;
 }
 .badge.mall {
   background-color: #f36f37;
