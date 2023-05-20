@@ -1,4 +1,6 @@
 # mini-lazada-fe
+
+USERNAME + PASSWORD
 customer:
 customer1 - Rmit123@
 
