@@ -9,6 +9,12 @@ const spinner = `
     ></span>
     Loading...
 `;
+
+window.sendUnfinishMessage = () => {
+  swal({
+    text: "This feature is currently under development. We apologize for any inconvenience this may cause. Please check back later for updates.",
+  });
+};
 const renderProduct = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const productListElement = document.querySelector(
@@ -47,8 +53,8 @@ const renderProduct = async () => {
                     <span class="product-price">${currencyFormat(price)}</span>
                   </div>
                   <div class="setting-buttons">
-                    <button class="btn primary-button w-100" type="button">Update</button>
-                    <button class="btn secondary-button w-100" type="button">Delete</button>
+                    <button class="btn primary-button w-100" type="button" onclick="sendUnfinishMessage()"/>Update</button>
+                    <button class="btn secondary-button w-100" type="button" onclick="sendUnfinishMessage()">Delete</button>
                   </div>
                 </div>
               </div>
