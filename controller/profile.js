@@ -17,6 +17,15 @@ const getProfile = async () => {
     loginBtn.setAttribute("disabled", true);
 
     const { data } = await profileApi.getProfile(user.accessToken);
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        accessToken: user.accessToken,
+        user: data.data,
+      })
+    );
+
     if (!data) {
       window.location = "/pages/login.html";
     }
