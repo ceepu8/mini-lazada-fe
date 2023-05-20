@@ -1,6 +1,6 @@
 import { customerApi } from "./controller/apis/customerApi.js";
-import { renderHeaderUserAuth } from "../../../../controller/main.js";
-import { currencyFormat, parseQueryString } from "../../../../utils/index.js";
+import { renderHeaderUserAuth } from "./controller/main.js";
+import { currencyFormat, parseQueryString } from "./utils/index.js";
 
 const fetchProducts = async (page = 1, limit = 8) => {
   try {
