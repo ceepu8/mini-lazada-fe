@@ -22,7 +22,7 @@ export const renderHeaderUserAuth = () => {
           <button class="btn secondary-btn me-2" onclick="goToRegisterPage()">Register</button>
           <button class="btn primary-btn" onclick="goToLoginPage()">Login</button>
           <div class="dropdown">
-            <a href="../shopping-cart/index.html">
+            <a href="/pages/customer/pages/shopping-cart/index.html">
               <i class="fa fa-shopping-cart"></i>
               <span>Your Cart</span>
               <div class="qty indexCart">${cart?.length || 0}</div>
