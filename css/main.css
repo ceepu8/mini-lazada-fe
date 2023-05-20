@@ -480,7 +480,14 @@ header .navbar .navbar-nav li.logout button:hover {
 }
 
 form .form-group {
-  padding-bottom: 16px;
+  padding-bottom: 24px;
+  position: relative;
+}
+form .form-group .error-message {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  font-size: 15px;
 }
 
 form .form-group .form-field {

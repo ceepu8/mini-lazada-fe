@@ -1,4 +1,4 @@
-import { filterUndefinedProperties } from "../../utils";
+import { filterUndefinedProperties } from "../../utils/index.js";
 
 const API_URL = "https://smoky-mini-lazada-be.onrender.com/api";
 

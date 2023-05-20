@@ -1,4 +1,5 @@
 import { customerApi } from "../../../../controller/apis/customerApi.js";
+import { shipperApi } from "../../../../controller/apis/shipperApi.js";
 import { renderHeaderUserAuth } from "../../../../controller/main.js";
 import { currencyFormat } from "../../../../utils/index.js";
 
@@ -16,7 +17,8 @@ window.handlePlaceOrder = async () => {
     0
   );
 
-  const hub = "646716803e1be5ecaf3ce4a4";
+  const selectHubElement = document.querySelector("select#hub");
+  const hub = selectHubElement.value;
 
   const order = { products, hub, totalPrice };
   try {
@@ -82,6 +84,19 @@ const renderUserInfo = () => {
   }
 };
 
+const renderHubSelectOptions = async () => {
+  try {
+    const { data } = await shipperApi.getHubs();
+    const html = data?.data.reduce((result, hub) => {
+      const { name, _id: id, address } = hub;
+      return result + `<option value="${id}">${name}</option>`;
+    }, "");
+
+    const select = document.querySelector("select#hub");
+    select.innerHTML = html;
+  } catch (error) {}
+};
+
 window.onload = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const cart = JSON.parse(localStorage.getItem("cart"));
@@ -92,5 +107,6 @@ window.onload = () => {
 
   renderUserInfo();
   renderCartProducts();
+  renderHubSelectOptions();
   renderHeaderUserAuth();
 };

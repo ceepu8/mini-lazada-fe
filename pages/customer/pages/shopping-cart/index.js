@@ -14,12 +14,24 @@ window.handleCheckout = () => {
       title: "Login required!",
       icon: "warning",
       text: "Please login before checkout!",
-      button: "Move to next page!",
+      button: "Move to login page!",
     }).then(() => {
       window.location = "/pages/login.html?verifyCheckout=true";
     });
     return;
   }
+
+  if (user?.user.role) {
+    swal({
+      icon: "warning",
+      text: "Please login as customer before checkout!",
+      button: "Move to login page!",
+    }).then(() => {
+      window.location = "/pages/login.html?verifyCheckout=true";
+    });
+    return;
+  }
+
   window.location = "/pages/customer/pages/checkout/index.html";
 };
 

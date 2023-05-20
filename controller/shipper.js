@@ -142,6 +142,20 @@ window.filterOrdersByStatus = () => {
 };
 
 window.onload = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.location = "/pages/login.html";
+  }
+  if (user?.user.role !== "shipper") {
+    swal({
+      title: "Unauthorized",
+      icon: "warning",
+      button: "Go back to login page",
+    }).then(() => {
+      window.location = "/pages/login.html";
+    });
+  }
+
   handleRedirect();
   renderHubInfor();
   fetchOrderList();

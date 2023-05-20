@@ -41,14 +41,14 @@ const handleForm = async (e) => {
         })
       );
       const userRole = user.role;
-      let url = `../../pages/${userRole}/${userRole}.html`;
+      let url = `/pages/${userRole}/${userRole}.html`;
 
       if (userRole === "customer") {
-        url = `../../pages/customer/pages/home/index.html`;
+        url = `/index.html`;
       }
 
       if (Boolean(verifyCheckout)) {
-        url = `../../pages/customer/pages/checkout/index.html`;
+        url = `/pages/customer/pages/checkout/index.html`;
       }
       swal({
         title: "Login successfully!",
