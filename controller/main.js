@@ -20,7 +20,7 @@ export const renderHeaderUserAuth = () => {
   if (user) {
     html = `
                 <div class="dropdown">
-                  <a href="../profile/index.html">
+                  <a href="/pages/customer/pages/profile/index.html">
                     <i class="fa fa-user"></i>
                     <span>Your Profile</span>
                   </a>

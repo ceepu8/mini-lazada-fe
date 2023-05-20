@@ -137,6 +137,15 @@ window.onload = () => {
   if (!user) {
     window.location = "/pages/login.html";
   }
+  if (user?.user.role !== "vendor") {
+    swal({
+      title: "Unauthorized",
+      icon: "warning",
+      button: "Go back to login page",
+    }).then(() => {
+      window.location = "/pages/login.html";
+    });
+  }
 
   renderProduct();
 };

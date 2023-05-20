@@ -101,7 +101,16 @@ window.goToProductDetailPage = (productID) => {
 };
 
 const renderProducts = (products = [], currentPage, totalPages) => {
-  const html = products
+  const productElement = document.querySelector(".product-list");
+  let html;
+
+  if (!products && !products.length) {
+    html = "<span>There is no products</span>";
+    productElement.innerHTML;
+    return;
+  }
+
+  html = products
     .map((product) => {
       const { id, image, name, price, description, vendor } = product;
 
@@ -155,7 +164,6 @@ const renderProducts = (products = [], currentPage, totalPages) => {
     })
     .join("");
 
-  const productElement = document.querySelector(".product-list");
   productElement.innerHTML = html + renderPagination(currentPage, totalPages);
 };
 
@@ -167,8 +175,6 @@ window.onload = () => {
     max,
     min,
   } = parseQueryString(window.location.search);
-
-  console.log(limit);
 
   const maxElement = document.querySelector(".input-number #price-max");
   const minElement = document.querySelector(".input-number #price-min");

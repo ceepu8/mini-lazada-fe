@@ -965,7 +965,7 @@ textarea.input {
 
 .product .product-body .product-rating > i {
   position: relative;
-  width: 14px;
+  font-size: 14px;
   margin-right: -4px;
   background: #fff;
   color: #e4e7ed;
