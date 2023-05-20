@@ -1,11 +1,15 @@
 const VALIDATION_MESSAGE = {
-  required: "Không được bỏ trống",
-  textOnly: "Chỉ chấp nhận chữ",
-  numberOnly: "Chỉ chấp nhận số",
-  email: "Email không đúng định dạng",
-  phoneNumber: "Số điện thoại không hợp lệ",
-  max: (maxNumber) => `Không được vượt quá ${maxNumber} ký tự`,
-  min: (minNumber) => `Không được nhỏ hơn ${minNumber} ký tự`,
+  required: "This field is required",
+  textOnly: "Only accept text",
+  numberOnly: "Only accept number",
+  email: "Invalid Email",
+  phoneNumber: "Invalid phone number",
+  max: (maxNumber) => `Please enter a value less than ${maxNumber} characters`,
+  min: (minNumber) => `Please enter a value more than ${minNumber} characters`,
+  username:
+    "Invalid username. Username must contain 8-15 numbers and digits only",
+  password:
+    "Invalid password. Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
 };
 
 export const VALIDATIONS = {
@@ -24,64 +28,75 @@ export const VALIDATIONS = {
   number: function (value) {
     return value.match(/^[0-9]/);
   },
+  username: function (value) {
+    return value.match(
+      /^(?=.{8,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/
+    );
+  },
+  password: function (value) {
+    return value.match(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    );
+  },
 };
 
 export const handleFormValidation = (form) => {
   const myForm = document.querySelector(form);
   const inputs = myForm.querySelectorAll("input");
   const textareas = myForm.querySelectorAll("textarea");
-  const errorArr = []
+  const errorArr = [];
 
   const fields = [...inputs, ...textareas];
 
   for (let field of fields) {
     const fieldName = field.id;
     const errorElement = document.querySelector(`.error-message.${fieldName}`);
-    let isFieldError = false
+    let isFieldError = false;
 
     const isRequired = field.hasAttribute("required");
     const isPhoneNumber = field.hasAttribute("phone");
     const isNumberOnly = field.hasAttribute("numberOnly");
     const isTextOnly = field.hasAttribute("textOnly");
     const isEmail = field.hasAttribute("email");
+    const isUsername = field.hasAttribute("username");
+    const isValidPassword = field.hasAttribute("password");
 
     const maxLength = Number(field.getAttribute("max"));
     const minLength = Number(field.getAttribute("min"));
 
     if (isRequired && !VALIDATIONS.required(field.value)) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["required"];
-      errorElement.style.color = "#a64452";
     } else if (isPhoneNumber && !VALIDATIONS.phone(field.value)) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["phoneNumber"];
-      errorElement.style.color = "#a64452";
     } else if (isNumberOnly && !VALIDATIONS.number(field.value)) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["numberOnly"];
-      errorElement.style.color = "#a64452";
     } else if (isTextOnly && !VALIDATIONS.text(field.value)) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["textOnly"];
-      errorElement.style.color = "#a64452";
     } else if (isEmail && !VALIDATIONS.email(field.value)) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["email"];
-      errorElement.style.color = "#a64452";
     } else if (maxLength && field.value.length > maxLength) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["max"](maxLength);
-      errorElement.style.color = "#a64452";
     } else if (minLength && field.value.length <= minLength) {
-      isFieldError = true
+      isFieldError = true;
       errorElement.innerHTML = VALIDATION_MESSAGE["min"](minLength);
-      errorElement.style.color = "#a64452";
+    } else if (isUsername && !VALIDATIONS.username(field.value)) {
+      isFieldError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["username"];
+    } else if (isValidPassword && !VALIDATIONS.password(field.value)) {
+      isFieldError = true;
+      errorElement.innerHTML = VALIDATION_MESSAGE["password"];
     } else {
-      isFieldError = false
-      errorElement.innerHTML = ""
+      isFieldError = false;
+      errorElement.innerHTML = "";
     }
 
-    let isPassword = false
+    let isPassword = false;
     const passwordField = document.querySelector(`${form} #password`);
     const confirmPasswordField = document.querySelector(
       `${form} #confirmPassword`
@@ -92,15 +107,15 @@ export const handleFormValidation = (form) => {
         ".error-message.confirmPassword"
       );
       if (passwordField.value !== confirmPasswordField.value) {
-        isPassword = true
+        isPassword = true;
         confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
       } else {
-        isPassword = false
+        isPassword = false;
         confirmPassErrorElement.innerHTML = "";
       }
     }
 
-    errorArr.push(isFieldError || isPassword)
+    errorArr.push(isFieldError || isPassword);
   }
   if (errorArr.includes(true)) return true;
 

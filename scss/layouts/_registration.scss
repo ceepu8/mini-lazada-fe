@@ -106,13 +106,10 @@
 }
 
 form .form-group {
-  padding-bottom: 24px;
-  position: relative;
+  padding-bottom: 12px;
   .error-message {
-    position: absolute;
-    bottom: 2px;
-    left: 0;
-    font-size: 15px;
+    font-size: 14px;
+    color: $red;
   }
 }
 
