@@ -108,7 +108,7 @@ export const handleFormValidation = (form) => {
       );
       if (passwordField.value !== confirmPasswordField.value) {
         isPassword = true;
-        confirmPassErrorElement.innerHTML = "Mật khẩu không trùng khớp";
+        confirmPassErrorElement.innerHTML = "Confirm password does not match";
       } else {
         isPassword = false;
         confirmPassErrorElement.innerHTML = "";
