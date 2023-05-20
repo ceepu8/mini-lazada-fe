@@ -104,6 +104,25 @@ a {
   visibility: hidden;
 }
 
+.login-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-footer .registration-list {
+  color: var(--raisin-black);
+}
+
+.login-footer .registration-list .title {
+  margin-bottom: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.login-footer .registration-list a:hover {
+  color: var(--primary);
+}
+
 .login-footer .links span {
   color: var(--primary);
 }
